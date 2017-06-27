@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="AudioKetab.MasterPage"
+	Icon="icon.png"
+	Title="Personal Organiser"
+	BackgroundColor="#5E5E5E">
+	<ContentPage.Content>
+		 <StackLayout VerticalOptions="FillAndExpand" Spacing="10">
+		 <StackLayout >
+			<ListView SeparatorVisibility="None"  
+					Margin="0,40,0,0" 
+					BackgroundColor="#5E5E5E" 
+					x:Name="listView" 
+					VerticalOptions="FillAndExpand" 
+					RowHeight="60">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+						<ViewCell>
+						<StackLayout BackgroundColor="#5E5E5E" Orientation="Horizontal">
+						<StackLayout HorizontalOptions="FillAndExpand">
+						<!--<BoxView BackgroundColor="Gray" HeightRequest="1"
+									HorizontalOptions="FillAndExpand"/>-->
+									<Label
+										Text="{Binding Title}" TextColor="White"
+								HorizontalOptions="EndAndExpand"
+								VerticalOptions="CenterAndExpand"
+								Margin="0,0,10,0"
+									FontAttributes="Bold"/>
+          <BoxView BackgroundColor="Black" HeightRequest="1"
+									HorizontalOptions="FillAndExpand"/>
+						
+									</StackLayout> 
+
+							</StackLayout> 
+						</ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+			</StackLayout>
+			<StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,20">
+			<Button x:Name="btnLogout"  FontAttributes="Bold" Text="تسجيل الخروج" TextColor="White" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand"/>
+			<StackLayout Orientation="Horizontal">
+				
+				<Grid HorizontalOptions="CenterAndExpand" Padding="10">
+				<Button x:Name="btnTw" Grid.Column="0" Image="tw_ic" HorizontalOptions="CenterAndExpand" Margin="5"/>
+				<Button x:Name="btnFb" Grid.Column="1" Image="fb_ic" HorizontalOptions="CenterAndExpand" Margin="5"/>
+				<Button x:Name="btnInsta" Grid.Column="2" Image="insat_ic" HorizontalOptions="CenterAndExpand" Margin="5"/>
+				
+				</Grid>		
+			</StackLayout>
+			</StackLayout>
+
+    </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

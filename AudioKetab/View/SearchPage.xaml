@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="AudioKetab.SearchPage"
+	 xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	BackgroundColor="#ECECEC"> 
+	<StackLayout Spacing="0">
+	   <!--Title Bar Start-->
+           <StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="80"  
+            BackgroundColor="#4D4D4D"
+            Margin="0"
+            Padding="0"
+			Spacing="0"
+			 HorizontalOptions="FillAndExpand">
+			<Grid  HorizontalOptions="FillAndExpand">
+				<StackLayout   Grid.Column="0" > 
+					
+				<Image Source="menu_ic"
+            HorizontalOptions="Start"
+					WidthRequest="30"
+            VerticalOptions="CenterAndExpand"
+					IsVisible="true"
+					Margin="15,10,0,0"
+					HeightRequest="25">    
+          </Image>
+				 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Back_Tapped"/>
+    </StackLayout.GestureRecognizers>	 
+				</StackLayout> 
+				 <StackLayout Grid.Column="1"  HorizontalOptions="CenterAndExpand">
+				  <Image Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"
+								Margin="0,10,0,0"/> 
+			</StackLayout>
+					 <StackLayout Grid.Column="2"  HorizontalOptions="CenterAndExpand">
+				  <Image IsVisible="false" Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"/>  
+			</StackLayout>
+					
+			</Grid>	
+			</StackLayout>	
+          <!--Title Bar End-->
+		<StackLayout HeightRequest="35" BackgroundColor="Silver" >
+		<Grid ColumnSpacing="1" HorizontalOptions="FillAndExpand" 
+				VerticalOptions="FillAndExpand"
+				BackgroundColor="Black">
+		<StackLayout Grid.Column="0" 
+					VerticalOptions="FillAndExpand" 
+					Orientation="Horizontal"
+					BackgroundColor="Silver"
+					Padding="0,0,10,0">
+					<StackLayout
+						Orientation="Horizontal"
+						HorizontalOptions="EndAndExpand">
+		<Label Text="آخرون"
+					FontSize="14"
+					HorizontalTextAlignment="Center"
+					VerticalOptions="CenterAndExpand"
+					LineBreakMode="TailTruncation"
+						x:Name="lblCategory"/>
+					<Image Source="dropdown"
+					HeightRequest="15"
+					VerticalOptions="CenterAndExpand"
+						/>
+						 
+					</StackLayout>
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="slCategory_Tapped"/>
+    </StackLayout.GestureRecognizers>	
+				</StackLayout>
+				<StackLayout Grid.Column="1" 
+					VerticalOptions="FillAndExpand" 
+					Orientation="Horizontal"
+					BackgroundColor="Silver"
+					Padding="0,0,10,0">
+					<StackLayout
+						Orientation="Horizontal"
+						HorizontalOptions="EndAndExpand">
+						<Label Text="آخرون"
+					FontSize="14"
+					HorizontalTextAlignment="Center"
+					VerticalOptions="CenterAndExpand"
+					LineBreakMode="TailTruncation"	
+						x:Name="lblType"/>
+					<Image Source="dropdown"
+					HeightRequest="15"
+					VerticalOptions="CenterAndExpand"/>
+						
+					</StackLayout>
+		 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="slType_Tapped"/>
+    </StackLayout.GestureRecognizers>
+				</StackLayout>
+			</Grid>
+
+
+
+
+			
+		</StackLayout>
+		<StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="50"
+           Margin="0"
+            Padding="0"
+			Spacing="0"
+
+			HorizontalOptions="FillAndExpand">
+
+			<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+
+			 <local:RoundedEntry
+			        HorizontalTextAlignment="Center"
+					PlaceholderColor="Black"
+					HorizontalOptions="FillAndExpand"
+				VerticalOptions="Center"
+					HeightRequest="40" 
+					x:Name="txtSearch"
+					FontSize="14"
+				    BackgroundColor="White"
+			Margin="10,0,0,0"/> 
+			<Button Text="Search" 
+				TextColor="White"
+			FontAttributes="Bold"
+			BackgroundColor="#48B2F7"
+			VerticalOptions="Center"
+			HeightRequest="30"
+			BorderRadius="15"
+			Margin="10,0,10,0"
+			WidthRequest="70"
+				FontSize="12"
+				x:Name="btnSearch"/> 
+				</StackLayout>
+		</StackLayout>
+<!--Content view-->
+
+
+			<flv:FlowListView
+			BackgroundColor="Transparent"
+			Margin="0,15,0,0"
+			ItemsSource="{Binding CollectionItems}" 
+			HasUnevenRows="true"
+			SeparatorVisibility="None" 
+			IsPullToRefreshEnabled="false" 
+
+			x:Name="flowlistview">
+
+			<flv:FlowListView.FlowColumnTemplate>
+				<DataTemplate>
+					<Grid Padding="10">
+						
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+			 			</Grid.ColumnDefinitions>
+						<StackLayout >
+							<RelativeLayout
+									HeightRequest="80"
+									WidthRequest="80" 
+								HorizontalOptions="Center">
+                          <ffimageloading:CachedImage 
+							Aspect="AspectFill"
+							DownsampleUseDipUnits="false" 
+							LoadingPlaceholder="default.png"
+							ErrorPlaceholder="default.png"
+							Source="{Binding image_path}"
+							/>
+							 
+					        </RelativeLayout>
+							<Label Text="{Binding book_name}"
+							TextColor="Gray"
+							HorizontalTextAlignment="Center"
+							FontSize="10" />
+							<Label  Text="{Binding author_name}"
+							FontSize="10" 
+							TextColor="Gray"
+							HorizontalTextAlignment="Center"/>
+						</StackLayout>
+					</Grid>
+				</DataTemplate>
+			</flv:FlowListView.FlowColumnTemplate>
+		
+		</flv:FlowListView>
+
+		<Picker 
+						x:Name="categoryypicker"
+					IsVisible="false" 
+							
+					/>
+		<Picker 
+						x:Name="typepicker"
+					IsVisible="false" 
+							
+					/>
+		
+	</StackLayout>
+</ContentPage>    

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+	x:Class="AudioKetab.UpdatePlaylistPopup"
+	 xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab">
+	<StackLayout
+			Orientation="Vertical" 
+			VerticalOptions="CenterAndExpand"
+		HorizontalOptions="FillAndExpand"
+			Padding="0" Margin="20,40,20,40"> 
+		     
+			<StackLayout BackgroundColor="White" >
+					<StackLayout Orientation="Horizontal"
+					HorizontalOptions="FillAndExpand"
+						HeightRequest="50"
+						Padding="10">
+					<Label Text="Update playlist"
+						VerticalOptions="CenterAndExpand"/>
+				
+					</StackLayout>
+			<BoxView BackgroundColor="Gray" HeightRequest="1.5"/>
+					
+			<StackLayout Padding="10" >
+				<StackLayout Spacing="0">
+				<local:MyEntry Margin="0,10,0,0" BackgroundColor="White"
+			x:Name="txtplaylistname"
+						Placeholder="Playlist Name"
+					HorizontalTextAlignment="Start"   
+			HorizontalOptions="FillAndExpand"  
+				HeightRequest="40"/>  
+			<BoxView BackgroundColor="Black" HeightRequest="1"/> 
+				</StackLayout> 
+			
+			<StackLayout Margin="0,10,0,0" Spacing="30" Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
+				<Button WidthRequest="80"  
+						BackgroundColor="#ED9B13" 
+					Text="CANCEL" HorizontalOptions="EndAndExpand"
+					TextColor="White"
+					x:Name="btnCancel"
+					/>
+					<Button WidthRequest="80" 
+						BackgroundColor="#ED9B13"
+					Text="SAVE" HorizontalOptions="EndAndExpand"
+					TextColor="White"
+					x:Name="btnSend"/> 
+			</StackLayout> 
+			</StackLayout> 
+					
+			<StackLayout HeightRequest="10" >
+			</StackLayout>
+
+
+
+				</StackLayout>
+		
+		
+	 
+		</StackLayout>
+</pages:PopupPage>
+ 

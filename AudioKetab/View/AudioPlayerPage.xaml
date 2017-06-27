@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	x:Class="AudioKetab.AudioPlayerPage">
+	<RelativeLayout 
+            Padding="0"
+            Margin="0"
+            x:Name="_MainLayout"
+            RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}">
+
+	
+
+        <Image Source="bg1"
+                x:Name="imgBG"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
+
+		 <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+	
+	<StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+		<StackLayout Spacing="0">
+				
+         	<!--	Start Header view		-->
+       <RelativeLayout x:Name="_MainRelativeLayout" VerticalOptions="Start"
+						>
+       	
+	<StackLayout Spacing="0" >
+
+				<StackLayout  
+            Orientation="Horizontal"  
+            HeightRequest="80"  
+            BackgroundColor="#4D4D4D" 
+            Margin="0"
+            Padding="0"
+			Spacing="0"
+					RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"
+               HorizontalOptions="FillAndExpand">
+			<Grid  HorizontalOptions="FillAndExpand">
+				<StackLayout   Grid.Column="0" > 
+					
+				<Image Source="back"
+            HorizontalOptions="Start"
+					WidthRequest="30"
+            VerticalOptions="CenterAndExpand"
+					IsVisible="true"
+					Margin="15,10,0,0">    
+          </Image>
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="menu_Tapped"/>  
+    </StackLayout.GestureRecognizers> 
+				</StackLayout> 
+				 <StackLayout Grid.Column="1"  HorizontalOptions="CenterAndExpand">
+				  <Image Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"
+								Margin="0,10,0,0"/>    
+			</StackLayout>
+					 <StackLayout Grid.Column="2"  HorizontalOptions="CenterAndExpand">
+				  <Image IsVisible="false" Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"/>       
+			</StackLayout> 
+					
+			</Grid>	
+				
+          </StackLayout>
+
+
+					
+		   <RelativeLayout
+           >
+						
+         <Image 
+                Aspect="Fill"
+                Source="heder_feam" 
+
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+
+                RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"
+                    />
+                    <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+					>
+					<StackLayout Orientation="Horizontal" Margin="2" > 
+					<Grid> 
+						<StackLayout Grid.Column="0" x:Name="_slMic">
+												
+						<Image
+							x:Name="imgMic" 
+								Source="follow"
+									Margin="3,0,0,0"
+									VerticalOptions="EndAndExpand"
+										HorizontalOptions="Start">
+										 <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Audio_Tapped"/>
+    </Image.GestureRecognizers>
+										</Image> 	
+						</StackLayout>
+
+						
+						<StackLayout Spacing="0" x:Name="_slHeaderIcons" Grid.Column="1">
+						 <Label x:Name="lblUsername"
+							Text="(User Name)" 
+										Margin="0,5,0,0"
+                    TextColor="White" 
+                    HorizontalOptions="Start" 
+                        LineBreakMode="TailTruncation" 
+                    FontAttributes="Bold"  
+                   FontSize="14" />
+                    <Label 
+                    x:Name="lblDesc" 
+					Text="No description"	
+					LineBreakMode="TailTruncation"
+                    TextColor="White"
+                    HorizontalOptions="Start"
+                    FontSize="12"
+                   Margin="0,3,20,5"/> 
+									<!--		start view icons							-->
+				
+									<Grid  HorizontalOptions="FillAndExpand" Padding="0" Margin="0">
+									<StackLayout  IsVisible="false">
+									 <Image 
+                                Source="ic1" 
+                              > 
+                                 <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Playlist_Tapped"/> 
+    </Image.GestureRecognizers>
+                            </Image>
+                        
+                       
+                        <Label
+                        x:Name="lblPlaylist_count" 
+									Text="0"
+                        TextColor="White"
+                    HorizontalOptions="Center"
+                        VerticalTextAlignment="Center"										
+                    FontSize="10"
+                   Margin="0,0,0,10"
+					LineBreakMode="TailTruncation"
+					HorizontalTextAlignment="Center"
+					WidthRequest="30"/>
+									</StackLayout>
+										<StackLayout Grid.Column="0" Spacing="0">
+											 <Image Source="ic2" >
+                <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Followers_Tapped"/>
+    </Image.GestureRecognizers>
+                            </Image>
+                    
+                       
+                        <Label  x:Name="lblFollower_count"
+									Text="0"
+                        TextColor="White"
+                        HorizontalOptions="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="10"
+                    Margin="0,6,0,0"
+					LineBreakMode="TailTruncation"
+					HorizontalTextAlignment="Center"
+					WidthRequest="30" />
+										</StackLayout>
+										<StackLayout Grid.Column="1" Spacing="0">
+											<Image Source="ic3"
+                        VerticalOptions="Start"
+                       >
+                         <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Following_Tapped"/>
+    </Image.GestureRecognizers>
+                            </Image> 
+                   
+                        <Label
+                         x:Name="lblFollowing_count"
+									Text="0"
+                        TextColor="White"
+                    HorizontalOptions="Center"
+                        VerticalTextAlignment="Center"
+                    FontSize="10"
+                    Margin="0,6,0,0"
+					LineBreakMode="TailTruncation"
+					HorizontalTextAlignment="Center"
+					WidthRequest="30" />
+										</StackLayout>
+										<StackLayout Grid.Column="2" Spacing="0">
+											 <Image Source="ic4"
+                       >
+                        <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="uplodedaudio_Tapped"/>
+    </Image.GestureRecognizers>
+							</Image>
+                   
+                      
+                        <Label  x:Name="lblUploadedAudio_count"
+									Text="0"
+                        TextColor="White"
+                    HorizontalOptions="Center" 
+                        VerticalTextAlignment="Center"
+                    FontSize="10"
+                    Margin="0,6,0,0"
+					LineBreakMode="TailTruncation"
+					HorizontalTextAlignment="Center"
+					WidthRequest="30" 
+					/> 
+										</StackLayout>
+
+								</Grid>
+
+<!--		end view icons							-->
+												</StackLayout>
+
+						 
+						<StackLayout Orientation="Horizontal"  
+									HorizontalOptions="EndAndExpand"
+									VerticalOptions="CenterAndExpand"
+									Padding="10"
+									Spacing="10"
+									Margin="0,30,0,0"
+										Grid.Column="2"
+												x:Name="_slMsgNotification">
+						<Image Source="msg_ic" Margin="0,0,10,0">
+											 <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="messages_Tapped"/>
+    </Image.GestureRecognizers>
+							</Image>
+								 <Image Source="notification" IsVisible="false"> 
+                <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="notification_Tapped"/> 
+    </Image.GestureRecognizers>
+							</Image>
+						</StackLayout>  
+
+						</Grid>
+					</StackLayout>
+					
+					
+							
+          
+						</Grid> 
+				 
+           </RelativeLayout>  
+					</StackLayout>
+				</RelativeLayout> 
+           <!--	End Header view		--> 
+
+			<!--<ScrollView Margin="20,30,20,0">-->
+						<StackLayout Spacing="0"> 
+
+
+
+						
+			<StackLayout BackgroundColor="#708F908E"> 
+			 
+			 <StackLayout>
+			<ffimageloading:CachedImage  
+										Margin="0,5,0,0"
+								x:Name="imgAlbum"
+                           Aspect="AspectFit"
+                            DownsampleUseDipUnits="true" 
+                            LoadingPlaceholder="default.png"
+                            ErrorPlaceholder="default.png"
+                           Source="default.png">
+                           HorizontalOptions="Start">
+										 <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Album_Tapped"/> 
+    </Image.GestureRecognizers> 
+								</ffimageloading:CachedImage>
+
+							
+			<StackLayout Orientation="Horizontal">
+			<Grid HorizontalOptions="FillAndExpand" Padding="10"> 
+							<StackLayout Grid.Column="0" VerticalOptions="Start">
+							<Image 
+							x:Name="imgLike"
+											Source="like"
+									Aspect="AspectFit"/>
+
+									<Label x:Name="lblLikeCount"
+											Text="0" 
+								HorizontalTextAlignment="Center"/>
+								<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="like_Tapped"/>
+    </StackLayout.GestureRecognizers>
+							</StackLayout>
+							<StackLayout Grid.Column="1"  VerticalOptions="Start">
+							<Image Source="ic_comment"
+									Aspect="AspectFit"/>
+
+									<Label x:Name="lblCommentCount"
+											Text="0" 
+								HorizontalTextAlignment="Center"/>
+							<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="comment_Tapped"/>
+    </StackLayout.GestureRecognizers>	
+							</StackLayout>
+						 	<StackLayout Grid.Column="2"  VerticalOptions="Start">
+							<Image 	x:Name="imgVolume"
+											Source="ic_volume"
+									Aspect="AspectFit"/>
+
+									<Label x:Name="lblVolumeCount"
+											Text="0" 
+								HorizontalTextAlignment="Center"
+												IsVisible="false"/>
+								<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="mute_Tapped"/>
+    </StackLayout.GestureRecognizers>
+							</StackLayout>
+							<StackLayout Grid.Column="3"  VerticalOptions="Start">
+					 		<Image Source="ic_share"
+									Aspect="AspectFit"/>
+
+									<Label x:Name="lblShareCount"
+											Text="0" 
+								HorizontalTextAlignment="Center"/>
+								<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="share_Tapped"/>
+    </StackLayout.GestureRecognizers>
+							</StackLayout>
+
+							<RelativeLayout > 
+
+							<StackLayout 
+									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.15}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=-1}"
+             
+									Orientation="Horizontal" 
+									VerticalOptions="EndAndExpand">
+							<Image 
+										x:Name="imgVideourl"
+								Source="ic_yellow" 
+								VerticalOptions="EndAndExpand"
+								Aspect="AspectFit"
+							HeightRequest="50">
+							<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="videourl_tapped"/>
+    </Image.GestureRecognizers>
+									</Image> 
+			 <Image 
+										x:Name="imgArticleurl"
+								Source="ic)green" 
+								VerticalOptions="EndAndExpand"
+								Aspect="AspectFit"
+							HeightRequest="50">
+							<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Articleurl_tapped"/> 
+    </Image.GestureRecognizers>
+									</Image> 
+							</StackLayout>
+			 </RelativeLayout>
+
+											<StackLayout Grid.Column="4"  VerticalOptions="Start">
+					 		<Image Source="iclist.png"
+									x:Name="imgIcList"
+									Aspect="AspectFit"/>
+
+									<Label x:Name="lblListCount"
+											Text="0" 
+								HorizontalTextAlignment="Center"/>
+								<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="addplaylist_Tapped"/>
+    </StackLayout.GestureRecognizers>
+							</StackLayout>
+											
+							
+						</Grid>
+					</StackLayout> 
+						</StackLayout>
+					
+
+				</StackLayout>	
+							<Grid HorizontalOptions="FillAndExpand" Padding="10">
+				<Button  Grid.Column="0" Image="ic_previos" HorizontalOptions="CenterAndExpand" Margin="5"/>
+				<Button IsVisible="false" x:Name="btnPlay" Grid.Column="1" Image="ic_play" HorizontalOptions="CenterAndExpand" Margin="5"/>
+				<Button IsVisible="true" x:Name="btnPause" Grid.Column="1" Image="pause" HorizontalOptions="CenterAndExpand" Margin="5"/>
+				<Button Grid.Column="2" Image="ic_next" HorizontalOptions="CenterAndExpand" Margin="5"/>
+				
+				</Grid>	
+
+			<StackLayout 
+			Orientation="Horizontal"
+			HorizontalOptions="FillAndExpand"
+			VerticalOptions="Start"
+			Spacing="5"
+			Padding="0"
+				Margin="0,0,0,0"	
+				>
+				<StackLayout >
+				<Label Margin="5"
+						Text="00:00:00"
+					TextColor="Gray"
+					VerticalTextAlignment="Center"
+				x:Name="lblPosition"
+							FontSize="14"/>
+				</StackLayout>
+			
+					<Slider 
+							x:Name="sliderPosition" 
+						HorizontalOptions="FillAndExpand" 
+						/>
+				<StackLayout>  
+				<Label 
+					VerticalTextAlignment="Center"
+				x:Name="lblDuration" 
+						Margin="5"
+							Text="00:00:00" 
+						TextColor="Gray"
+					HorizontalOptions="End"
+							FontSize="14"/>
+				</StackLayout>
+
+				</StackLayout>
+						</StackLayout>
+			<!--</ScrollView> -->
+			</StackLayout>
+          </StackLayout>
+			</Grid>
+		
+	</RelativeLayout> 
+</ContentPage>

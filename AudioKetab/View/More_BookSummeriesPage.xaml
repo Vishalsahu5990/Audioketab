@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	x:Class="AudioKetab.More_BookSummeriesPage"
+	xmlns:Controls="clr-namespace:HorizontalList;assembly=HorizontalList">
+	<StackLayout x:Name="ParentLayout" Orientation="Vertical" Spacing="0">
+
+
+		 <!--Title Bar Start-->
+           <StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="80"  
+            BackgroundColor="#4D4D4D"
+            Margin="0"
+            Padding="0"
+			Spacing="0"
+			 HorizontalOptions="FillAndExpand">
+			<Grid  HorizontalOptions="FillAndExpand">
+				<StackLayout   Grid.Column="0" >    
+					
+				<Image Source="back"
+            HorizontalOptions="Start"
+					WidthRequest="30"
+            VerticalOptions="CenterAndExpand"
+					IsVisible="true" 
+					Margin="15,10,0,0" 
+					HeightRequest="25">     
+          </Image>
+				 <StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="Back_Tapped"/> 
+    </StackLayout.GestureRecognizers>	 
+				</StackLayout> 
+				 <StackLayout Grid.Column="1"  HorizontalOptions="CenterAndExpand">
+				  <Image Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"
+								Margin="0,10,0,0"/> 
+			</StackLayout>
+					 <StackLayout Grid.Column="2"  HorizontalOptions="CenterAndExpand">
+				  <Image IsVisible="false" Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"/>      
+			</StackLayout>
+					
+			</Grid>	
+				
+          
+			 </StackLayout>
+          <!--Title Bar End-->
+				<StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="50"
+           Margin="0"
+            Padding="0"
+			Spacing="0"
+			BackgroundColor="Silver"
+			HorizontalOptions="FillAndExpand">
+			<StackLayout Margin="10,0,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+
+				
+					 <StackLayout
+					Orientation="Horizontal"
+                            HeightRequest="40"
+                            HorizontalOptions="FillAndExpand"
+                             VerticalOptions="CenterAndExpand" 
+				WidthRequest="30"
+					Padding="10,0,10,0">
+					<Label Text="آخرون"
+					FontSize="12" VerticalOptions="CenterAndExpand"
+					HorizontalTextAlignment="Center"
+					HorizontalOptions="CenterAndExpand"
+					LineBreakMode="HeadTruncation"
+					x:Name="lblCategory"/>
+                <Image
+                    x:Name="imgSearch"
+                    Margin="0,0,10,0"
+                    Source="dropdown.png"
+                    VerticalOptions="CenterAndExpand"
+							WidthRequest="17"
+                 HorizontalOptions="EndAndExpand"
+				/>
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="slCategory_Tapped"/>
+    </StackLayout.GestureRecognizers>				</StackLayout>	
+								<StackLayout
+					 BackgroundColor="Transparent">
+					
+				
+						
+				<Picker 
+						x:Name="categoryypicker"
+					IsVisible="false" 
+							
+					/>
+									
+				</StackLayout>
+				</StackLayout>
+			<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+
+			 <local:RoundedEntry
+			        HorizontalTextAlignment="Center"
+					PlaceholderColor="Black"
+					HorizontalOptions="FillAndExpand"
+				VerticalOptions="Center"
+					HeightRequest="40" 
+					WidthRequest="100"
+					FontSize="14"
+				    BackgroundColor="White"
+			Margin="10,0,0,0"
+				x:Name="txtSearch"/> 
+			<Button Text="Search"
+				TextColor="White"
+			FontAttributes="Bold"
+			BackgroundColor="#48B2F7"
+			VerticalOptions="Center"
+			HeightRequest="30"
+			BorderRadius="10"
+			Margin="10,0,10,0"
+			WidthRequest="60"
+				x:Name="btnSearch"/> 
+				</StackLayout>
+		</StackLayout>
+<!--data views starts from here-->
+
+	<StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+					<Button x:Name="btnMoreRecentAdded"
+                                BackgroundColor="#F7A703"
+                                TextColor="Black"
+                                Text="more" 
+                            HeightRequest="25"
+                                    WidthRequest="50"
+                            Margin="20,0,0,0"
+                            />
+			<Label 
+			Text="Recent Added" 
+			TextColor="White"
+			VerticalOptions="Center"
+			HorizontalOptions="EndAndExpand"
+			Margin="0,0,20,0"/>
+				</StackLayout>
+
+<!--	First view	-->
+		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+				<StackLayout VerticalOptions="Center">
+				<Image Source="previous_ic" HeightRequest="25" Margin="5"/>
+					</StackLayout>
+					<StackLayout HorizontalOptions="CenterAndExpand">
+
+					<!--third list-->
+									<ScrollView Orientation="Horizontal" 
+					HeightRequest="{Binding cell_size}">
+										<Controls:HorizontalListView 
+												x:Name="listview_recentadded"
+												ListOrientation="Horizontal" 
+												ItemsSource="{Binding List_LectureTraining}"
+												Command="{Binding SelectedItemCommandLectureTraining}" >
+											<Controls:HorizontalListView.ItemTemplate>
+												<DataTemplate>
+													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
+														<RelativeLayout>
+															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
+															<Button BackgroundColor="Transparent"
+				RelativeLayout.WidthConstraint="{ConstraintExpression 
+					Type=RelativeToParent, Property=Width}" 
+					RelativeLayout.HeightConstraint="{ConstraintExpression 
+					Type=RelativeToParent,
+				Property=Height}"
+				Clicked="one_clicked"
+				CommandParameter="{Binding s_id}"/>
+															</RelativeLayout>
+														<Label FontSize="13" Text="{Binding author_name}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="{Binding cell_size}" HeightRequest="10" />
+													</StackLayout>
+												</DataTemplate>
+											</Controls:HorizontalListView.ItemTemplate>
+										</Controls:HorizontalListView>
+									</ScrollView>
+
+				<!--<local:TLScrollView 
+					ItemsSource="{Binding items}"
+				Orientation="Horizontal" 
+				SelectedCommand="{Binding [ItemSelected]}"
+				HeightRequest="{Binding cell_size}"
+				x:Name="listview_recentadded">
+			<local:TLScrollView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Padding="5"
+							WidthRequest="{Binding cell_size}"								>
+							<RelativeLayout
+									>
+                          <ffimageloading:CachedImage 
+							HeightRequest="{Binding cell_size}"
+							WidthRequest="{Binding cell_size}"
+							Aspect="AspectFill"
+							DownsampleUseDipUnits="false" 
+							LoadingPlaceholder="default.png"
+							ErrorPlaceholder="default.png"
+							Source="{Binding image_path}"
+							/>
+								 
+					        </RelativeLayout>
+											<Label
+											FontSize="13"
+												Text="{Binding author_name}"
+								HorizontalOptions="Center"
+									HorizontalTextAlignment="Center"
+								WidthRequest="{Binding cell_size}"
+									HeightRequest="10"		/> 
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</local:TLScrollView.ItemTemplate>
+		</local:TLScrollView>
+-->
+
+				
+					</StackLayout>
+					<StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+					<Image  VerticalOptions="Center" Source="next_ic" HeightRequest="25" Margin="5"/>
+				
+					</StackLayout>
+
+
+
+				</StackLayout>
+
+
+
+
+
+
+		<StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+					<Button x:Name="btnMoreMostPlayed"
+                                BackgroundColor="#F7A703"
+                                TextColor="Black"
+                                Text="more" 
+                            HeightRequest="25"
+                                    WidthRequest="50"
+                            Margin="20,0,0,0"
+                            />
+			<Label 
+			Text="Most played" 
+			TextColor="White"
+			VerticalOptions="Center"
+			HorizontalOptions="EndAndExpand"
+			Margin="0,0,20,0"/>
+				</StackLayout>
+
+<!--	First view	-->
+		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+				<StackLayout VerticalOptions="Center">
+				<Image Source="previous_ic" HeightRequest="25" Margin="5"/>
+					</StackLayout>
+					<StackLayout HorizontalOptions="CenterAndExpand">
+					<local:TLScrollView 
+					ItemsSource="{Binding items1}"
+				Orientation="Horizontal" 
+				SelectedCommand="{Binding [ItemSelected]}"
+				HeightRequest="{Binding cell_size}"
+				x:Name="listview_mostplayed">
+			<local:TLScrollView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Padding="5"
+							WidthRequest="{Binding cell_size}"								>
+							<RelativeLayout
+									>
+                          <ffimageloading:CachedImage 
+							HeightRequest="{Binding cell_size}"
+							WidthRequest="{Binding cell_size}"
+							Aspect="AspectFill"
+							DownsampleUseDipUnits="false" 
+							LoadingPlaceholder="default.png"
+							ErrorPlaceholder="default.png"
+							Source="{Binding image_path}"
+							/>
+								 
+					        </RelativeLayout>
+											<Label
+											FontSize="13"
+												Text="{Binding author_name}"
+								HorizontalOptions="Center"
+									HorizontalTextAlignment="Center"
+								WidthRequest="{Binding cell_size}"
+									HeightRequest="10"		/> 
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</local:TLScrollView.ItemTemplate>
+		</local:TLScrollView>
+					</StackLayout>
+					<StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+					<Image  VerticalOptions="Center" Source="next_ic" HeightRequest="25" Margin="5"/>
+				
+					</StackLayout>
+
+
+
+				</StackLayout>
+
+
+
+
+
+		<StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+					<Button x:Name="btnMoreRecentFollowers"
+                                BackgroundColor="#F7A703" 
+                                TextColor="Black"
+                                Text="more" 
+                            HeightRequest="25"
+                                    WidthRequest="50"
+                            Margin="20,0,0,0"
+                            />
+			<Label 
+			Text="Recent followers" 
+			TextColor="White"
+			VerticalOptions="Center"
+			HorizontalOptions="EndAndExpand"
+			Margin="0,0,20,0"/>
+				</StackLayout>
+
+<!--	First view	-->
+		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+				<StackLayout VerticalOptions="Center">
+				<Image Source="previous_ic" HeightRequest="25" Margin="5"/>
+					</StackLayout>
+					<StackLayout HorizontalOptions="CenterAndExpand">
+					<local:TLScrollView 
+					ItemsSource="{Binding items2}"
+				Orientation="Horizontal" 
+				SelectedCommand="{Binding [ItemSelected]}"
+	 			HeightRequest="{Binding cell_size}" 
+				x:Name="listview_recentfollowers"> 
+			<local:TLScrollView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Padding="5"
+							WidthRequest="{Binding cell_size}"								>
+							<RelativeLayout
+									>
+                          <ffimageloading:CachedImage 
+							HeightRequest="{Binding cell_size}"
+							WidthRequest="{Binding cell_size}"
+							Aspect="AspectFill"
+							DownsampleUseDipUnits="false" 
+							LoadingPlaceholder="default.png"
+							ErrorPlaceholder="default.png"
+							Source="{Binding image_path}"
+							/>
+								 
+					        </RelativeLayout>
+											<Label
+											FontSize="13"
+												Text="{Binding first_name}"
+								HorizontalOptions="Center"
+									HorizontalTextAlignment="Center"
+								WidthRequest="{Binding cell_size}"
+									HeightRequest="10"		/>  
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</local:TLScrollView.ItemTemplate> 
+		</local:TLScrollView>
+					</StackLayout>
+					<StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+
+				<Image  VerticalOptions="Center" Source="next_ic" HeightRequest="25" Margin="5"/>
+					</StackLayout>
+					 
+
+
+				</StackLayout> 
+		</StackLayout>  
+</ContentPage>  

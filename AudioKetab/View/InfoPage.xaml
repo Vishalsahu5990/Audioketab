@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+	x:Class="AudioKetab.InfoPage">
+	<RelativeLayout 
+            Padding="0"
+            Margin="0"
+            x:Name="_MainLayout"
+            RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}">
+
+        <Image Source="bg"
+                x:Name="imgBG"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
+            <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+
+      <StackLayout Padding="0,0,0,10" 
+			Orientation="Vertical" 
+			VerticalOptions="FillAndExpand"
+			HorizontalOptions="FillAndExpand"
+					 >
+				 <Frame 
+			x:Name="frame"
+			Padding="40"
+			Margin="30"
+			BackgroundColor="#E9E9EB" 
+			OutlineColor="Gray"
+			VerticalOptions="CenterAndExpand"
+				>
+				 <StackLayout Orientation="Vertical" 
+					Spacing="10" HorizontalOptions="FillAndExpand">
+						<Frame HasShadow="false" BackgroundColor="White">
+							<Label 
+					Margin="0,30,0,0"
+					HorizontalOptions="Center"
+					HorizontalTextAlignment="Center"
+							Text="Your reset password link sent in your email address"/>
+						</Frame>
+				 <Button 
+					HeightRequest="30"
+				BackgroundColor="#ED9B13"
+				BorderRadius="8"
+				Text="Ok"
+				TextColor="White"
+				FontAttributes="Bold"
+				HorizontalOptions="FillAndExpand"
+							Clicked="Submit_Clicked"/>
+				
+
+			</StackLayout>
+		</Frame>
+	</StackLayout>
+    </Grid>
+	
+		 </RelativeLayout> 
+</ContentPage>

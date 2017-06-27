@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="AudioKetab.AudioRecordingPage"
+	xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+	BackgroundColor="#E9E9E9">
+
+	<StackLayout x:Name="ParentLayout" Orientation="Vertical" Spacing="0">
+<!--Title Bar Start-->
+           <StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="80"  
+            BackgroundColor="#4D4D4D"  
+            Margin="0" 
+            Padding="0" 
+			Spacing="0" 
+			 HorizontalOptions="FillAndExpand"
+			VerticalOptions="Start"> 
+			<Grid  HorizontalOptions="FillAndExpand"> 
+				<StackLayout   Grid.Column="0" 
+					Padding="5">  
+					 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="menu_Tapped"/>
+    </StackLayout.GestureRecognizers>	
+				<Image Source="menu_ic"
+            HorizontalOptions="Start" 
+					WidthRequest="30"
+            VerticalOptions="CenterAndExpand"
+					IsVisible="true"
+					Margin="15,10,0,0">    
+          </Image>
+				 
+				</StackLayout> 
+				 <StackLayout Grid.Column="1"  HorizontalOptions="CenterAndExpand">
+				  <Image Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"
+								Margin="0,10,0,0"/> 
+			</StackLayout>
+					 <StackLayout Grid.Column="2"  HorizontalOptions="CenterAndExpand">
+				  <Image IsVisible="false" Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"/>  
+			</StackLayout>
+					
+			</Grid>	
+				
+          </StackLayout>
+          <!--Title Bar End-->
+
+		<Frame  Margin="10,0,10,0" BackgroundColor="#DDDDDD" HasShadow="false">
+		<Label Text="Audio" HorizontalOptions="CenterAndExpand"/>
+		</Frame>
+		<ScrollView IsClippedToBounds="true">
+			<StackLayout>
+				<Grid HorizontalOptions="FillAndExpand" Padding="10" Margin="30,0,30,0">
+				<StackLayout Orientation="Horizontal" Grid.Column="0">
+					<Label FontSize="12" Text="مقالات من الصحف و سواليف" VerticalOptions="CenterAndExpand"/>
+			<Image x:Name="r1" Source="radio_check">
+				 <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="rbtnBoolsummeries_Tapped"/>
+    </Image.GestureRecognizers></Image>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Grid.Column="1">
+						<Label FontSize="12" Text="محاضرات ودورات" VerticalOptions="CenterAndExpand"/>
+			<Image x:Name="r2" Source="radio_uncheck">
+				 <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="rbtnLectures_Tapped"/>
+    </Image.GestureRecognizers></Image>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Grid.Column="2">
+						<Label FontSize="12" Text="قراءة في  كتاب" VerticalOptions="CenterAndExpand"/>
+			<Image x:Name="r3" Source="radio_uncheck">
+				 <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="rbtnNewsletter_Tapped"/>
+    </Image.GestureRecognizers></Image> 
+					</StackLayout>
+				</Grid> 
+		
+		<StackLayout>
+		<StackLayout Orientation="Horizontal">
+
+				<RelativeLayout 
+							
+					HeightRequest="30" 
+							 RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"	>
+								
+					<local:MyEntry 
+					 Margin="30,0,30,0"
+					HorizontalTextAlignment="End"
+					x:Name="txtCountry" 
+					PlaceholderColor="Black"
+					Placeholder="آخرون"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"
+					 RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"/>
+					 <StackLayout
+                            HeightRequest="30"
+                            WidthRequest="30"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.82}"
+                >
+                <Image
+                    x:Name="imgSearch"
+                    Margin="0,0,0,0"
+                    Source="drop_down.png"
+                    VerticalOptions="CenterAndExpand"
+                 />
+								</StackLayout>	
+								<StackLayout
+									
+					RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"	
+			 
+						HorizontalOptions="FillAndExpand"
+						HeightRequest="30" BackgroundColor="Transparent">
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="categorypicker_Tapped"/>
+    </StackLayout.GestureRecognizers>
+				
+						
+					<Picker 
+						x:Name="categoryypicker"
+					IsVisible="false" 
+							Title="Category" 
+					/>
+									
+				</StackLayout>
+						
+
+					</RelativeLayout>
+							
+							</StackLayout>
+		<local:MyEntry
+			        Margin="30,0,30,0"
+					HorizontalTextAlignment="End"
+					x:Name="txtBookname"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"
+				Placeholder="اسم الكتاب"
+				PlaceholderColor="Gray"/>
+		<local:MyEntry
+					x:Name="txtAuthorname"
+			        Margin="30,0,30,0"
+					HorizontalTextAlignment="End"
+					Placeholder="اسم المؤلف"
+				PlaceholderColor="Gray"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"/>
+			<local:MyEntry
+					x:Name="txtDesc"
+					Placeholder="وصف"
+				PlaceholderColor="Gray"
+			        Margin="30,0,30,0"
+					HorizontalTextAlignment="End"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="70"
+					FontSize="14"
+				    BackgroundColor="White"/> 
+				<local:MyEntry
+					x:Name="txtArticleurl"
+			        Margin="30,0,30,0"
+					HorizontalTextAlignment="End"
+					Placeholder="اضافة رابط لملف نصي"
+				PlaceholderColor="Gray"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"/>
+				<local:MyEntry
+					x:Name="txtVideourl"
+			        Margin="30,0,30,0"
+					HorizontalTextAlignment="End"
+					Placeholder="اضافة رابط لفيديو"
+				PlaceholderColor="Gray"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30" 
+					FontSize="14"
+				    BackgroundColor="White"/> 
+
+				<StackLayout HorizontalOptions="FillAndExpand">
+
+
+				<StackLayout
+					Margin="30,0,30,0"
+					HeightRequest="40"
+					Orientation="Horizontal"
+				    BackgroundColor="#ED9B13"
+					HorizontalOptions="FillAndExpand"
+						VerticalOptions="Center">
+					<StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="CenterAndExpand">
+					<Image  Source="upload-button"
+							/>
+								
+					<Label x:Name="lblUPloadbookpicture" 
+							Text="تحميل الكتاب صورة…"
+							VerticalTextAlignment="Center"
+							VerticalOptions="CenterAndExpand"
+						    Margin="30,0,30,0"/> 
+							</StackLayout> 
+					
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="uploadpicture_Tapped"/> 
+    </StackLayout.GestureRecognizers>
+				</StackLayout>
+				<Label Text="بإمكانك تحميل ملف قد قمت بتسجيله سابقاَ:"
+						HorizontalTextAlignment="Start"
+						FontSize="Small"
+						HorizontalOptions="EndAndExpand"
+						Margin="30,0,30,0"/>
+		<StackLayout
+					Margin="30,0,30,0"
+					HeightRequest="40"
+					Orientation="Horizontal"
+				    BackgroundColor="#ED9B13"
+					HorizontalOptions="FillAndExpand"
+						VerticalOptions="Center">
+					<StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="CenterAndExpand">
+					
+					<Image  Source="upload-button" />
+					<Label x:Name="lblUPloadAudioFile" 
+							Text="اختيار ملف الصوت…"
+							VerticalTextAlignment="Center"
+							VerticalOptions="CenterAndExpand"
+							/>
+								</StackLayout>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="chooseaudio_Tapped"/>
+    </StackLayout.GestureRecognizers>
+				</StackLayout>
+					</StackLayout>
+		</StackLayout>
+			<Label Text="OR" HorizontalOptions="CenterAndExpand"/>
+		<Image Source="mic_ic"
+			HeightRequest="100"
+			Margin="0,30,0,0"
+		>
+				<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="recorder_Tapped"/>
+    </Image.GestureRecognizers></Image>
+				<Label x:Name="lblRecording" HorizontalOptions="CenterAndExpand"/>
+		<Button Margin="40,30,40,0"
+					HeightRequest="40"
+				BackgroundColor="#ED9B13"
+				BorderRadius="8"
+				Text="تسجيل الدخول"
+				TextColor="White"
+				FontAttributes="Bold"
+				x:Name="btnSubmit"/>
+				</StackLayout>
+			</ScrollView>
+	</StackLayout>
+		
+</ContentPage>

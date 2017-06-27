@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+     xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+	x:Class="AudioKetab.FollowingPage"
+    BackgroundImage="bg1">
+
+        <StackLayout   VerticalOptions="FillAndExpand"> 
+
+        <StackLayout Spacing="0">
+                
+            <!--Title Bar Start-->
+           <StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="80"  
+            BackgroundColor="#4D4D4D"
+            Margin="0"
+            Padding="0"
+			Spacing="0"
+			 HorizontalOptions="FillAndExpand">
+			<Grid  HorizontalOptions="FillAndExpand">
+				<StackLayout   Grid.Column="0" > 
+					
+				<Image Source="back"
+            HorizontalOptions="Start"
+					WidthRequest="30"
+            VerticalOptions="CenterAndExpand"
+					IsVisible="true" 
+					Margin="15,10,0,0"
+					HeightRequest="25">    
+          </Image>
+				 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Back_Tapped"/>
+    </StackLayout.GestureRecognizers>	 
+				</StackLayout> 
+				 <StackLayout Grid.Column="1"  HorizontalOptions="CenterAndExpand">
+				  <Image Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"
+								Margin="0,10,0,0"/> 
+			</StackLayout>
+					 <StackLayout Grid.Column="2"  HorizontalOptions="CenterAndExpand">
+				  <Image IsVisible="false" Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"/>  
+			</StackLayout>
+					
+			</Grid>	
+				
+          
+			 </StackLayout>
+          <!--Title Bar End-->
+
+			
+       
+                </StackLayout> 
+
+		
+            <flv:FlowListView
+			RowHeight="120"
+			BackgroundColor="Transparent"
+			Margin="0,30,0,0"
+			SeparatorVisibility="None"
+			HasUnevenRows="true"
+			FlowItemTappedCommand="{Binding ItemTappedCommand}" 
+			FlowLastTappedItem="{Binding LastTappedItem}"
+			FlowColumnMinWidth="100" 
+			x:Name="flowlistview">
+
+			<flv:FlowListView.FlowColumnTemplate>
+				<DataTemplate>
+					<Grid Padding="0,10,0,10">
+						
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+			 			</Grid.ColumnDefinitions>
+						<StackLayout >
+							<RelativeLayout
+									HeightRequest="80"
+									WidthRequest="80" 
+								HorizontalOptions="Center">
+                          <ffimageloading:CachedImage 
+							Aspect="AspectFill"
+							DownsampleUseDipUnits="false" 
+							LoadingPlaceholder="default.png"
+							ErrorPlaceholder="default.png"
+							Source="{Binding profile_pic}"
+							/>
+							 
+					        </RelativeLayout>
+							<Label Text="{Binding first_name}"
+							TextColor="Gray"
+							HorizontalTextAlignment="Center"/>
+							 
+						</StackLayout> 
+					</Grid>
+				</DataTemplate>
+			</flv:FlowListView.FlowColumnTemplate>
+		
+		</flv:FlowListView>
+
+		
+
+            </StackLayout>
+           
+</ContentPage>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="AudioKetab.AudioKetabPage"
+	>
+	<StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+
+
+		<RelativeLayout 
+			>
+	<Frame BackgroundColor="White" HasShadow="false"
+											OutlineColor="Silver"
+			Padding="5">
+
+											<StackLayout>
+												<Image Aspect="AspectFill"
+							 Source="default.png"
+							HeightRequest="{Binding height}"/>
+												<StackLayout Orientation="Horizontal" 
+								Margin="5,0,5,0" VerticalOptions="EndAndExpand"
+					Padding="5">
+					<Grid HorizontalOptions="FillAndExpand">
+					<Label Text="Testing And" 
+					FontSize="Small"
+					LineBreakMode="TailTruncation"
+						Grid.Column="0"/>
+
+													<Label Text="1457.00" 
+								HorizontalOptions="EndAndExpand"
+					FontSize="Small"
+					LineBreakMode="TailTruncation"
+						Grid.Column="1"/>
+					</Grid>
+													
+												</StackLayout>
+											</StackLayout>
+										</Frame>
+			 
+				
+
+				<Label Text="TOP" 
+			HorizontalOptions="CenterAndExpand"
+					TextColor="Red"
+			FontAttributes="Bold"
+			RelativeLayout.XConstraint=
+									"{ConstraintExpression 
+									Property=Width ,
+									Type=RelativeToParent ,Factor=0.57}"
+					RelativeLayout.YConstraint="{ConstraintExpression 
+								Property=Height ,
+									Type=RelativeToParent ,Factor=0.08}"/>  
+				
+				 
+			
+										
+
+
+										</RelativeLayout>
+		</StackLayout>
+	
+</ContentPage>
+
+<!--CommandParameter="{Binding playlist_id}"
+											Clicked="Delete_Clicked"-->

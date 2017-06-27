@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{3EA18C88-3053-41AA-9DB6-1812B7F9928E}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AudioKetab.iOS</RootNamespace>
+    <AssemblyName>AudioKetab.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>true</MtouchFastDev>
+    <IOSDebuggerPort>52278</IOSDebuggerPort>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodesignProvision>Audioketabnew_provisioningprofile1</CodesignProvision>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>false</MtouchFastDev>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodesignProvision>Audioketabnew_provisioningprofile1</CodesignProvision>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="DLToolkit.Forms.Controls.FlowListView">
+      <HintPath>..\packages\DLToolkit.Forms.Controls.FlowListView.2.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\DLToolkit.Forms.Controls.FlowListView.dll</HintPath>
+    </Reference>
+    <Reference Include="BTProgressHUD">
+      <HintPath>..\Components\btprogresshud-1.20\lib\ios-unified\BTProgressHUD.dll</HintPath>
+    </Reference>
+    <Reference Include="PerpetualEngine.SimpleStorage.iOS-Unified">
+      <HintPath>..\packages\SimpleStorage.1.4.2\lib\Xamarin.iOS10\PerpetualEngine.SimpleStorage.iOS-Unified.dll</HintPath>
+    </Reference>
+    <Reference Include="WebP.Touch">
+      <HintPath>..\packages\WebP.Touch.1.0.3\lib\Xamarin.iOS10\WebP.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.2.9\lib\Xamarin.iOS10\FFImageLoading.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.2.9\lib\Xamarin.iOS10\FFImageLoading.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms">
+      <HintPath>..\packages\Xamarin.FFImageLoading.Forms.2.2.9\lib\Xamarin.iOS10\FFImageLoading.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms.Touch">
+      <HintPath>..\packages\Xamarin.FFImageLoading.Forms.2.2.9\lib\Xamarin.iOS10\FFImageLoading.Forms.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin.iOS">
+      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\Xamarin.iOS10\ImageCircle.Forms.Plugin.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="SlideOverKit">
+      <HintPath>..\packages\SlideOverKit.2.1.4\lib\Xamarin.iOS10\SlideOverKit.dll</HintPath>
+    </Reference>
+    <Reference Include="SlideOverKit.iOS">
+      <HintPath>..\packages\SlideOverKit.2.1.4\lib\Xamarin.iOS10\SlideOverKit.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Teddy.MvvmCross.Plugins.SimpleAudioPlayer">
+      <HintPath>..\packages\Teddy.MvvmCross.Plugin.SimpleAudioPlayer.1.0.7\lib\Xamarin.iOS10\Teddy.MvvmCross.Plugins.SimpleAudioPlayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Teddy.MvvmCross.Plugins.SimpleAudioPlayer.iOS">
+      <HintPath>..\packages\Teddy.MvvmCross.Plugin.SimpleAudioPlayer.1.0.7\lib\Xamarin.iOS10\Teddy.MvvmCross.Plugins.SimpleAudioPlayer.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.SimpleAudioPlayer.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.SimpleAudioPlayer.0.7.0\lib\Xamarin.iOS10\Plugin.SimpleAudioPlayer.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.SimpleAudioPlayer">
+      <HintPath>..\packages\Xam.Plugin.SimpleAudioPlayer.0.7.0\lib\Xamarin.iOS10\Plugin.SimpleAudioPlayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.MediaManager.Abstractions">
+      <HintPath>..\packages\Plugin.MediaManager.0.4.0\lib\Xamarin.iOS10\Plugin.MediaManager.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.MediaManager">
+      <HintPath>..\packages\Plugin.MediaManager.0.4.0\lib\Xamarin.iOS10\Plugin.MediaManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.SecureStorage.Abstractions">
+      <HintPath>..\packages\sameerIOTApps.Plugin.SecureStorage.1.2.1\lib\Xamarin.iOS10\Plugin.SecureStorage.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.SecureStorage">
+      <HintPath>..\packages\sameerIOTApps.Plugin.SecureStorage.1.2.1\lib\Xamarin.iOS10\Plugin.SecureStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\Xamarin.iOS10\Plugin.Media.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\Xamarin.iOS10\Plugin.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.Support.iOS">
+      <HintPath>..\packages\Acr.Support.2.1.0\lib\Xamarin.iOS10\Acr.Support.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs">
+      <HintPath>..\packages\Acr.UserDialogs.6.3.10\lib\Xamarin.iOS10\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface">
+      <HintPath>..\packages\Acr.UserDialogs.6.3.10\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.0.4\lib\Xamarin.IOS\Rg.Plugins.Popup.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.IOS">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.0.4\lib\Xamarin.IOS\Rg.Plugins.Popup.IOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.Platform">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.0.4\lib\Xamarin.IOS\Rg.Plugins.Popup.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvvmCross.Platform">
+      <HintPath>..\packages\MvvmCross.Platform.4.4.0\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform.iOS">
+      <HintPath>..\packages\MvvmCross.Platform.4.4.0\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.iOS">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.224\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="CarouselView.FormsPlugin.Abstractions">
+      <HintPath>..\packages\CarouselView.FormsPlugin.3.1.1\lib\Xamarin.iOS10\CarouselView.FormsPlugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="CarouselView.FormsPlugin.iOS">
+      <HintPath>..\packages\CarouselView.FormsPlugin.3.1.1\lib\Xamarin.iOS10\CarouselView.FormsPlugin.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\Xamarin.iOS10\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Xamarin.iOS10\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Sockets.Plugin.Abstractions">
+      <HintPath>..\packages\rda.SocketsForPCL.1.2.2\lib\Xamarin.iOS10\Sockets.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Sockets.Plugin">
+      <HintPath>..\packages\rda.SocketsForPCL.1.2.2\lib\Xamarin.iOS10\Sockets.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocket.Portable">
+      <HintPath>..\packages\WebSocket.Portable.Core.1.2.6\lib\portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\WebSocket.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="Square.SocketRocket">
+      <HintPath>..\packages\Square.SocketRocket.0.4.2.0\lib\Xamarin.iOS\Square.SocketRocket.dll</HintPath>
+    </Reference>
+    <Reference Include="Websockets.Ios">
+      <HintPath>..\packages\Websockets.Pcl.1.1.9\lib\xamarinios10\Websockets.Ios.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSockets.PCL">
+      <HintPath>..\packages\Websockets.Pcl.1.1.9\lib\xamarinios10\WebSockets.PCL.dll</HintPath>
+    </Reference>
+    <Reference Include="SignalR.Client.Portable">
+      <HintPath>..\packages\SignalR.Client.Portable.0.4.0\lib\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SignalR.Client.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Core">
+      <HintPath>..\packages\Xamarin.Firebase.iOS.Core.3.4.6\lib\Xamarin.iOS10\Firebase.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.InstanceID">
+      <HintPath>..\packages\Xamarin.Firebase.iOS.InstanceID.1.0.8.1\lib\Xamarin.iOS10\Firebase.InstanceID.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Analytics">
+      <HintPath>..\packages\Xamarin.Firebase.iOS.Analytics.3.6.0.2\lib\Xamarin.iOS10\Firebase.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.DynamicLinks">
+      <HintPath>..\packages\Xamarin.Firebase.iOS.DynamicLinks.1.3.2.2\lib\Xamarin.iOS10\Firebase.DynamicLinks.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Core">
+      <HintPath>..\packages\Xamarin.Google.iOS.Core.3.0.3.3\lib\Xamarin.iOS10\Google.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.SignIn">
+      <HintPath>..\packages\Xamarin.Google.iOS.SignIn.4.0.1.2\lib\Xamarin.iOS10\Google.SignIn.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Invites">
+      <HintPath>..\packages\Xamarin.Firebase.iOS.Invites.1.2.3.2\lib\Xamarin.iOS10\Firebase.Invites.dll</HintPath>
+    </Reference>
+    <Reference Include="HorizontalList">
+      <HintPath>..\packages\HorizontalListView1.1.1.1.0\lib\HorizontalList.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AudioKetab\AudioKetab.csproj">
+      <Project>{B6BCA90C-0001-4F98-9D50-C05ECEDEB7E0}</Project>
+      <Name>AudioKetab</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="CustomRenderers\" />
+    <Folder Include="DependencyServices\" />
+    <Folder Include="Splash\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Splash\SplashViewController.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="CustomRenderers\MyEntryRenderer.cs" />
+    <Compile Include="CustomRenderers\TLScrollViewRenderer.cs" />
+    <Compile Include="DependencyServices\iOSMethods.cs" />
+    <Compile Include="Bootstrap\SimpleAudioPlayerPluginBootstrap.cs" />
+    <Compile Include="CustomRenderers\ChatEntryRenderer.cs" />
+    <Compile Include="CustomRenderers\RoundedEntryRenderer.cs" />
+    <Compile Include="Splash\SplashViewController.cs" />
+    <Compile Include="Splash\SplashViewController.designer.cs">
+      <DependentUpon>SplashViewController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\logo%402x.png" />
+    <BundleResource Include="Resources\menu_ic.png" />
+    <BundleResource Include="Resources\menu_ic%402x.png" />
+    <BundleResource Include="Resources\mic_ic.png" />
+    <BundleResource Include="Resources\mic_ic%402x.png" />
+    <BundleResource Include="Resources\radio_check.png" />
+    <BundleResource Include="Resources\radio_check%402x.png" />
+    <BundleResource Include="Resources\radio_uncheck.png" />
+    <BundleResource Include="Resources\radio_uncheck%402x.png" />
+    <BundleResource Include="Resources\bg-layer2.png" />
+    <BundleResource Include="Resources\bg-layer2%402x.png" />
+    <BundleResource Include="Resources\default.png" />
+    <BundleResource Include="Resources\default%402x.png" />
+    <BundleResource Include="Resources\ic_comment.png" />
+    <BundleResource Include="Resources\ic_comment%402x.png" />
+    <BundleResource Include="Resources\ic_next.png" />
+    <BundleResource Include="Resources\ic_next%402x.png" />
+    <BundleResource Include="Resources\ic_play.png" />
+    <BundleResource Include="Resources\ic_play%402x.png" />
+    <BundleResource Include="Resources\ic_previos.png" />
+    <BundleResource Include="Resources\ic_previos%402x.png" />
+    <BundleResource Include="Resources\ic_share.png" />
+    <BundleResource Include="Resources\ic_share%402x.png" />
+    <BundleResource Include="Resources\ic_volume.png" />
+    <BundleResource Include="Resources\ic_volume%402x.png" />
+    <BundleResource Include="Resources\ic_yellow.png" />
+    <BundleResource Include="Resources\ic_yellow%402x.png" />
+    <BundleResource Include="Resources\ic%29green.png" />
+    <BundleResource Include="Resources\ic%29green%402x.png" />
+    <BundleResource Include="Resources\iclist.png" />
+    <BundleResource Include="Resources\iclist%402x.png" />
+    <BundleResource Include="Resources\badge.png" />
+    <BundleResource Include="Resources\badge%402x.png" />
+    <BundleResource Include="Resources\down.png" />
+    <BundleResource Include="Resources\down%402x.png" />
+    <BundleResource Include="Resources\ic1.png" />
+    <BundleResource Include="Resources\ic1%402x.png" />
+    <BundleResource Include="Resources\ic2.png" />
+    <BundleResource Include="Resources\ic2%402x.png" />
+    <BundleResource Include="Resources\ic3.png" />
+    <BundleResource Include="Resources\ic3%402x.png" />
+    <BundleResource Include="Resources\ic4.png" />
+    <BundleResource Include="Resources\ic4%402x.png" />
+    <BundleResource Include="Resources\msg_ic.png" />
+    <BundleResource Include="Resources\msg_ic%402x.png" />
+    <BundleResource Include="Resources\next_ic.png" />
+    <BundleResource Include="Resources\next_ic%402x.png" />
+    <BundleResource Include="Resources\previous_ic.png" />
+    <BundleResource Include="Resources\previous_ic%402x.png" />
+    <BundleResource Include="Resources\download-%282%29.png" />
+    <BundleResource Include="Resources\download-%282%29%402x.png" />
+    <BundleResource Include="Resources\heder_feam.png" />
+    <BundleResource Include="Resources\heder_feam%402x.png" />
+    <BundleResource Include="Resources\ic.png" />
+    <BundleResource Include="Resources\ic%402x.png" />
+    <BundleResource Include="Resources\mute.png" />
+    <BundleResource Include="Resources\mute%402x.png" />
+    <BundleResource Include="Resources\plus.png" />
+    <BundleResource Include="Resources\plus%402x.png" />
+    <BundleResource Include="Resources\profile_frame.png" />
+    <BundleResource Include="Resources\profile_frame%402x.png" />
+    <BundleResource Include="Resources\profile-circle.png" />
+    <BundleResource Include="Resources\profile-circle%402x.png" />
+    <BundleResource Include="Resources\upload_ic.png" />
+    <BundleResource Include="Resources\upload_ic%402x.png" />
+    <BundleResource Include="Resources\user_ic.png" />
+    <BundleResource Include="Resources\user_ic%402x.png" />
+    <BundleResource Include="Resources\users%29ic.png" />
+    <BundleResource Include="Resources\users%29ic%402x.png" />
+    <BundleResource Include="Resources\defaultprofile.png" />
+    <BundleResource Include="Resources\defaultprofile%402x.png" />
+    <BundleResource Include="Resources\chckbox_check.png" />
+    <BundleResource Include="Resources\chckbox_check%402x.png" />
+    <BundleResource Include="Resources\checkbox_arrow.png" />
+    <BundleResource Include="Resources\checkbox_arrow%402x.png" />
+    <BundleResource Include="Resources\checkbox_uncheck.png" />
+    <BundleResource Include="Resources\checkbox_uncheck%402x.png" />
+    <BundleResource Include="Resources\drop_down-arrow.png" />
+    <BundleResource Include="Resources\drop_down-arrow%402x.png" />
+    <BundleResource Include="Resources\download.png" />
+    <BundleResource Include="Resources\download%402x.png" />
+    <BundleResource Include="Resources\bg_social_ic.png" />
+    <BundleResource Include="Resources\bg_social_ic%402x.png" />
+    <BundleResource Include="Resources\fb_ic.png" />
+    <BundleResource Include="Resources\fb_ic%402x.png" />
+    <BundleResource Include="Resources\insat_ic.png" />
+    <BundleResource Include="Resources\insat_ic%402x.png" />
+    <BundleResource Include="Resources\tw_ic.png" />
+    <BundleResource Include="Resources\tw_ic%402x.png" />
+    <BundleResource Include="Resources\bg1.png" />
+    <BundleResource Include="Resources\bg1%402x.png" />
+    <BundleResource Include="Resources\training3x.png" />
+    <BundleResource Include="Resources\book-summerti3x.png" />
+    <BundleResource Include="Resources\readingmentor3x.png" />
+    <BundleResource Include="Resources\newsleeter3x.png" />
+    <BundleResource Include="Resources\training.png" />
+    <BundleResource Include="Resources\training%402x.png" />
+    <BundleResource Include="Resources\book-summerti.png" />
+    <BundleResource Include="Resources\book-summerti%402x.png" />
+    <BundleResource Include="Resources\readingmentor.png" />
+    <BundleResource Include="Resources\readingmentor%402x.png" />
+    <BundleResource Include="Resources\newsleeter.png" />
+    <BundleResource Include="Resources\newsleeter%402x.png" />
+    <BundleResource Include="Resources\sel_list%403x.png" />
+    <BundleResource Include="Resources\sel_list.png" />
+    <BundleResource Include="Resources\sel_list%402x.png" />
+    <BundleResource Include="Resources\bg1~ipad.png" />
+    <BundleResource Include="Resources\menu_ic~ipad.png" />
+    <BundleResource Include="Resources\radio_check~ipad.png" />
+    <BundleResource Include="Resources\radio_uncheck~ipad.png" />
+    <BundleResource Include="Resources\bg-layer2~ipad.png" />
+    <BundleResource Include="Resources\default~ipad.png" />
+    <BundleResource Include="Resources\ic_comment~ipad.png" />
+    <BundleResource Include="Resources\ic_next~ipad.png" />
+    <BundleResource Include="Resources\ic_play~ipad.png" />
+    <BundleResource Include="Resources\ic_previos~ipad.png" />
+    <BundleResource Include="Resources\ic_share~ipad.png" />
+    <BundleResource Include="Resources\ic_volume~ipad.png" />
+    <BundleResource Include="Resources\ic_yellow~ipad.png" />
+    <BundleResource Include="Resources\ic%29green~ipad.png" />
+    <BundleResource Include="Resources\badge~ipad.png" />
+    <BundleResource Include="Resources\down~ipad.png" />
+    <BundleResource Include="Resources\heder_feam~ipad.png" />
+    <BundleResource Include="Resources\ic~ipad.png" />
+    <BundleResource Include="Resources\mute~ipad.png" />
+    <BundleResource Include="Resources\plus~ipad.png" />
+    <BundleResource Include="Resources\profile_frame~ipad.png" />
+    <BundleResource Include="Resources\profile-circle~ipad.png" />
+    <BundleResource Include="Resources\upload_ic~ipad.png" />
+    <BundleResource Include="Resources\user_ic~ipad.png" />
+    <BundleResource Include="Resources\users%29ic~ipad.png" />
+    <BundleResource Include="Resources\defaultprofile~ipad.png" />
+    <BundleResource Include="Resources\checkbox_arrow~ipad.png" />
+    <BundleResource Include="Resources\drop_down-arrow~ipad.png" />
+    <BundleResource Include="Resources\download~ipad.png" />
+    <BundleResource Include="Resources\bg_social_ic~ipad.png" />
+    <BundleResource Include="Resources\fb_ic~ipad.png" />
+    <BundleResource Include="Resources\insat_ic~ipad.png" />
+    <BundleResource Include="Resources\tw_ic~ipad.png" />
+    <BundleResource Include="Resources\dropdownbg.png" />
+    <BundleResource Include="Resources\badge%403x.png" />
+    <BundleResource Include="Resources\bg1%403x.png" />
+    <BundleResource Include="Resources\checkbox_arrow%403x.png" />
+    <BundleResource Include="Resources\default%403x.png" />
+    <BundleResource Include="Resources\defaultprofile%403x.png" />
+    <BundleResource Include="Resources\down%403x.png" />
+    <BundleResource Include="Resources\download-_1_%403x.png" />
+    <BundleResource Include="Resources\download-_2_%403x.png" />
+    <BundleResource Include="Resources\download%403x.png" />
+    <BundleResource Include="Resources\drop_down_arrow%403x.png" />
+    <BundleResource Include="Resources\fb_ic%403x.png" />
+    <BundleResource Include="Resources\ic%403x.png" />
+    <BundleResource Include="Resources\ic1%403x.png" />
+    <BundleResource Include="Resources\ic2%403x.png" />
+    <BundleResource Include="Resources\ic3%403x.png" />
+    <BundleResource Include="Resources\ic4%403x.png" />
+    <BundleResource Include="Resources\msg_ic%403x.png" />
+    <BundleResource Include="Resources\insat_ic%403x.png" />
+    <BundleResource Include="Resources\logo%403x.png" />
+    <BundleResource Include="Resources\logo2.png" />
+    <BundleResource Include="Resources\menu_ic%403x.png" />
+    <BundleResource Include="Resources\mic_ic%403x.png" />
+    <BundleResource Include="Resources\mute%403x.png" />
+    <BundleResource Include="Resources\next_ic%403x.png" />
+    <BundleResource Include="Resources\plus%403x.png" />
+    <BundleResource Include="Resources\previous_ic%403x.png" />
+    <BundleResource Include="Resources\profile_circle%403x.png" />
+    <BundleResource Include="Resources\profile_frame%403x.png" />
+    <BundleResource Include="Resources\radio_check%403x.png" />
+    <BundleResource Include="Resources\radio_uncheck%403x.png" />
+    <BundleResource Include="Resources\tw_ic%403x.png" />
+    <BundleResource Include="Resources\upload_ic%403x.png" />
+    <BundleResource Include="Resources\user_ic%403x.png" />
+    <BundleResource Include="Resources\users_ic%403x.png" />
+    <BundleResource Include="Resources\pause.png" />
+    <BundleResource Include="Resources\down_arrow.png" />
+    <BundleResource Include="Resources\upload-button.png" />
+    <BundleResource Include="Resources\microphone.png" />
+    <BundleResource Include="Resources\stop-button.png" />
+    <BundleResource Include="Resources\delete.png" />
+    <BundleResource Include="Resources\clear-button.png" />
+    <BundleResource Include="Resources\ic_volume-mute.png" />
+    <BundleResource Include="Resources\ic_volume-mute%402x.png" />
+    <BundleResource Include="Resources\ic_volume-mute%403x.png" />
+    <BundleResource Include="Resources\ic_volume-mute%40ipad.png" />
+    <BundleResource Include="Resources\ic_volume%403x.png" />
+    <BundleResource Include="Resources\ic_volume%40ipad.png" />
+    <BundleResource Include="Resources\like.png" />
+    <BundleResource Include="Resources\like%402x.png" />
+    <BundleResource Include="Resources\like%403x.png" />
+    <BundleResource Include="Resources\like%40ipad.png" />
+    <BundleResource Include="Resources\message_add.png" />
+    <BundleResource Include="Resources\message_add%402x.png" />
+    <BundleResource Include="Resources\message_add%403x.png" />
+    <BundleResource Include="Resources\message_add%40ipad.png" />
+    <BundleResource Include="Resources\notification.png" />
+    <BundleResource Include="Resources\notification%402x.png" />
+    <BundleResource Include="Resources\notification%40ipad.png" />
+    <BundleResource Include="Resources\unlike.png" />
+    <BundleResource Include="Resources\unlike%402x.png" />
+    <BundleResource Include="Resources\unlike%403x.png" />
+    <BundleResource Include="Resources\unlike%40ipad.png" />
+    <BundleResource Include="GoogleService-Info.plist" />
+    <BundleResource Include="Resources\dropdown.png" />
+    <BundleResource Include="Resources\chckbox_check%403x.png" />
+    <BundleResource Include="Resources\checkbox_uncheck%403x.png" />
+    <BundleResource Include="Resources\mic_ic~ipad.png" />
+    <BundleResource Include="Resources\back.png" />
+    <BundleResource Include="Resources\splash_logo.png" />
+    <BundleResource Include="Resources\mentoring.png" />
+    <BundleResource Include="Resources\mentoring%402x.png" />
+    <BundleResource Include="Resources\mentoring%403x.png" />
+    <BundleResource Include="Resources\newsletter.png" />
+    <BundleResource Include="Resources\newsletter%403x.png" />
+    <BundleResource Include="Resources\newsletter%402x.png" />
+    <BundleResource Include="Resources\book%402x.png" />
+    <BundleResource Include="Resources\book%403x.png" />
+    <BundleResource Include="Resources\book.png" />
+    <BundleResource Include="Resources\lectures.png" />
+    <BundleResource Include="Resources\lectures%403x.png" />
+    <BundleResource Include="Resources\lectures%402x.png" />
+    <BundleResource Include="Resources\edit.png" />
+    <BundleResource Include="Resources\delete_icon.png" />
+    <BundleResource Include="Resources\unfollow.png" />
+    <BundleResource Include="Resources\follow.png" />
+    <BundleResource Include="Resources\follow%403x.png" />
+    <BundleResource Include="Resources\unfollow%403x.png" />
+    <BundleResource Include="Resources\unfollow%402x.png" />
+    <BundleResource Include="Resources\follow%402x.png" />
+    <BundleResource Include="Resources\ic_volume2x.png" />
+    <BundleResource Include="Resources\ic_share%403x.png" />
+    <BundleResource Include="Resources\iclist%403x.png" />
+    <BundleResource Include="Resources\ic_comment%403x.png" />
+    <BundleResource Include="Resources\ic_volume3x.png" />
+    <BundleResource Include="Resources\notification%403x.png" />
+    <BundleResource Include="Resources\crosssign.png" />
+    <BundleResource Include="Resources\bg~ipad.png" />
+    <BundleResource Include="Resources\bg%402x.png" />
+    <BundleResource Include="Resources\bg.png" />
+    <BundleResource Include="Resources\questions%403x.png" />
+    <BundleResource Include="Resources\questions%402x.png" />
+    <BundleResource Include="Resources\questions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="btprogresshud">
+      <Version>1.20</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="square.socketrocket">
+      <Version>0.4.2.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="firebaseiosinvites">
+      <Version>1.2.3.2</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="googleiossignin">
+      <Version>4.0.1.2</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.iOS.Core.3.4.6\build\Xamarin.Firebase.iOS.Core.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.Core.3.4.6\build\Xamarin.Firebase.iOS.Core.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.iOS.InstanceID.1.0.8.1\build\Xamarin.Firebase.iOS.InstanceID.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.InstanceID.1.0.8.1\build\Xamarin.Firebase.iOS.InstanceID.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.iOS.Analytics.3.6.0.2\build\Xamarin.Firebase.iOS.Analytics.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.Analytics.3.6.0.2\build\Xamarin.Firebase.iOS.Analytics.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.iOS.DynamicLinks.1.3.2.2\build\Xamarin.Firebase.iOS.DynamicLinks.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.DynamicLinks.1.3.2.2\build\Xamarin.Firebase.iOS.DynamicLinks.targets')" />
+  <Import Project="..\packages\Xamarin.Google.iOS.Core.3.0.3.3\build\Xamarin.Google.iOS.Core.targets" Condition="Exists('..\packages\Xamarin.Google.iOS.Core.3.0.3.3\build\Xamarin.Google.iOS.Core.targets')" />
+  <Import Project="..\packages\Xamarin.Google.iOS.SignIn.4.0.1.2\build\Xamarin.Google.iOS.SignIn.targets" Condition="Exists('..\packages\Xamarin.Google.iOS.SignIn.4.0.1.2\build\Xamarin.Google.iOS.SignIn.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.iOS.Invites.1.2.3.2\build\Xamarin.Firebase.iOS.Invites.targets" Condition="Exists('..\packages\Xamarin.Firebase.iOS.Invites.1.2.3.2\build\Xamarin.Firebase.iOS.Invites.targets')" />
+</Project>

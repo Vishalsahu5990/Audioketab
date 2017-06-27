@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+	x:Class="AudioKetab.AlbumInfoPopup">
+	<StackLayout
+			Orientation="Vertical" 
+			VerticalOptions="CenterAndExpand"
+		HorizontalOptions="FillAndExpand"
+			Padding="0" Margin="20,40,20,40"> 
+		     
+			<StackLayout BackgroundColor="#60808080" >
+			<StackLayout  HeightRequest="200"
+									Padding="10" x:Name="_slInfo">
+									<StackLayout HorizontalOptions="End" Orientation="Horizontal"  Padding="10">
+									<Image Source="crosssign"
+										HorizontalOptions="EndAndExpand"/>
+										<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Cross_Tapped"/> 
+    </StackLayout.GestureRecognizers> 
+									</StackLayout>
+								<StackLayout Orientation="Horizontal">
+										<Label Text="" TextColor="White"
+										FontSize="14"
+										HorizontalTextAlignment="End"
+					            HorizontalOptions="EndAndExpand" 
+					x:Name="lblTitle"/> 
+								<Label Text="عنوان كتاب : " TextColor="White"
+										FontSize="14"
+										HorizontalOptions="EndAndExpand"/>
+									</StackLayout>
+				<StackLayout Orientation="Horizontal">
+										<Label Text="" TextColor="White"
+										FontSize="14"
+										HorizontalTextAlignment="End"
+					            HorizontalOptions="EndAndExpand"
+								x:Name="lblAuthorName"/>
+								<Label Text="شرح الكتاب :" TextColor="White"
+										FontSize="14"
+										HorizontalOptions="EndAndExpand"
+					/> 
+									</StackLayout>
+				<StackLayout Orientation="Horizontal">
+										<Label Text="" TextColor="White"
+										FontSize="14"
+										HorizontalTextAlignment="End"
+					            HorizontalOptions="EndAndExpand"
+					            x:Name="lblDescription"/>
+								<Label Text="مؤلف الكتاب : " TextColor="White"
+										FontSize="14"
+										HorizontalOptions="EndAndExpand"
+					/> 
+									</StackLayout>
+								</StackLayout>
+		</StackLayout> 
+			</StackLayout>     
+</pages:PopupPage>

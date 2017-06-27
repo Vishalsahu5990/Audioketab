@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+	x:Class="AudioKetab.SignUpPage"
+	>
+	<RelativeLayout 
+            Padding="0"
+            Margin="0"
+            x:Name="_MainLayout"
+            RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}">
+
+        <Image Source="bg"
+                x:Name="imgBG"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
+             <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+
+			<StackLayout   VerticalOptions="FillAndExpand">
+
+		<StackLayout Spacing="0">
+				
+                <!--Title Bar Start-->
+           <StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="80"  
+            BackgroundColor="Transparent"
+            Margin="0"
+            Padding="0"
+			Spacing="0"
+			 HorizontalOptions="FillAndExpand">
+			<Grid  HorizontalOptions="FillAndExpand">
+				<StackLayout   Grid.Column="0" > 
+					
+				<Image Source="back"
+            HorizontalOptions="Start"
+					WidthRequest="30"
+            VerticalOptions="CenterAndExpand"
+					IsVisible="true"
+					Margin="15,10,0,0"
+					HeightRequest="25">    
+          </Image>
+				 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Back_Tapped" />
+    </StackLayout.GestureRecognizers>	 
+				</StackLayout> 
+				 <StackLayout Grid.Column="1"  HorizontalOptions="CenterAndExpand">
+				  <Image Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"
+								Margin="0,10,0,0"
+								IsVisible="false"/> 
+			</StackLayout>
+					 <StackLayout Grid.Column="2"  HorizontalOptions="CenterAndExpand">
+				  <Image IsVisible="false" Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"/>  
+			</StackLayout>
+					
+			</Grid>	
+			</StackLayout>	
+          
+			 </StackLayout>
+          <!--Title Bar End--> 
+              <StackLayout Padding="0,0,0,10"  
+			Orientation="Vertical" 
+			VerticalOptions="FillAndExpand" 
+			HorizontalOptions="FillAndExpand"
+			 		 >
+				 <Frame 
+			x:Name="frame"
+			Margin="30,50,30,10" 
+			BackgroundColor="Silver" 
+			OutlineColor="Transparent" 
+			VerticalOptions="EndAndExpand"
+			HasShadow="false"	>
+					<ScrollView>
+				 <StackLayout Orientation="Vertical" Spacing="8" 
+							HorizontalOptions="FillAndExpand">
+				 <Label HorizontalOptions="Center" Text="تسجيل"/>
+				<Label HorizontalOptions="Center" FontAttributes="Bold"
+				Text="AudioKetab"
+				TextColor="#5AB0B1"/>  
+						<Label
+				x:Name="lblErrorMessage"
+				IsVisible="false"
+				HorizontalOptions="Center"
+			Text="All fields are required."
+			TextColor="Red"
+			FontSize="14"/>
+				<local:MyEntry
+					HorizontalTextAlignment="End"
+					x:Name="txtFirstName"
+					PlaceholderColor="Black"
+					Placeholder="firstname
+"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"/>
+				<local:MyEntry
+							HorizontalTextAlignment="End"
+							x:Name="txtLastName"
+					PlaceholderColor="Black"
+					Placeholder="lastname"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"/>
+						<RelativeLayout HeightRequest="30"> 
+						<local:MyEntry
+					HorizontalTextAlignment="End"
+					x:Name="txtDob"
+					PlaceholderColor="Black"
+					Placeholder="date of birth"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"
+							 RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"	
+				/>
+							<StackLayout  
+					 RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"	
+			 
+						HorizontalOptions="FillAndExpand"
+						HeightRequest="40" BackgroundColor="Transparent">
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="DOB_Tapped"/>
+    </StackLayout.GestureRecognizers>
+				
+						
+					<DatePicker 
+						x:Name="datepicker"
+					IsVisible="false"
+					/>
+				</StackLayout>
+						</RelativeLayout>
+				
+				<local:MyEntry
+							HorizontalTextAlignment="End"
+							x:Name="txtEmail"
+					PlaceholderColor="Black"
+					Placeholder="email"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"
+						Keyboard="Email"/>
+						<local:MyEntry
+							HorizontalTextAlignment="End"
+						x:Name="txtPassword"	
+					PlaceholderColor="Black"
+					Placeholder="password"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"
+					IsPassword="true"
+						/>
+						<StackLayout Orientation="Horizontal">
+
+				<RelativeLayout
+					x:Name="_rlCountry"		
+					HeightRequest="30" 
+							 RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"	>
+								
+					<local:MyEntry
+					HorizontalTextAlignment="Start"
+					x:Name="txtCountry"
+					PlaceholderColor="Black"
+					Placeholder="select country"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"
+					 RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"/>
+					 <StackLayout
+										x:Name="_slCountry"
+                            HeightRequest="30"
+                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.82}"
+                >
+                <Image
+                    x:Name="imgSearch"
+                    Margin="0,0,0,0"
+                    Source="dropdown.png"
+                    VerticalOptions="CenterAndExpand"
+                 HeightRequest="15"/>
+								</StackLayout>	
+								<StackLayout
+									
+					RelativeLayout.WidthConstraint=
+             "{ConstraintExpression Type=RelativeToParent, Property=Width}"	
+			 
+						HorizontalOptions="FillAndExpand"
+						HeightRequest="30" BackgroundColor="Transparent">
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Country_Tapped"/> 
+    </StackLayout.GestureRecognizers>
+				
+						
+					<Picker 
+						x:Name="countrypicker"
+					IsVisible="false" 
+							Title="Specialist" 
+					/>
+									
+				</StackLayout>
+						
+
+					</RelativeLayout>
+							
+							</StackLayout>
+				<local:MyEntry
+							x:Name="txtMobileNo"
+					HorizontalTextAlignment="End"
+					PlaceholderColor="Black"
+					Placeholder="mobile number"
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="30"
+					FontSize="14"
+				    BackgroundColor="White"
+						Keyboard="Telephone"/>
+			<StackLayout Spacing="20" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+			<Image Margin="10"
+									x:Name="imgCheckBox"
+								Source="checkbox_uncheck">
+			<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="CheckBox_Tapped"/>
+    </Image.GestureRecognizers>
+				</Image>
+							
+							
+					<Label FontSize="10" TextColor="Gray" 
+					Text="موافق على سياسات الاستخدام سياسة الخصوصي" 
+					HorizontalOptions="EndAndExpand"
+					VerticalTextAlignment="Center">
+					<Label.GestureRecognizers>
+        <TapGestureRecognizer Tapped="PrivacyPolicy_Tapped"/> 
+    </Label.GestureRecognizers>
+									</Label>
+				
+				</StackLayout>
+				<Button 
+								x:Name="btnSignUp"
+							Clicked="Signup_Clicked"
+					HeightRequest="40"
+				BackgroundColor="#ED9B13"
+				BorderRadius="8"
+				Text="تسجيل الدخول"
+				TextColor="White"
+				FontAttributes="Bold"/>
+				<Label FontSize="10" TextColor="Gray" 
+					Text="لديك بالفعل حساب تسجيل الدخول هنا"
+					HorizontalOptions="Center"
+					VerticalTextAlignment="Center"
+								IsVisible="false"/>
+			</StackLayout>
+						</ScrollView> 
+		</Frame>
+	</StackLayout>
+				</StackLayout>
+		</Grid>
+
+	
+		 </RelativeLayout> 
+</ContentPage>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	  xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+		x:Class="AudioKetab.ChatPage"
+	BackgroundColor="#DCDFE0">
+	<StackLayout>
+
+	 <StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="80"
+            BackgroundColor="#4D4D4D"
+            Margin="0"
+            Padding="0"
+				
+			 >
+				<StackLayout >
+				<Image Source="back"
+            HorizontalOptions="Start"
+					WidthRequest="30" 
+				VerticalOptions="CenterAndExpand"
+            Margin="15,10,0,0"
+					HeightRequest="25">
+            <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Back_Tapped"/>
+    </Image.GestureRecognizers>
+					</Image>
+				</StackLayout>
+
+				 <controls:CircleImage
+					x:Name="imgProfile"
+							Aspect="AspectFill"
+							Source="defaultprofile"
+							HorizontalOptions="Start"
+							HeightRequest="40"
+			WidthRequest="40"
+			VerticalOptions="Center"
+									BorderColor="White"
+									BorderThickness="3"
+											IsVisible="true"
+				Grid.Column="0"
+				 Margin="15,10,0,0"/>
+			<Label 
+			x:Name="lblUsername"
+				Text="Name"
+					 HorizontalOptions="Start"
+			VerticalOptions="CenterAndExpand"
+				Grid.Column="1"
+				FontAttributes="Bold"
+				TextColor="White"
+			 Margin="5,10,0,0"/>
+			
+          
+			
+        </StackLayout>
+	<StackLayout
+			HorizontalOptions="FillAndExpand"
+			VerticalOptions="FillAndExpand">
+			
+			 
+				
+       
+				</StackLayout>
+				<ScrollView>
+		<StackLayout>
+		<StackLayout>
+
+	 <flv:FlowListView
+			
+			BackgroundColor="Transparent"
+			Margin="0,30,0,0"
+			SeparatorVisibility="None"
+			HasUnevenRows="true"
+			FlowItemTappedCommand="{Binding ItemTappedCommand}" 
+			FlowLastTappedItem="{Binding LastTappedItem}"
+			FlowColumnMinWidth="320" 
+			x:Name="flowlistview">
+
+			<flv:FlowListView.FlowColumnTemplate>
+				<DataTemplate>
+					<Grid Padding="0,10,0,10"> 
+						
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+			 			</Grid.ColumnDefinitions>
+							<StackLayout
+							Orientation="Horizontal"
+							Padding="10"
+							Spacing="0">
+
+<!--	incoming cell					-->
+
+			<StackLayout 
+			IsVisible="{Binding Incoming}" 
+			Orientation="Horizontal" 
+			HorizontalOptions="FillAndExpand"
+									VerticalOptions="Start">
+									<controls:CircleImage
+							Aspect="AspectFill"
+							Source="{Binding profile_pic}"
+							HeightRequest="40"
+			WidthRequest="40"
+			VerticalOptions="Start"
+									BorderColor="White"
+									BorderThickness="3"/>
+
+			<Frame
+				Margin="0,0,30,0"
+				Padding="0"
+				HasShadow="false"
+				BackgroundColor="White"
+				HorizontalOptions="StartAndExpand" 
+				>
+				<Label Text="{Binding msg_desc}"
+				Margin="5"/>
+			</Frame>
+		    </StackLayout>			
+							  
+							  <!--		outgoing cell					-->
+
+							<StackLayout
+								IsVisible="{Binding Outgoing}"
+								Orientation="Horizontal" 
+			HorizontalOptions="EndAndExpand"
+									VerticalOptions="Start">
+			<Frame
+				x:Name="frameOutgoing" 
+				Margin="30,0,0,0"
+				Padding="0"
+				HasShadow="false"
+				BackgroundColor="White"
+				HorizontalOptions="EndAndExpand" 
+				>
+				<Label Text="{Binding msg_desc}"
+				Margin="5"/>
+			</Frame>
+									
+
+		    </StackLayout>		
+												
+							</StackLayout>
+						
+					</Grid>
+				</DataTemplate>
+			</flv:FlowListView.FlowColumnTemplate>
+		
+		</flv:FlowListView>
+			<StackLayout HeightRequest="50" Orientation="Horizontal" 
+			HorizontalOptions="FillAndExpand"
+			VerticalOptions="FillAndExpand"
+			Padding="10"
+				BackgroundColor="Silver"> 
+			<local:ChatEntry BackgroundColor="White" 
+			x:Name="txtComment"
+					HorizontalTextAlignment="End"
+			HorizontalOptions="FillAndExpand"/>
+				<Button Text="Send" FontAttributes="Bold" 
+			x:Name="btnSend"/>
+			</StackLayout>
+			</StackLayout>
+					</StackLayout>
+	</ScrollView>
+			</StackLayout>
+</ContentPage>
+ 

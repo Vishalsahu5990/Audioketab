@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="AudioKetab.AboutusPage"
+	>
+	 <RelativeLayout
+            >  
+	
+						
+         <Image
+                Aspect="Fill"
+                Source="bg1" 
+                x:Name="imgBG"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+
+                RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"
+                    />
+                    <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+					>
+			
+	<StackLayout  HorizontalOptions="FillAndExpand">
+	  <!--Title Bar Start-->
+           <StackLayout 
+            Orientation="Horizontal" 
+            HeightRequest="80"  
+            BackgroundColor="#4D4D4D"  
+            Margin="0" 
+            Padding="0" 
+			Spacing="0" 
+			 HorizontalOptions="FillAndExpand"
+			VerticalOptions="Start"> 
+			<Grid  HorizontalOptions="FillAndExpand"> 
+				<StackLayout   Grid.Column="0" >  
+					
+				<Image Source="menu_ic"
+            HorizontalOptions="Start"
+					WidthRequest="30"
+            VerticalOptions="CenterAndExpand"
+					IsVisible="true"
+					Margin="15,10,0,0">    
+          </Image>
+				 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="menu_Tapped"/>
+    </StackLayout.GestureRecognizers>	 
+				</StackLayout> 
+				 <StackLayout Grid.Column="1"  HorizontalOptions="CenterAndExpand">
+				  <Image Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"
+								Margin="0,10,0,0"/> 
+			</StackLayout>
+					 <StackLayout Grid.Column="2"  HorizontalOptions="CenterAndExpand">
+				  <Image IsVisible="false" Source="logo"
+            HorizontalOptions="CenterAndExpand"
+            HeightRequest="40"
+				VerticalOptions="CenterAndExpand"/>  
+			</StackLayout>
+					
+			</Grid>	
+				
+          </StackLayout>
+          <!--Title Bar End-->
+
+		<StackLayout  VerticalOptions="CenterAndExpand" >
+			<Label 
+				x:Name="lblAboutus"
+			HorizontalTextAlignment="End"
+	TextColor="Black" 
+			Margin="30" 
+			Text="هي احدى مبادرات جامعة الملك عبدالعزيز والتي تهدف الى نشر ثقافة القراءة و الإسهام في بناء المجتمع. رسالتها التحول من استهلاك المعرفة الى صناعة المعرفة. و هي عبارة عن منصة الكترونية تفاعلية تهدف إلى تكوين مكتبة صوتية لأهم الكتب و المقالات في مختلف المجالات. كما تشكل المنصة منبر للقرّاء و المتحدثين تمكنهم من عرض و مشاركة محاضراتهم الصوتية، كما تمكنهم من تكوين قاعدة من المتابعين والمستمعين لهم."/>
+		</StackLayout>
+
+		<StackLayout> 
+			<Image Source="logo2" HorizontalOptions="Center"
+			 VerticalOptions="CenterAndExpand" 
+						HeightRequest="150"
+					Margin="0,0,0,20"/> 
+		</StackLayout>
+
+	</StackLayout>
+			</Grid> 
+	</RelativeLayout> 
+		
+</ContentPage>

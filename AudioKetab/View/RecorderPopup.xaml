@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+  x:Class="AudioKetab.RecorderPopup">
+	<StackLayout
+			Orientation="Vertical" 
+			VerticalOptions="CenterAndExpand"
+		HorizontalOptions="FillAndExpand"
+			HeightRequest="350"
+			BackgroundColor="White"
+			Margin="30"> 
+		     
+			<Grid HorizontalOptions="Center"
+			VerticalOptions="CenterAndExpand">
+			<Button x:Name="btnRecord" Grid.Column="0" Image="microphone"/>
+			<Label x:Name="lblTimer"  Grid.Column="1" Text="00:00" FontSize="18"
+			VerticalTextAlignment="Center"
+				VerticalOptions="CenterAndExpand"
+			HorizontalOptions="Center"/>
+			<Button x:Name="btnStop"  Grid.Column="2" Image="stop-button"/>
+			</Grid>
+		
+	 
+		</StackLayout>
+	
+</pages:PopupPage>

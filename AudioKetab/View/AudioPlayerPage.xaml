@@ -36,7 +36,7 @@
 				<StackLayout  
             Orientation="Horizontal"  
             HeightRequest="80"  
-            BackgroundColor="#4D4D4D" 
+            BackgroundColor="#4D4D4D"  
             Margin="0"
             Padding="0"
 			Spacing="0"
@@ -78,7 +78,7 @@
 
 					
 		   <RelativeLayout
-           >
+          x:Name="_rlHeader"> 
 						
          <Image 
                 Aspect="Fill"
@@ -93,10 +93,11 @@
               "{ConstraintExpression Type=RelativeToParent, Property=Width}"
             RelativeLayout.HeightConstraint=
               "{ConstraintExpression Type=RelativeToParent, Property=Height}"
-					>
+					> 
 					<StackLayout Orientation="Horizontal" Margin="2" > 
 					<Grid> 
-						<StackLayout Grid.Column="0" x:Name="_slMic">
+						<StackLayout Grid.Column="0" x:Name="_slMic"
+												>
 												
 						<Image
 							x:Name="imgMic" 
@@ -104,10 +105,10 @@
 									Margin="3,0,0,0"
 									VerticalOptions="EndAndExpand"
 										HorizontalOptions="Start">
-										 <Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="Audio_Tapped"/>
-    </Image.GestureRecognizers>
-										</Image> 	
+										</Image> 
+			<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Audio_Tapped"/>  
+    </StackLayout.GestureRecognizers>
 						</StackLayout>
 
 						
@@ -260,7 +261,7 @@
 
 
 						
-			<StackLayout BackgroundColor="#708F908E"> 
+			<StackLayout Margin="0,10,0,0" BackgroundColor="#708F908E"> 
 			 
 			 <StackLayout>
 			<ffimageloading:CachedImage  
@@ -329,7 +330,7 @@
     </StackLayout.GestureRecognizers>
 							</StackLayout>
 
-							<RelativeLayout > 
+							<RelativeLayout >  
 
 							<StackLayout 
 									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.15}"

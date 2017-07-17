@@ -59,7 +59,17 @@
 			<key>CFBundleURLTypes</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.rudimentwebtech.audioketab</string>
+			<string>google</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.rudimentwebtech.audioketab</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>google</string>
+			<key>CFBundleURLTypes</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.859517772081-bpi2f61e0b9i56fjt2c8ldsuonh90cd8</string>

@@ -23,12 +23,15 @@
               <Image Source="splash_logo"
 		        HorizontalOptions="Center"
 				x:Name="imgLogo"
-				Aspect="AspectFit"/>
+				Aspect="AspectFit"
+				/>
 				<StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="Center">
 				<Label Text="جميع الحقوق محفوظة"
-				HorizontalOptions="Center"/> 
+				HorizontalOptions="Center"
+					FontSize="9"/> 
 					<Label Text="@AudioKetab 2015"
-				HorizontalOptions="Center"/> 
+				HorizontalOptions="Center"
+					FontSize="9"/> 
 				</StackLayout>
 			
 			</StackLayout>

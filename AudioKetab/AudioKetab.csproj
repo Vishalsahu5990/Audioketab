@@ -296,6 +296,7 @@
     <Compile Include="CustomRenderers\HorizontalList.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="CustomRenderers\LabelRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DLToolkit.Forms.Controls.FlowListView">

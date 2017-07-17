@@ -1,6 +1,8 @@
 ﻿using Plugin.SecureStorage;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AudioKetab
 {
 	public partial class App : Application
@@ -12,11 +14,11 @@ namespace AudioKetab
 			InitializeComponent(); 
           
 			 
-			MainPage = new NavigationPage( new SplashScreenPage());//To test  
+			MainPage = new NavigationPage( new TestPage());//To test  
 
 		}
 
-		protected override void OnStart()  
+		protected override void OnStart()   
 		{ 
 			// Handle when your app starts
 		}

@@ -13,12 +13,12 @@ namespace AudioKetab
 			InitializeComponent();
 			GetMyAudios(StaticDataModel.UserId).Wait();
 		}
-public UploadedAudioPage(int userid)
-{
-	InitializeComponent();
-	GetMyAudios(userid).Wait();
+		public UploadedAudioPage(int userid)
+		{ 
+			InitializeComponent();
+			GetMyAudios(userid).Wait(); 
 		}
-async void menu_Tapped(object sender, System.EventArgs e)
+async void Back_Tapped(object sender, System.EventArgs e)
 {
 	try
 	{
@@ -32,61 +32,7 @@ async void menu_Tapped(object sender, System.EventArgs e)
 	}
 }
 
-async void Followers_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new FollowersPage());
-	}
-	catch (Exception ex)
-	{
 
-
-	}
-}
-async void Following_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new FollowingPage());
-	}
-	catch (Exception ex)
-	{
-
-
-	}
-}
-async void uplodedaudio_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-				await Navigation.PushModalAsync(new UploadedAudioPage( _userId));
-	}
-	catch (Exception ex)
-	{
-
-
-	}
-}
-async void messages_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new ChatUsersPage());
-	}
-	catch (Exception ex)
-	{
-
-
-	}
-}
-
-
-
-async void Audio_Tapped(object sender, System.EventArgs e)
-{
-	
-}
 private async Task GetMyAudios(int user_id)
 {
 			List<Book_summariesModel> _model = null;
@@ -102,7 +48,10 @@ private async Task GetMyAudios(int user_id)
 			{
 				if (_model != null)
 				{
-
+					for (int i = 0; i < _model.Count; i++)
+					{
+						_model[i].image_path = Constants.SERVER_IMG_URL + _model[i].image_path;
+					}
 					flowlistview.FlowItemsSource = _model;
 				}
 

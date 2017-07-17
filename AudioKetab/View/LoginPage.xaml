@@ -13,6 +13,7 @@
 
         <Image Source="bg"
                 x:Name="imgBG"
+			Aspect="AspectFill"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
               RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
             RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
@@ -23,14 +24,17 @@
               "{ConstraintExpression Type=RelativeToParent, Property=Height}">
 			
 				  
-              <StackLayout Padding="0,0,0,10" Orientation="Vertical"
+              <StackLayout Padding="0,10,0,0" Orientation="Vertical"
 						VerticalOptions="EndAndExpand"
 					HorizontalOptions="FillAndExpand"
 				x:Name="_slMainLayout"
                >
               
             <ScrollView>
-    <StackLayout x:Name="_slScrollLayout"   Spacing="10" Padding="60,0,60,0" VerticalOptions="EndAndExpand">
+    <StackLayout x:Name="_slScrollLayout" 
+						Spacing="10" Padding="60,10,60,0" 
+						VerticalOptions="EndAndExpand"
+						>
 
    
 					<local:MyEntry 
@@ -43,7 +47,7 @@
                 Keyboard="Email"
             BackgroundColor="#E3E3E1" 
 					VerticalOptions="EndAndExpand"	
-						HorizontalTextAlignment="End"/> 
+						HorizontalTextAlignment="End"/>  
             <local:MyEntry  
 					Opacity="0.7"
                     x:Name="txtPassword"
@@ -70,7 +74,7 @@
     </Label.GestureRecognizers>
 				
 						</Label>
-                    <Label FontSize="10" TextColor="Gray"  Text="لم يكن لديك حساب! سجل هنا" HorizontalOptions="EndAndExpand">
+                    <Label FontSize="10" TextColor="Gray"  Text="سجل هنا" HorizontalOptions="EndAndExpand">
 						<Label.GestureRecognizers>
         <TapGestureRecognizer Tapped="ForgotPassword_Tapped"/>
     </Label.GestureRecognizers>
@@ -79,7 +83,7 @@
                 </StackLayout>
                 <Image Source="logo" 
                 HorizontalOptions="Center" 
-                HeightRequest="40"
+                HeightRequest="40" 
                 Margin="0,0,0,10"/>
                 </StackLayout>
 					</ScrollView>  

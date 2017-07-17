@@ -49,5 +49,6 @@ public string outlook_invite { get; set; }
 public string device_token { get; set; }
 public string device_type { get; set; }
 public double cell_size { get; set; }
+public double listview_height { get; set; }
 	}
 }

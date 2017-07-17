@@ -28,7 +28,7 @@ namespace AudioKetab
 			SetData();
 			categoryypicker.SelectedIndexChanged += Categoryypicker_SelectedIndexChanged;
 			btnSubmit.Clicked+= BtnSubmit_Clicked;
-			_uploadAudioModel = new Book_summariesModel();
+			_uploadAudioModel = new Book_summariesModel(); 
 
 		}
 		private void SetData()
@@ -268,15 +268,15 @@ namespace AudioKetab
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			if (_uploadAudioModel.byte_recorded_audio != null)
-			{
-				string fileName = string.Format("recording{0}.aac", DateTime.Now.ToString("yyyyMMddHHmmss"));
-				lblRecording.Text = fileName;
-			}
-			else
-			{ 
-				lblRecording.Text = string.Empty;
-			}
+			//if (_uploadAudioModel.byte_recorded_audio != null)
+			//{
+			//	string fileName = string.Format("recording{0}.aac", DateTime.Now.ToString("yyyyMMddHHmmss"));
+			//	lblRecording.Text = fileName;
+			//}
+			//else
+			//{ 
+			//	lblRecording.Text = string.Empty;
+			//}
 		}
 	}
 }

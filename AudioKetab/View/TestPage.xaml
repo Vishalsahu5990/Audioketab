@@ -7,22 +7,59 @@
 	   xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
 	x:Class="AudioKetab.TestPage"
 	xmlns:Controls="clr-namespace:HorizontalList;assembly=HorizontalList"
-	>
-	<StackLayout VerticalOptions="Start" Padding="16">
+	BackgroundColor="#F5F6F7">
+	<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-		<StackLayout
-			Orientation="Vertical" 
-			VerticalOptions="CenterAndExpand"
-		HorizontalOptions="FillAndExpand"
-			Padding="0" Margin="20,30,20,30"> 
-			<StackLayout>
 
-		</StackLayout>
+	<StackLayout Padding="20" Spacing="15">
+		
+		<StackLayout>
+		<StackLayout BackgroundColor="White" 
+						HeightRequest="40" Margin="10" Orientation="Horizontal"
+						x:Name="_slEmail"
+				>
+						<StackLayout BackgroundColor="#27BB9B"
+							WidthRequest="40"
+							x:Name="_slLeftEmail">
+						<Image Source="email" 
+						Margin="12"
+						Aspect="AspectFit"
+							VerticalOptions="CenterAndExpand"/>
+						</StackLayout>
+				<StackLayout BackgroundColor="Gray">
+				<local:MyEntry
+				Margin="20"
+				Placeholder="Email Address"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"
+				Text="lksdflkjlkasdjfkljasdfjlasdasdfasdfasfasdfk"
 
-	</StackLayout>
+				/>
+			</StackLayout>
+						
+					</StackLayout>
+					</StackLayout>
 
 		
-	</StackLayout> 
+		<Button Text="SAVE"
+		FontSize="Medium" 
+		TextColor="White"
+		BackgroundColor="#20D0C8"
+		BorderRadius="0"
+		HeightRequest="50"
+		Margin="0,30,0,0"
+		x:Name="btnSave"/> 
+		</StackLayout>
+		 
+	</StackLayout>
+
+
+		
+
+
+		
+	
+
 
 
 </ContentPage>

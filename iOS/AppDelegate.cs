@@ -32,9 +32,12 @@ namespace AudioKetab.iOS
 			SetupTitleBar();
 
 
+
+
 // You can get the GoogleService-Info.plist file at https://developers.google.com/mobile/add
 var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
 SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString ();
+
 			Firebase.Analytics.App.Configure();
 			LoadApplication(new App());
 

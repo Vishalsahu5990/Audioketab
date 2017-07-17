@@ -29,7 +29,7 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 									</StackLayout>
 								</Grid>
 							</StackLayout>
-							<RelativeLayout>
+							<RelativeLayout x:Name="_rlHeader" >  
 								<Image Aspect="Fill" Source="heder_feam" x:Name="imgBG" RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}" RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}" RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}" />
 								<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
 									<StackLayout Orientation="Horizontal" Margin="2">
@@ -147,7 +147,7 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 													<DataTemplate>
 														<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
 
-														<RelativeLayout>
+														<RelativeLayout HeightRequest="{Binding cell_size}">
 																<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding profile_pic}" />
 																<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
@@ -206,7 +206,7 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 											<Controls:HorizontalListView.ItemTemplate>
 												<DataTemplate>
 													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
-														<RelativeLayout>
+														<RelativeLayout HeightRequest="{Binding cell_size}">
 															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
 
 															<Button BackgroundColor="Transparent"
@@ -269,7 +269,7 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 											<Controls:HorizontalListView.ItemTemplate>
 												<DataTemplate>
 													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
-														<RelativeLayout>
+														<RelativeLayout HeightRequest="{Binding cell_size}">
 															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
 															<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
@@ -350,7 +350,7 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 											<Controls:HorizontalListView.ItemTemplate>
 												<DataTemplate>
 													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
-														<RelativeLayout>
+														<RelativeLayout HeightRequest="{Binding cell_size}">
 															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
 															<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
@@ -399,4 +399,4 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 			</StackLayout>
 		</Grid>
 	</RelativeLayout>
-</ContentPage>
+</ContentPage>  

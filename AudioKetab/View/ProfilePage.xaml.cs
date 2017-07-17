@@ -529,14 +529,10 @@ private void PrepareUI()
 							CrossSecureStorage.Current.SetValue("userEmail", model.email.ToString());
 
 							StaticMethods.ShowToast("Profile updated Successfully");
-					profileImage.Source = ImageSource.FromStream(() =>
-		{
-			var stream = profileData.GetStream();
 
-			//file.Dispose();
-			return stream;
-		});
-						}
+							profileImage.Source = Constants.PRO_PIC_IMG_URL + model.profile_pic;
+							App.Current.MainPage = new MainPage();
+					}
 						else
 						{
 							StaticMethods.ShowToast("Something went wrong, please try again later!");

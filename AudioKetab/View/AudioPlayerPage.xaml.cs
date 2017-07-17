@@ -19,7 +19,7 @@ namespace AudioKetab
 {
 	public partial class AudioPlayerPage : ContentPage
 	{
-		
+		static double layoutHeigh = 0;
 		CircleImage profileImage = null;
 		int height = 55;
 		int width = 55;
@@ -33,25 +33,26 @@ namespace AudioKetab
 		bool isFollowing = false;
 		UserDetailsModel _list = null;
 		string _profilePic = string.Empty;
+		bool isFirstLoad = false;
 		public AudioPlayerPage()
 		{
 			InitializeComponent();
 		}
-public AudioPlayerPage(MainPage context, Book_summariesModel book_summeriesModel, string profile_pic)
-{
-	InitializeComponent();
+		public AudioPlayerPage(MainPage context, Book_summariesModel book_summeriesModel, string profile_pic)
+		{
+			InitializeComponent();
 
 			_profilePic = profile_pic;
 			_model = book_summeriesModel;
 			_context = context;
-            InitializeComponent();
-NavigationPage.SetHasNavigationBar(this, false);
-CrossMediaManager.Current.PlayingChanged += Current_PlayingChanged;
-GetUserDetails();
-SetData();
-InitControls();
-getLikeStatus();
-PrepareUI();
+			InitializeComponent();
+			NavigationPage.SetHasNavigationBar(this, false);
+			CrossMediaManager.Current.PlayingChanged += Current_PlayingChanged;
+
+			SetData();
+			InitControls();
+
+			PrepareUI();
 		}
 		public AudioPlayerPage(MainPage context, Book_summariesModel book_summeriesModel)
 		{
@@ -60,41 +61,65 @@ PrepareUI();
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			CrossMediaManager.Current.PlayingChanged += Current_PlayingChanged;
-			GetUserDetails();
+			//GetUserDetails().Wait();
 			SetData();
 			InitControls();
-			getLikeStatus();
 			PrepareUI();
+
+		}
+
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			base.OnSizeAllocated(width, height);
+			if (isFirstLoad)
+			{
+				var size = _rlHeader.Height;
+				if (size > 0)
+					layoutHeigh = size;
+
+
+				Debug.WriteLine("alocatedAudio**********" + size.ToString());
+
+			}
 		}
 		protected async override void OnAppearing()
 		{
 			base.OnAppearing();
 
 
-			await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path);
-			//CheckFollow(Convert.ToInt32( _model.u_id)).Wait();
+			//if (isFirstLoad)
+			GetUserDetails().Wait();
+
+
+			CheckFollow(Convert.ToInt32( _model.u_id)).Wait();
+
+			//GetFollowUnfollow().Wait();
+
+await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path);
+			isFirstLoad = false;
 
 		}
 		protected async override void OnDisappearing()
 		{
 			base.OnDisappearing();
 			await CrossMediaManager.Current.Stop();
+			isFirstLoad = false;
 		}
 		public void PrepareHeaderView()
 		{
 			try
-			{  
+			{
 				var w = App.ScreenWidth;
 				var h = App.ScreenHeight;
-				if (w > 350) 
+				if (w > 350)
 				{
 					imgMic.Margin = new Thickness(8, 0, 0, 0);
 					_slHeaderIcons.Spacing = 10;
 				}
 				if (StaticMethods.IsIpad())
-				{ 
+				{
 					_slMsgNotification.Spacing = 30;
-					 
+
 					height = 80;
 					width = 80;
 					x = 100;
@@ -110,7 +135,7 @@ PrepareUI();
 				var centerX = Constraint.RelativeToParent(parent => parent.Width - x);
 				var centerY = Constraint.RelativeToParent(parent => y);
 				profileImage = new CircleImage
-				{ 
+				{
 					HeightRequest = height,
 					WidthRequest = width,
 					BorderColor = Color.White,
@@ -129,9 +154,9 @@ PrepareUI();
 		}
 		private void PrepareUI()
 		{
-			try 
+			try
 			{
-				
+
 				PrepareHeaderView();
 				if (App.ScreenWidth == 320)
 				{
@@ -157,18 +182,7 @@ PrepareUI();
 					lblUsername.Text = model.first_name + " " + model.last_name;
 					lblDesc.Text = model.description;
 				}
-var ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
-			if (ret == "follow")
-			{
-				imgMic.Source = "follow"; 
-				isFollowing = true;
 
-			}
-			else
-			{
-				imgMic.Source = "unfollow";
-				isFollowing = false;
-			}
 			}
 			catch (Exception ex)
 			{
@@ -188,8 +202,8 @@ var ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
 		{
 			try
 			{
-				imgAlbum.HeightRequest = App.ScreenWidth /2;
-				imgAlbum.WidthRequest = App.ScreenWidth /2;
+				imgAlbum.HeightRequest = App.ScreenWidth / 2;
+				imgAlbum.WidthRequest = App.ScreenWidth / 2;
 				imgAlbum.Source = _model.image_path;
 				if (_model != null)
 				{
@@ -211,7 +225,7 @@ var ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
 						lblListCount.Text = "0";
 
 
-				} 
+				}
 
 				if (string.IsNullOrEmpty(_model.video_url))
 					imgVideourl.IsVisible = false;
@@ -222,7 +236,7 @@ var ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
 			catch (Exception ex)
 			{
 				lblCommentCount.Text = "0";
-					lblShareCount.Text = "0";
+				lblShareCount.Text = "0";
 			}
 		}
 		private async void BtnPlayClicked(object sender, EventArgs e)
@@ -258,8 +272,8 @@ var ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
 		}
 		async void Album_Tapped(object sender, EventArgs e)
 		{
-			AlbumInfoPopup s = new AlbumInfoPopup(_model.book_name,_model.author_name,_model.comment);
-            Navigation.PushPopupAsync(s);	
+			AlbumInfoPopup s = new AlbumInfoPopup(_model.book_name, _model.author_name, _model.comment);
+			Navigation.PushPopupAsync(s);
 		}
 
 		void Current_PlayingChanged(object sender, Plugin.MediaManager.Abstractions.EventArguments.PlayingChangedEventArgs e)
@@ -347,7 +361,7 @@ var ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
 		{
 			try
 			{
-				await Navigation.PushModalAsync(new UploadedAudioPage(Convert.ToInt32( _model.u_id)));
+				await Navigation.PushModalAsync(new UploadedAudioPage(Convert.ToInt32(_model.u_id)));
 			}
 			catch (Exception ex)
 			{
@@ -379,11 +393,20 @@ var ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
 
 			}
 		}
-		 void Audio_Tapped(object sender, System.EventArgs e)
+		async void Audio_Tapped(object sender, EventArgs e)
 		{
-			//unFollowUser(Convert.ToInt32(_model.u_id)).Wait();
-					}
-async void videourl_tapped(object sender, System.EventArgs e)
+			string msg = string.Empty;
+			if (isFollowing)
+				msg = "Do you want to unfollow?";
+			else
+				msg = "Do you want to follow?"; 
+			
+		var result=	await DisplayAlert("Alert!",msg,"YES","CANCEL");
+
+			if(result)
+			unFollowUser(Convert.ToInt32(_model.u_id)).Wait(); 
+		}
+		async void videourl_tapped(object sender, System.EventArgs e)
 		{
 			try
 			{
@@ -565,108 +588,151 @@ async void videourl_tapped(object sender, System.EventArgs e)
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
 		}
-private async Task CheckFollow(int follow_userid)
-{
-
-	string ret = string.Empty;
-	StaticMethods.ShowLoader();
-	Task.Factory.StartNew(
-			// tasks allow you to use the lambda syntax to pass wor
-			() =>
-			{
-				ret = WebService.CheckFollow(follow_userid);
-			}).ContinueWith(
-			t =>
-			{
-				Device.BeginInvokeOnMainThread(() => 
+		private async Task CheckFollow(int follow_userid)
 		{
-			if (ret == "follow")
-			{
-				imgMic.Source = "follow";
-				isFollowing = true;
 
-			}
-			else
-			{
-				imgMic.Source = "unfollow";
-				isFollowing = false;
-			}
-
-
-		});
-
-			}, TaskScheduler.FromCurrentSynchronizationContext()
-		);
-		}
-
-private async Task unFollowUser(int follow_userid)
-{
-
-	string ret = string.Empty;
-	StaticMethods.ShowLoader();
-	Task.Factory.StartNew(
-			// tasks allow you to use the lambda syntax to pass wor
-			() =>
-			{
-				if (isFollowing)
-				ret = WebService.unFollowUser(follow_userid);
-				else
-					ret = WebService.followUser(follow_userid);	
-			}).ContinueWith(
-			t =>
-			{
-				Device.BeginInvokeOnMainThread(() =>
-				{ 
-				
-				if (ret == "success")
-				{
-					if (isFollowing)
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
 					{
-						imgMic.Source = "unfollow";
-						isFollowing = false;
+						ret = WebService.CheckFollow(follow_userid);
+					}).ContinueWith(
+					t =>
+					{
+						Device.BeginInvokeOnMainThread(() =>
+				{
+					if (ret == "follow")
+					{
+						imgMic.Source = "follow";
+						isFollowing = true;
 
 					}
 					else
 					{
-						imgMic.Source = "follow";
-						isFollowing = true;
+						imgMic.Source = "unfollow";
+						isFollowing = false;
 					}
 
-
-
-				}
-				
+					if (HomePage.layoutHeigh > 0)
+								_rlHeader.HeightRequest = HomePage.layoutHeigh;
 				});
 
-			}, TaskScheduler.FromCurrentSynchronizationContext()
-		);
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
 		}
-private void GetUserDetails()
+
+		private async Task unFollowUser(int follow_userid)
+		{
+
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
+					{
+						if (isFollowing)
+							ret = WebService.unFollowUser(follow_userid);
+						else
+							ret = WebService.followUser(follow_userid);
+					}).ContinueWith(
+					t =>
+					{
+						Device.BeginInvokeOnMainThread(() =>
+						{
+
+							if (ret == "success")
+							{
+								if (isFollowing)
+								{
+									imgMic.Source = "unfollow";
+									isFollowing = false;
+
+								}
+								else
+								{
+									imgMic.Source = "follow";
+									isFollowing = true;
+								}
+
+
+
+							}
+					if (HomePage.layoutHeigh > 0)
+								_rlHeader.HeightRequest = HomePage.layoutHeigh;
+
+					Debug.WriteLine("********Inside"+layoutHeigh.ToString());
+						});
+                getLikeStatus().Wait();
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
+		}
+		private async Task GetUserDetails()
+		{
+			List<PlaylistModel> playlist = null;
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(async () =>
+			{
+
+				_list = WebService.GetUserDetails(Convert.ToInt32(_model.u_id));
+
+			}).ContinueWith((arg) =>
+
+			{
+				if (_list != null)
+				{
+
+
+
+					Device.BeginInvokeOnMainThread(() =>
+					{
+						lblFollower_count.Text = _list.follower_count.ToString();
+						lblFollowing_count.Text = _list.following_count.ToString();
+						lblUploadedAudio_count.Text = _list.myaudio_count.ToString();
+					});
+					if (HomePage.layoutHeigh > 0)
+								_rlHeader.HeightRequest = HomePage.layoutHeigh;
+				}
+				else
+				{
+					StaticMethods.ShowToast("No post found!");
+				}
+				StaticMethods.DismissLoader();
+                //GetFollowUnfollow().Wait();
+			});
+		}
+private async Task GetFollowUnfollow()
 {
-	List<PlaylistModel> playlist = null;
+	
 	string ret = string.Empty;
 	StaticMethods.ShowLoader();
-
-			_list = WebService.GetUserDetails(Convert.ToInt32( _model.u_id));
-
-	if (_list != null)
+	Task.Factory.StartNew(async () =>
 	{
 
+				ret = WebService.CheckFollow(Convert.ToInt32(_model.u_id));
 
-		
-		Device.BeginInvokeOnMainThread(() =>
-		{
-			    lblFollower_count.Text = _list.follower_count.ToString();
-				lblFollowing_count.Text = _list.following_count.ToString();
-				lblUploadedAudio_count.Text = _list.myaudio_count.ToString();
-		});
 
-	}
-	else
+	}).ContinueWith((arg) =>
+
 	{
-		StaticMethods.ShowToast("No post found!");
-	}
+		if (ret == "follow")
+				{
+					imgMic.Source = "follow";
+					isFollowing = true;
 
+				}
+				else
+				{
+					imgMic.Source = "unfollow";
+					isFollowing = false;
+				}
+		StaticMethods.DismissLoader();
+				if (HomePage.layoutHeigh > 0)
+								_rlHeader.HeightRequest = HomePage.layoutHeigh;
+				//getLikeStatus().Wait();
+	});
 		}
 	}
 }

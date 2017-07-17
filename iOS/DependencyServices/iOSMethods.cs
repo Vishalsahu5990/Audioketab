@@ -60,7 +60,8 @@ public void DidSignIn(SignIn signIn, GoogleUser user, NSError error)
 		}
 		public void ShowLoader()
 		{
-			MPMediaPickerController mediaController = new MPMediaPickerController(MPMediaType.Music);
+			
+			MPMediaPickerController mediaController = new MPMediaPickerController(MPMediaType.AnyAudio);
 			mediaController.AllowsPickingMultipleItems = false;
 			mediaController.Delegate = new MediaPickerDelegate(UIApplication.SharedApplication.KeyWindow.RootViewController);
 			UIApplication.SharedApplication.KeyWindow.RootViewController.PresentModalViewController(mediaController, true);
@@ -267,13 +268,13 @@ SignIn.SharedInstance.SignInUserSilently ();
 			{
 				var items = mediaItemCollection.Items;
 
-				var assetUrl = items[0].AssetURL;
-				//NSData data = NSData.FromUrl(assetUrl);
+				var assetUrl = items[0].AssetURL.AbsoluteUrl;
+				NSData data = NSData.FromUrl(assetUrl);
 
 
-				//NSUrl soundFileURL = NSUrl.CreateFileUrl(@"%@/memo.mp3", assetUrl);
-				////[NSURL fileURLWithPath:[NSString stringWithFormat: @"%@/memo.m4a", documentsDirectory]]; ;
-				//NSData myData = NSData.FromUrl(soundFileURL);
+				NSUrl soundFileURL = NSUrl.CreateFileUrl(@"%@/memo.mp3", assetUrl);
+				//[NSURL fileURLWithPath:[NSString stringWithFormat: @"%@/memo.m4a", documentsDirectory]]; ;
+				NSData myData = NSData.FromUrl(soundFileURL);
 				GetAssetFromUrl(assetUrl);
 				_viewController.DismissModalViewController(true);
 			}

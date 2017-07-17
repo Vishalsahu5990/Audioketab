@@ -10,14 +10,14 @@ using Plugin.SecureStorage.Abstractions;
 using Plugin.SecureStorage;
 using ImageCircle.Forms.Plugin.Abstractions;
 using System.Collections.ObjectModel;
-
+using System.Diagnostics;
 namespace AudioKetab
 {
 	public partial class HomePage : ContentPage
 	{
-		
-       CategoryViewModel viewModel;
-		CircleImage profileImage = null;
+		public static double layoutHeigh=0;
+		CategoryViewModel viewModel;
+		CircleImage profileImage = null;	
 		int height = 55;
 		int width = 55;
 		int x = 70;
@@ -32,20 +32,20 @@ namespace AudioKetab
 		List<LectureandTraingingModel> list_LectureTraining = null;
 		List<NewsLetterModel> list_NewsLetter = null;
 		private double cellSize = 0;
-
+		bool isFirstLoad = false;
 		async void mentor_clicked(object sender, System.EventArgs e)
 		{
 			try
 			{
-var item = (Xamarin.Forms.Button)sender;
-			for (int i = 0; i<list_ReadingMentor.Count; i++)
-			{
-				if (item.CommandParameter.ToString() == list_ReadingMentor[i].u_id)
-				{ 
-	await Navigation.PushModalAsync(new UserDetailsPage(Convert.ToInt32(list_ReadingMentor[i].u_id), _context,list_ReadingMentor[i].profile_pic));
+				var item = (Xamarin.Forms.Button)sender;
+				for (int i = 0; i < list_ReadingMentor.Count; i++)
+				{
+					if (item.CommandParameter.ToString() == list_ReadingMentor[i].u_id)
+					{
+						await Navigation.PushModalAsync(new UserDetailsPage(Convert.ToInt32(list_ReadingMentor[i].u_id), _context, list_ReadingMentor[i].profile_pic));
 
+					}
 				}
-			}
 			}
 			catch (Exception ex)
 			{
@@ -74,173 +74,102 @@ var item = (Xamarin.Forms.Button)sender;
 		}
 		async void lecture_clicked(object sender, System.EventArgs e)
 		{
- try
-				 {
-
-var item1 = (Xamarin.Forms.Button)sender;
-				for (int i = 0; i<list_LectureTraining.Count; i++)
+			try
 			{
+
+				var item1 = (Xamarin.Forms.Button)sender;
+				for (int i = 0; i < list_LectureTraining.Count; i++)
+				{
 					if (item1.CommandParameter.ToString() == list_LectureTraining[i].s_id)
-				{ 
-						 _model = new Book_summariesModel();
-var item = list_LectureTraining[i];
-_model.u_id = item.u_id;
-					 _model.s_id = item.s_id;
-					 _model.song_path = item.song_path;
-					 _model.profile_pic = item.profile_pic;
-					 _model.image_path = item.image_path;
-					 _model.book_name = item.book_name;
-					 _model.author_name = item.author_name;
-					 _model.count_like = item.count_like;
-					 _model.first_name = item.first_name;
-					 _model.last_name = item.last_name;
-					 _model.article_url = item.article_url;
-					 _model.video_url = item.video_url;
-					 _model.comment = item.comment;
-					 await Navigation.PushModalAsync(new AudioPlayerPage(_context, _model));
+					{
+						_model = new Book_summariesModel();
+						var item = list_LectureTraining[i];
+						_model.u_id = item.u_id;
+						_model.s_id = item.s_id;
+						_model.song_path = item.song_path;
+						_model.profile_pic = item.profile_pic;
+						_model.image_path = item.image_path;
+						_model.book_name = item.book_name;
+						_model.author_name = item.author_name;
+						_model.count_like = item.count_like;
+						_model.first_name = item.first_name;
+						_model.last_name = item.last_name;
+						_model.article_url = item.article_url;
+						_model.video_url = item.video_url;
+						_model.comment = item.comment;
+						await Navigation.PushModalAsync(new AudioPlayerPage(_context, _model));
+					}
 				}
+
+
 			}
+			catch (Exception ex)
+			{
 
-					
-				 }
-				 catch (Exception ex)
-				 {
-
-				 }
+			}
 		}
-async void newsletter_clicked(object sender, System.EventArgs e)
+		async void newsletter_clicked(object sender, System.EventArgs e)
 		{
-			 try
-				 {
-                   var item1 = (Xamarin.Forms.Button)sender;
+			try
+			{
+				var item1 = (Xamarin.Forms.Button)sender;
 				for (int i = 0; i < list_NewsLetter.Count; i++)
 				{
 					if (item1.CommandParameter.ToString() == list_NewsLetter[i].s_id)
 					{
-						 _model = new Book_summariesModel();
-var item =list_NewsLetter[i];
-_model.u_id = item.u_id;
-					 _model.s_id = item.s_id;
-					 _model.song_path = item.song_path;
-					 _model.profile_pic = item.profile_pic;
-					 _model.image_path = item.image_path;
-					 _model.book_name = item.book_name;
-					 _model.author_name = item.author_name;
-					 _model.count_like = item.count_like;
-					 _model.first_name = item.first_name;
-					 _model.last_name = item.last_name;
-					 _model.article_url = item.article_url;
-					 _model.video_url = item.video_url;
-					 _model.comment = item.comment;
-					 await Navigation.PushModalAsync(new AudioPlayerPage(_context, _model));
+						_model = new Book_summariesModel();
+						var item = list_NewsLetter[i];
+						_model.u_id = item.u_id;
+						_model.s_id = item.s_id;
+						_model.song_path = item.song_path;
+						_model.profile_pic = item.profile_pic;
+						_model.image_path = item.image_path;
+						_model.book_name = item.book_name;
+						_model.author_name = item.author_name;
+						_model.count_like = item.count_like;
+						_model.first_name = item.first_name;
+						_model.last_name = item.last_name;
+						_model.article_url = item.article_url;
+						_model.video_url = item.video_url;
+						_model.comment = item.comment;
+						await Navigation.PushModalAsync(new AudioPlayerPage(_context, _model));
 					}
 				}
-					
-				 }
-				 catch (Exception ex)
-				 {
 
-				 }
+			}
+			catch (Exception ex)
+			{
+
+			}
 
 		}
 		public HomePage()
 		{
-			
-			InitializeComponent();
 
+			InitializeComponent();
+			isFirstLoad = true;
 		}
 		public HomePage(MainPage context)
 		{
 			_context = context;
 			_context.IsGestureEnabled = false;
 			InitializeComponent();
-            viewModel = new CategoryViewModel();
-			 this.BindingContext = viewModel;
+			isFirstLoad = true;
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepareUI();
 
-			//var ret = WebService.GetHomePageAudio();
 
-			//if (ret == "success")
+			Debug.WriteLine("*********Main thread************");
+			GetCounts().Wait();
+			
+			//var model = WebService.GetAll_Counts();
+			//if (model != null) 
 			//{
-			//	ProcessResult();
-
+			//	lblPlaylist_count.Text = model.playlist_count.ToString();
+			//	lblFollower_count.Text = model.follower_count.ToString();
+			//	lblFollowing_count.Text = model.following_count.ToString();
+			//	lblUploadedAudio_count.Text = model.myaudio_count.ToString();
 			//}
-
-			//listview_mentor.ItemSelected += async (sender, e) =>
-			//  {
-			//	var item = e.SelectedItem as Reading_mentorModel;
-			//	await Navigation.PushModalAsync(new UserDetailsPage(Convert.ToInt32(item.u_id), _context,item.profile_pic));
-
-			//  };
-
-			//listview_booksummeries.ItemSelected += async (sender, e) =>
-			// {
-			//	var item = e.Item as Book_summariesModel;
-			//	 await Navigation.PushModalAsync(new AudioPlayerPage(_context, item));
-			// };
-			//lecture_training.ItemSelected += async (sender, e) =>
-			// {
-			//	 try
-			//	 {
-			//		 _model = new Book_summariesModel();
-			//		 var item = e.Item as LectureandTraingingModel;
-
-			//		 _model.u_id = item.u_id;
-			//		 _model.s_id = item.s_id;
-			//		 _model.song_path = item.song_path;
-			//		 _model.profile_pic = item.profile_pic;
-			//		 _model.image_path = item.image_path;
-			//		 _model.book_name = item.book_name;
-			//		 _model.author_name = item.author_name;
-			//		 _model.count_like = item.count_like;
-			//		 _model.first_name = item.first_name;
-			//		 _model.last_name = item.last_name;
-			//		 _model.article_url = item.article_url;
-			//		 _model.video_url = item.video_url;
-			//		 _model.comment = item.comment;
-
-			//		 await Navigation.PushModalAsync(new AudioPlayerPage(_context, _model));
-			//	 }
-			//	 catch (Exception ex)
-			//	 {
-
-			//	 }
-			// };
-			//news_letters.ItemSelected += async (sender, e) =>
-			// {
-			//	 try
-			//	 {
-			//		 _model = new Book_summariesModel();
-			//		 var item = e.Item as NewsLetterModel;
-			//		 _model.u_id = item.u_id;
-			//		 _model.s_id = item.s_id;
-			//		 _model.song_path = item.song_path;
-			//		 _model.profile_pic = item.profile_pic;
-			//		 _model.image_path = item.image_path;
-			//		 _model.book_name = item.book_name;
-			//		 _model.author_name = item.author_name;
-			//		 _model.count_like = item.count_like;
-			//		 _model.first_name = item.first_name;
-			//		 _model.last_name = item.last_name;
-			//		 _model.article_url = item.article_url;
-			//		 _model.video_url = item.video_url;
-			//		 _model.comment = item.comment;
-			//		 await Navigation.PushModalAsync(new AudioPlayerPage(_context, _model));
-			//	 }
-			//	 catch (Exception ex)
-			//	 {
-
-			//	 }
-			// };
-			var model = WebService.GetAll_Counts();
-			if (model != null)
-			{
-				lblPlaylist_count.Text = model.playlist_count.ToString();
-				lblFollower_count.Text = model.follower_count.ToString();
-				lblFollowing_count.Text = model.following_count.ToString();
-				lblUploadedAudio_count.Text = model.myaudio_count.ToString();
-			}
 		}
 		public void PrepareHeaderView()
 		{
@@ -291,7 +220,7 @@ _model.u_id = item.u_id;
 		{
 			try
 			{
-
+				
 				PrepareHeaderView();
 				cellSize = App.ScreenWidth / 4.3;
 				//imgMic.HeightRequest = App.ScreenWidth / 4;
@@ -310,58 +239,78 @@ _model.u_id = item.u_id;
 
 			}
 		}
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 			StaticDataModel.IsFromHomePage = true;
-			// GetCounts().Wait();
+
+			if(isFirstLoad)
+            GetAudio().Wait();
+
+			_rlHeader.SizeChanged += (sender, e) =>
+			 {
 
 
-			//GetAudio().Wait();
+
+			};
 
 
 		}
-private async Task GetAudio()
-{
-	string ret = string.Empty;
-	StaticMethods.ShowLoader();
-	Task.Factory.StartNew(
-			// tasks allow you to use the lambda syntax to pass wor
-			() =>
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			base.OnSizeAllocated(width, height);
+			if (isFirstLoad)
 			{
-				ret = WebService.GetHomePageAudio();
-
-			}).ContinueWith(
-			t =>
-			{
-				if (ret == "success")
-				{
-					Device.BeginInvokeOnMainThread(() => 
-			{
-				ProcessResult();
-
+				var size = _rlHeader.Height;
+				if (size > 0)
+					layoutHeigh = size;
 				
-			});
+
+				Debug.WriteLine("alocated**********"+size.ToString());
+			}
+
+		}
+		private async Task GetAudio()
+		{
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
+					{
+						ret = WebService.GetHomePageAudio();
+
+					}).ContinueWith(
+					t =>
+					{
+						if (ret == "success")
+						{
+							Device.BeginInvokeOnMainThread(() =>
+					{
+						ProcessResult();
+
+						isFirstLoad = false;
+					});
 
 
 
 
-				}
+						}
 
 
-			}, TaskScheduler.FromCurrentSynchronizationContext()
-		);
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
 		}
 		protected override void OnDisappearing()
 		{
 			base.OnAppearing();
 			StaticDataModel.IsFromHomePage = false;
-
+			isFirstLoad = false;
 		}
 
-async void Tapped(object sender, System.EventArgs e)
-{
-	
+		async void Tapped(object sender, System.EventArgs e)
+		{
+
 		}
 		async void menu_Tapped(object sender, System.EventArgs e)
 		{
@@ -372,7 +321,7 @@ async void Tapped(object sender, System.EventArgs e)
 			}
 			catch (Exception ex)
 			{
-				
+
 
 			}
 		}
@@ -419,7 +368,7 @@ async void Tapped(object sender, System.EventArgs e)
 				if (lblUploadedAudio_count.Text != "0")
 					await Navigation.PushModalAsync(new UploadedAudioPage(StaticDataModel.UserId));
 				else
-					DisplayAlert("Message","you not uploaded any audio yet.","OK");
+					DisplayAlert("Message", "you not uploaded any audio yet.", "OK");
 			}
 			catch (Exception ex)
 			{
@@ -622,29 +571,12 @@ async void Tapped(object sender, System.EventArgs e)
 				lecture_training.ItemsSource = list_LectureTraining;
 				news_letters.ItemsSource = list_NewsLetter;
 
-				//viewModel.List_LectureTraining = new ObservableCollection<LectureandTraingingModel>();
-				foreach (LectureandTraingingModel itm in list_LectureTraining)
-				{
-					viewModel.List_LectureTraining.Add(itm);
-				}
+				listview_mentor.HeightRequest = cellSize + 40;
+				listview_booksummeries.HeightRequest = cellSize + 40;
+				lecture_training.HeightRequest = cellSize + 40;
+				news_letters.HeightRequest = cellSize + 40;
 
-//viewModel.List_ReadingMentor = new ObservableCollection<Reading_mentorModel>();
-				foreach (Reading_mentorModel itm in list_ReadingMentor)
-				{
-viewModel.List_ReadingMentor.Add(itm);
-				}
-
-//viewModel.List_BookSummeries = new ObservableCollection<Book_summariesModel>();
-				foreach (Book_summariesModel itm in list_BookSummeries)
-				{
-               viewModel. List_BookSummeries.Add(itm);
-				}
-
-//viewModel.List_NewsLetter = new ObservableCollection<NewsLetterModel>();
-				foreach (NewsLetterModel itm in list_NewsLetter)
-				{
-                viewModel.List_NewsLetter.Add(itm);
-				}
+                GetProfile().Wait();
 			}
 			catch (Exception ex)
 			{
@@ -668,19 +600,48 @@ viewModel.List_ReadingMentor.Add(itm);
 						{
 							Device.BeginInvokeOnMainThread(() =>
 							{
+								Debug.WriteLine("*********background thread************");
 								lblPlaylist_count.Text = model.playlist_count.ToString();
 								lblFollower_count.Text = model.follower_count.ToString();
 								lblFollowing_count.Text = model.following_count.ToString();
 								lblUploadedAudio_count.Text = model.myaudio_count.ToString();
-								//lblPlaylist_count.Text = "5";
-								//			lblFollower_count.Text = "5";
-								//			lblFollowing_count.Text ="5";
-								//			lblUploadedAudio_count.Text = "5";
+
+						Debug.WriteLine(layoutHeigh.ToString());
+						          if(layoutHeigh>0)
+								_rlHeader.HeightRequest = layoutHeigh;
 							});
 
 						}
 
 						StaticMethods.DismissLoader();
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
+		}
+		private async Task GetProfile()
+		{
+			ProfileModel profileModel = null;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor 
+					() =>
+					{
+						profileModel = WebService.GetProfile(StaticDataModel.UserId);
+					}).ContinueWith(
+					t =>
+					{
+						if (profileModel != null)
+						{
+							Device.BeginInvokeOnMainThread(() =>
+							{
+								if (profileModel.features_users == "1")
+									_slBadge.IsVisible = true;
+								else
+									_slBadge.IsVisible = false;
+							});
+
+						}
+
+				StaticMethods.DismissLoader();
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
 		}

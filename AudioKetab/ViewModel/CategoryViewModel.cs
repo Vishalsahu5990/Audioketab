@@ -79,17 +79,17 @@ namespace AudioKetab
 		private async void BindData()
 		{
 
-			await GetAudio();
+			//await GetAudio();
 
-			//var ret = WebService.GetHomePageAudio();
-			//if (ret == "success")
-			//{
+			var ret = WebService.GetHomePageAudio();
+			if (ret == "success")
+			{
 
-			//	ProcessResult();
+				ProcessResult();
 
 
 
-			//}
+			}
 		}
 		private async Task GetAudio()
 		{
@@ -133,7 +133,7 @@ namespace AudioKetab
 				var _newsLetter = WebService.newsletter;
 				if (_readingmentor != null)
 				{
-					foreach (var item in _readingmentor)
+					foreach (var item in _readingmentor) 
 					{
 						list_ReadingMentor.Add(new Reading_mentorModel
 						{
@@ -161,7 +161,8 @@ namespace AudioKetab
 							outlook_invite = item["outlook_invite"].ToString(),
 							device_token = item["device_token"].ToString(),
 							device_type = item["device_type"].ToString(),
-							cell_size = cellSize
+							cell_size = cellSize, 
+							listview_height = cellSize + 20 
 
 						});
 					}
@@ -195,7 +196,9 @@ namespace AudioKetab
 							article_url = item["article_url"].ToString(),
 							video_url = item["video_url"].ToString(),
 							description = item["description"].ToString(),
-							cell_size = cellSize
+							cell_size = cellSize,
+							listview_height = cellSize + 20 
+
 						});
 					}
 
@@ -224,7 +227,9 @@ namespace AudioKetab
 							article_url = item["article_url"].ToString(),
 							video_url = item["video_url"].ToString(),
 							description = item["description"].ToString(),
-							cell_size = cellSize
+							cell_size = cellSize,
+							listview_height = cellSize + 20 
+
 						});
 					}
 
@@ -252,15 +257,16 @@ namespace AudioKetab
 							delete_status = item["delete_status"].ToString(),
 							article_url = item["article_url"].ToString(),
 							video_url = item["video_url"].ToString(),
-							cell_size = cellSize
+							cell_size = cellSize,
+							listview_height = cellSize + 20
+
 						});
 					}
 
 				}
 
 
-				Device.BeginInvokeOnMainThread(async () =>
-				{ 
+
 				foreach (LectureandTraingingModel itm in list_LectureTraining)
 				{
 					List_LectureTraining.Add(itm);
@@ -284,7 +290,7 @@ namespace AudioKetab
 					List_NewsLetter.Add(itm);
 				}
 
-				});
+
 			}
 			catch (Exception ex)
 			{

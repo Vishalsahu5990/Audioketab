@@ -34,14 +34,16 @@ namespace AudioKetab
 			txtSubject.Focused += TxtSubject_Focused;
 			txtMessage.Focused += TxtMessage_Focused;
 			PrepareUI();
-			var model = WebService.GetAll_Counts();
-			if (model != null)
-			{
-				lblPlaylist_count.Text = model.playlist_count.ToString();
-				lblFollower_count.Text = model.follower_count.ToString();
-				lblFollowing_count.Text = model.following_count.ToString();
-				lblUploadedAudio_count.Text = model.myaudio_count.ToString();
-			}
+
+		}
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			GetAllCounts().Wait();
+		}
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
 		}
 		public void PrepareHeaderView()
 		{
@@ -145,78 +147,78 @@ namespace AudioKetab
 
 			}
 		}
-async void Playlist_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new PlaylistPage(_context));
-	}
-	catch (Exception ex)
-	{
+		async void Playlist_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
+				await Navigation.PushModalAsync(new PlaylistPage(_context));
+			}
+			catch (Exception ex)
+			{
 
 
-	}
+			}
 		}
-async void Followers_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new FollowersPage());
-	}
-	catch (Exception ex)
-	{
+		async void Followers_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
+				await Navigation.PushModalAsync(new FollowersPage());
+			}
+			catch (Exception ex)
+			{
 
 
-	}
-}
-async void Following_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new FollowingPage());
-	}
-	catch (Exception ex)
-	{
+			}
+		}
+		async void Following_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
+				await Navigation.PushModalAsync(new FollowingPage());
+			}
+			catch (Exception ex)
+			{
 
 
-	}
-}
-async void uplodedaudio_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
+			}
+		}
+		async void uplodedaudio_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
 				await Navigation.PushModalAsync(new UploadedAudioPage(StaticDataModel.UserId));
-	}
-	catch (Exception ex)
-	{
+			}
+			catch (Exception ex)
+			{
 
 
-	}
-}
-async void messages_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new ChatUsersPage());
-	}
-	catch (Exception ex)
-	{
+			}
+		}
+		async void messages_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
+				await Navigation.PushModalAsync(new ChatUsersPage());
+			}
+			catch (Exception ex)
+			{
 
 
-	}
-}
-async void notification_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
-		await Navigation.PushModalAsync(new NotificationPage());
-	}
-	catch (Exception ex)
-	{
+			}
+		}
+		async void notification_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
+				await Navigation.PushModalAsync(new NotificationPage());
+			}
+			catch (Exception ex)
+			{
 
 
-	}
-}
+			}
+		}
 
 
 		async void Audio_Tapped(object sender, System.EventArgs e)
@@ -310,6 +312,36 @@ async void notification_Tapped(object sender, System.EventArgs e)
 						}
 						StaticMethods.DismissLoader();
 
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
+		}
+		private async Task GetAllCounts()
+		{
+
+			string ret = string.Empty;
+			CounterModel model = null;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
+					{
+						model = WebService.GetAll_Counts();
+
+					}).ContinueWith(
+					t =>
+					{
+						if (model != null)
+						{
+							lblPlaylist_count.Text = model.playlist_count.ToString();
+							lblFollower_count.Text = model.follower_count.ToString();
+							lblFollowing_count.Text = model.following_count.ToString();
+							lblUploadedAudio_count.Text = model.myaudio_count.ToString();
+						}
+						StaticMethods.DismissLoader();
+
+						if (HomePage.layoutHeigh > 0)
+							_rlHeader.HeightRequest = HomePage.layoutHeigh;
+				
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
 		}

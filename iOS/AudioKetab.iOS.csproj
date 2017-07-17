@@ -506,7 +506,6 @@
     <BundleResource Include="Resources\checkbox_uncheck%403x.png" />
     <BundleResource Include="Resources\mic_ic~ipad.png" />
     <BundleResource Include="Resources\back.png" />
-    <BundleResource Include="Resources\splash_logo.png" />
     <BundleResource Include="Resources\mentoring.png" />
     <BundleResource Include="Resources\mentoring%402x.png" />
     <BundleResource Include="Resources\mentoring%403x.png" />
@@ -540,6 +539,10 @@
     <BundleResource Include="Resources\questions%403x.png" />
     <BundleResource Include="Resources\questions%402x.png" />
     <BundleResource Include="Resources\questions.png" />
+    <BundleResource Include="Resources\splash_logo.png" />
+    <BundleResource Include="Resources\cloudcomputing%403x.png" />
+    <BundleResource Include="Resources\cloudcomputing%402x.png" />
+    <BundleResource Include="Resources\cloudcomputing.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="btprogresshud">

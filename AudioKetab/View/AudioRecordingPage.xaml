@@ -22,7 +22,7 @@
 					 <StackLayout.GestureRecognizers>
         <TapGestureRecognizer Tapped="menu_Tapped"/>
     </StackLayout.GestureRecognizers>	
-				<Image Source="menu_ic"
+				<Image Source="back"
             HorizontalOptions="Start" 
 					WidthRequest="30"
             VerticalOptions="CenterAndExpand"

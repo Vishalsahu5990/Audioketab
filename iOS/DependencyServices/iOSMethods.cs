@@ -266,10 +266,12 @@ SignIn.SharedInstance.SignInUserSilently ();
 
 			public override void MediaItemsPicked(MPMediaPickerController sender, MPMediaItemCollection mediaItemCollection)
 			{
+
+               
 				var items = mediaItemCollection.Items;
 
-				var assetUrl = items[0].AssetURL.AbsoluteUrl;
-				NSData data = NSData.FromUrl(assetUrl);
+				var assetUrl = items[0].AssetURL;
+                NSData data = NSData.FromFile(assetUrl.Path);
 
 
 				NSUrl soundFileURL = NSUrl.CreateFileUrl(@"%@/memo.mp3", assetUrl);
@@ -288,40 +290,40 @@ SignIn.SharedInstance.SignInUserSilently ();
 
 				try
 				{
-					var inputPath = url;
-					var outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/output.mp3";
-					var outputURL = new NSUrl(outputPath);
-					NSData data = NSData.FromUrl(outputURL);
+					//var inputPath = url;
+					//var outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/output.mp3";
+					//var outputURL = new NSUrl(outputPath);
+					//NSData data = NSData.FromUrl(outputURL);
 
-					//compress the video file
-					var asset = new AVUrlAsset(inputPath, (AVUrlAssetOptions)null);
-					var exportSession = AVAssetExportSession.FromAsset(asset, "AVAssetExportPresetLowQuality");
+					////compress the video file
+					//var asset = new AVUrlAsset(inputPath, (AVUrlAssetOptions)null);
+					//var exportSession = AVAssetExportSession.FromAsset(asset, "AVAssetExportPresetLowQuality");
 
-					exportSession.OutputUrl = outputURL;
-					exportSession.OutputFileType = AVFileType.CoreAudioFormat;
+					//exportSession.OutputUrl = outputURL;
+					//exportSession.OutputFileType = AVFileType.CoreAudioFormat;
 
-					exportSession.ExportAsynchronously(() =>
-					{
-						Console.WriteLine(exportSession.Status);//prints status "Failed"....
+					//exportSession.ExportAsynchronously(() =>
+					//{
+					//	Console.WriteLine(exportSession.Status);//prints status "Failed"....
 
-						exportSession.Dispose();
-					});
-					//var asset = new ALAssetsLibrary();
-					//UIImage image;
-					//asset.AssetForUrl(
-					//				url,
-					//				(ALAsset obj) =>
-					//				{
-					//					var assetRep = obj.DefaultRepresentation;
-					//					var filename = assetRep.Filename;
+					//	exportSession.Dispose();
+					//});
+					var asset = new ALAssetsLibrary();
+					
+					asset.AssetForUrl(
+									url,
+									(ALAsset obj) =>
+									{
+										var assetRep = obj.DefaultRepresentation;
+										var filename = assetRep.Filename;
+                        Console.WriteLine("True@@@@@@@@@@@@@@@@@");
 
-
-					//				},
-					//				(NSError err) =>
-					//				{
-					//					Console.WriteLine(err);
-					//				}
-					//			);
+									},
+									(NSError err) =>
+									{
+										Console.WriteLine(err);
+									}
+								);
 				}
 				catch (Exception ex)
 				{

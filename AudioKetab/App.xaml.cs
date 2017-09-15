@@ -14,7 +14,7 @@ namespace AudioKetab
 			InitializeComponent(); 
           
 			 
-			MainPage = new NavigationPage( new TestPage());//To test  
+            MainPage = new NavigationPage( new SplashScreenPage());//To test  
 
 		}
 

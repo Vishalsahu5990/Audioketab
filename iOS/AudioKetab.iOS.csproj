@@ -78,7 +78,7 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
-    <CodesignProvision>Audioketabnew_provisioningprofile1</CodesignProvision>
+    <CodesignProvision>Audioketabnew_provisioningprofile2</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -406,8 +406,6 @@
     <BundleResource Include="Resources\sel_list%402x.png" />
     <BundleResource Include="Resources\bg1~ipad.png" />
     <BundleResource Include="Resources\menu_ic~ipad.png" />
-    <BundleResource Include="Resources\radio_check~ipad.png" />
-    <BundleResource Include="Resources\radio_uncheck~ipad.png" />
     <BundleResource Include="Resources\bg-layer2~ipad.png" />
     <BundleResource Include="Resources\default~ipad.png" />
     <BundleResource Include="Resources\ic_comment~ipad.png" />
@@ -543,6 +541,12 @@
     <BundleResource Include="Resources\cloudcomputing%403x.png" />
     <BundleResource Include="Resources\cloudcomputing%402x.png" />
     <BundleResource Include="Resources\cloudcomputing.png" />
+    <BundleResource Include="Resources\unitedstates%403x.png" />
+    <BundleResource Include="Resources\unitedstates%402x.png" />
+    <BundleResource Include="Resources\unitedstates.png" />
+    <BundleResource Include="Resources\germany%403x.png" />
+    <BundleResource Include="Resources\germany%402x.png" />
+    <BundleResource Include="Resources\germany.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="btprogresshud">

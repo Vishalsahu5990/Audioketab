@@ -366,7 +366,7 @@ namespace AudioKetab
 			try
 			{
 				if (lblUploadedAudio_count.Text != "0")
-					await Navigation.PushModalAsync(new UploadedAudioPage(StaticDataModel.UserId));
+                    await Navigation.PushAsync(new UploadedAudioPage(StaticDataModel.UserId));
 				else
 					DisplayAlert("Message", "you not uploaded any audio yet.", "OK");
 			}

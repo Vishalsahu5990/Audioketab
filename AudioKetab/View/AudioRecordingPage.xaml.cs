@@ -52,7 +52,8 @@ namespace AudioKetab
 		{
 			try
 			{
-				_context.MenuTapped.Execute(_context.MenuTapped);
+                await Navigation.PopModalAsync();
+				//_context.MenuTapped.Execute(_context.MenuTapped);
 			}
 			catch (Exception ex)
 			{

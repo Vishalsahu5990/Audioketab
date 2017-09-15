@@ -134,9 +134,6 @@
     <EmbeddedResource Include="Popup\AlbumInfoPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\TestPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -289,9 +286,6 @@
     <Compile Include="Model\BindingSourceModel.cs" />
     <Compile Include="Popup\AlbumInfoPopup.xaml.cs">
       <DependentUpon>AlbumInfoPopup.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomRenderers\HorizontalList.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />

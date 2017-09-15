@@ -26,7 +26,7 @@ namespace AudioKetab
 			if (!exists)
 				await Navigation.PushModalAsync(new LoginPage());
 			else
-				await Navigation.PushModalAsync(new MainPage());
+                App.Current.MainPage=new MainPage();
 
 		}
 		public static async Task SlideLogo(View view, int Top, int reduce, int time)

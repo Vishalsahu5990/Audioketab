@@ -78,5 +78,7 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Music Usage</string>
 </dict>
 </plist>

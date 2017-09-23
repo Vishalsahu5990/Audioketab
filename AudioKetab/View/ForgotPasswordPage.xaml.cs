@@ -86,16 +86,19 @@ private async Task SubmitProcess()
 			}).ContinueWith(
 			t =>
 			{
-				if (ret == "success")
-				{
-					 Navigation.PushAsync(new InfoPage());
-				}
-				else
-				{ 
-				 lblErrorMessage.Text = "Invalid Email!";
-					lblErrorMessage.IsVisible = true;
-					txtEmail.TextColor = Color.Red;
-				}
+                Device.BeginInvokeOnMainThread(() => 
+                {
+					if (ret == "success")
+					{
+                        Navigation.PushAsync(new InfoPage());
+					}
+					else
+					{
+						lblErrorMessage.Text = "Invalid Email!";
+						lblErrorMessage.IsVisible = true;
+						txtEmail.TextColor = Color.Red;
+					}
+                });
 
 
 			}, TaskScheduler.FromCurrentSynchronizationContext()

@@ -51,7 +51,7 @@ string name = item.users.first_name + " " + item.users.last_name;
 				profile = "defaultprofile.png";
 			}
 				
-string id = item.users.u_id;
+            string id = item.users.u_id;
 			await Navigation.PushModalAsync(new ChatPage(Convert.ToInt32( id),name,profile));
 		}
 
@@ -74,6 +74,7 @@ string id = item.users.u_id;
 					{
 						for (int i = 0; i < _list.Count; i++)
 						{
+                            _list[i].users.first_name = _list[i].users.first_name + " " + _list[i].users.last_name;
 							if (!string.IsNullOrEmpty(_list[i].users.profile_pic))
 								_list[i].users.profile_pic = Constants.PRO_PIC_IMG_URL + _list[i].users.profile_pic;
 							else

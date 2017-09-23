@@ -40,7 +40,12 @@
 					Margin="0,30,0,0"
 					HorizontalOptions="Center"
 					HorizontalTextAlignment="Center"
-							Text="Your reset password link sent in your email address"/>
+							Text="يرجي التحقق من بريدك الالكتروني
+ لتأكيد التسجيل
+
+تأكد من أن بريدنا ليس من ضمن ملفات
+Spam or Junk mail
+"/>
 						</Frame>
 				 <Button 
 					HeightRequest="30"

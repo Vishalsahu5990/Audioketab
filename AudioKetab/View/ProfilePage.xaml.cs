@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,21 +13,25 @@ namespace AudioKetab
 {
 	public partial class ProfilePage : ContentPage
 	{
+		public static double layoutHeigh = 0;
+		bool isFirstLoad = false;
 		CircleImage profileImage = null;
-		int height = 55;
-		int width = 55;
-		int x = 70;
-		int y = 50;
+		int height = 65;
+		int width = 65;
+		int x = 75;
+		int y = 45;
 		MainPage _context;
 		Plugin.Media.Abstractions.MediaFile profileData = null;
 		double _PicSize = 0;
 		public ProfilePage()
 		{
 			InitializeComponent();
+            isFirstLoad = true;
 		}
 		public ProfilePage(MainPage context)
 		{
 			_context = context;
+            isFirstLoad = true;
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			datepicker.DateSelected += Datepicker_DateSelected;
@@ -45,18 +50,37 @@ namespace AudioKetab
 			GetCountries();
 			PrepareUI();
 			var model = WebService.GetAll_Counts();
-			if (model != null)
-			{ 
-			lblPlaylist_count.Text = model.playlist_count.ToString();
-						lblFollower_count.Text = model.follower_count.ToString();
-						lblFollowing_count.Text = model.following_count.ToString();
-						lblUploadedAudio_count.Text = model.myaudio_count.ToString();
-			}
+			//if (model != null)
+			//{ 
+			//lblPlaylist_count.Text = model.playlist_count.ToString();
+			//			lblFollower_count.Text = model.follower_count.ToString();
+			//			lblFollowing_count.Text = model.following_count.ToString();
+			//			lblUploadedAudio_count.Text = model.myaudio_count.ToString();
+			//}
 		}
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			//GetCounts();
+			GetCounts();
+		}
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            isFirstLoad = false;
+        }
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			base.OnSizeAllocated(width, height);
+			if (isFirstLoad)
+			{
+				var size = _rlHeader.Height;
+				if (size > 0)
+					layoutHeigh = size;
+
+
+			
+			}
+
 		}
 		public void PrepareHeaderView()
 		{
@@ -581,6 +605,9 @@ private async Task GetCounts()
 						lblFollower_count.Text = model.follower_count.ToString();
 						lblFollowing_count.Text = model.following_count.ToString();
 						lblUploadedAudio_count.Text = model.myaudio_count.ToString();
+						Debug.WriteLine(layoutHeigh.ToString());
+						if (layoutHeigh > 0)
+							_rlHeader.HeightRequest = layoutHeigh;
 								//lblPlaylist_count.Text = "5";
 								//			lblFollower_count.Text = "5";
 								//			lblFollowing_count.Text ="5";

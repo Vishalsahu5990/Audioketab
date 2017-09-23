@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ImageCircle.Forms.Plugin.Abstractions;
 using Plugin.SecureStorage;
@@ -9,11 +10,13 @@ namespace AudioKetab
 {
 	public partial class UserDetailsPage : ContentPage
 	{
+		public static double layoutHeigh = 0;
+		bool isFirstLoad = false;
 		CircleImage profileImage = null;
-		int height = 55;
-		int width = 55;
-		int x = 70;
-		int y = 50;
+		int height = 65;
+		int width = 65;
+		int x = 75;
+		int y = 45;
 		UserDetailsModel _list = null;
 		MainPage _context = null;
 		int _userid = 0;
@@ -23,10 +26,10 @@ namespace AudioKetab
 		{
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-			GetPlayList();
+			//GetPlayList();
 
 			flowlistview.FlowColumnMinWidth = App.ScreenWidth / 3;
-
+			isFirstLoad = true;
 		}
 		public UserDetailsPage(int userid, MainPage context)
 		{
@@ -34,11 +37,11 @@ namespace AudioKetab
 			_userid = userid;
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-			GetPlayList();
+			//GetPlayList();
 
 			flowlistview.FlowColumnMinWidth = App.ScreenWidth / 3;
 
-
+			isFirstLoad = true;
 		}
 		public UserDetailsPage(int userid, MainPage context, string profilePic)
 		{
@@ -47,19 +50,37 @@ namespace AudioKetab
 			_profilePic = profilePic;
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
-			GetPlayList();
+			//GetPlayList();
 
 			flowlistview.FlowColumnMinWidth = App.ScreenWidth / 3;
+			isFirstLoad = true;
+		}
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			base.OnSizeAllocated(width, height);
+			if (isFirstLoad)
+			{
+				var size = _rlHeader.Height;
+				if (size > 0)
+					layoutHeigh = size;
+
+
+				Debug.WriteLine("alocated**********" + size.ToString());
+			}
+
 		}
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 			flowlistview.FlowItemTapped+= Flowlistview_FlowItemTapped;
+            GetUserDetails().Wait();
+            GetPlayList().Wait();
 		}
 		protected override void OnDisappearing()
 		{
 			base.OnDisappearing();
 			flowlistview.FlowItemTapped-= Flowlistview_FlowItemTapped;
+            isFirstLoad = false;
 		}
 
 		async void Flowlistview_FlowItemTapped(object sender, ItemTappedEventArgs e)
@@ -155,18 +176,18 @@ namespace AudioKetab
 					lblUsername.Text = model.first_name + " " + model.last_name;
 					lblDesc.Text = model.description;
 				}
-				var ret = WebService.CheckFollow(Convert.ToInt32(_userid));
-				if (ret == "follow")
-				{
-					imgMic.Source = "follow";
-					isFollowing = true;
+				//var ret = WebService.CheckFollow(Convert.ToInt32(_userid));
+				//if (ret == "follow")
+				//{
+				//	imgMic.Source = "follow";
+				//	isFollowing = true;
 
-				} 
-				else
-				{
-					imgMic.Source = "unfollow";
-					isFollowing = false;
-				}
+				//} 
+				//else
+				//{
+				//	imgMic.Source = "unfollow";
+				//	isFollowing = false;
+				//}
 				SetData();
 			}
 			catch (Exception ex)
@@ -186,9 +207,11 @@ namespace AudioKetab
 					lblUsername.Text = _list.user_info[0].first_name + " " + _list.user_info[0].last_name;
 					lblDesc.Text = _list.user_info[0].description;
 				}
-				lblFollower_count.Text = _list.follower_count.ToString();
-				lblFollowing_count.Text = _list.following_count.ToString();
-				lblUploadedAudio_count.Text = _list.myaudio_count.ToString();
+				//lblFollower_count.Text = _list.follower_count.ToString();
+				//lblFollowing_count.Text = _list.following_count.ToString();
+				//lblUploadedAudio_count.Text = _list.myaudio_count.ToString();
+				//if (layoutHeigh > 0)
+					//_rlHeader.HeightRequest = layoutHeigh;
 			}
 			catch (Exception ex)
 			{
@@ -197,7 +220,16 @@ namespace AudioKetab
 		}
 		async void Audio_Tapped(object sender, System.EventArgs e)
 		{
-			//await Navigation.PushModalAsync(new AudioRecordingPage(_context));
+			string msg = string.Empty;
+			if (isFollowing)
+				msg = "Do you want to unfollow?";
+			else
+				msg = "Do you want to follow?";
+
+			var result = await DisplayAlert("Alert!", msg, "YES", "CANCEL");
+
+			if (result)
+                unFollowUser(Convert.ToInt32(_userid)).Wait();
 		}
 		async void Back_Tapped(object sender, System.EventArgs e)
 		{
@@ -265,7 +297,13 @@ namespace AudioKetab
 		{
 			try
 			{
-				await Navigation.PushModalAsync(new ChatUsersPage());
+                
+				
+
+				
+                await Navigation.PushModalAsync(new ChatPage(Convert.ToInt32(_userid), lblUsername.Text, _profilePic));
+
+				//await Navigation.PushModalAsync(new ChatUsersPage());
 			}
 			catch (Exception ex)
 			{
@@ -274,7 +312,7 @@ namespace AudioKetab
 			}
 		}
 
-		private void GetPlayList()
+        public async Task  GetPlayList()
 		{
 			List<PlaylistModel> playlist = null;
 			string ret = string.Empty;
@@ -288,12 +326,15 @@ namespace AudioKetab
 
 							for (int i = 0; i < _list.audio_list.Count; i++)
 							{
-								_list.audio_list[i].image_path = Constants.SERVER_IMG_URL + _list.audio_list[i].image_path;
+                                _list.audio_list[i].image_path = "default.png";
 							}
 							flowlistview.FlowItemsSource = _list.audio_list;
 							Device.BeginInvokeOnMainThread(() =>
 							{
 								PrepareUI();
+								if (HomePage.layoutHeigh > 0)
+									_rlHeader.HeightRequest = HomePage.layoutHeigh;
+                            CheckFollow(Convert.ToInt32(_userid)).Wait();
 							});
 
 						}
@@ -305,6 +346,123 @@ namespace AudioKetab
 
 					
 		}
+		private async Task CheckFollow(int follow_userid)
+		{
 
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
+					{
+						ret = WebService.CheckFollow(follow_userid);
+					}).ContinueWith(
+					t =>
+					{
+						Device.BeginInvokeOnMainThread(() =>
+						{
+							if (ret == "follow")
+							{
+								imgMic.Source = "follow";
+								isFollowing = true;
+
+							}
+							else
+							{
+								imgMic.Source = "unfollow";
+								isFollowing = false;
+							}
+
+							if (HomePage.layoutHeigh > 0)
+								_rlHeader.HeightRequest = HomePage.layoutHeigh;
+						});
+
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
+		}
+		private async Task GetUserDetails()
+		{
+			List<PlaylistModel> playlist = null;
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(async () =>
+			{
+
+                _list = WebService.GetUserDetails(Convert.ToInt32(_userid));
+
+			}).ContinueWith((arg) =>
+
+			{
+				if (_list != null)
+				{
+
+
+
+					Device.BeginInvokeOnMainThread(() =>
+					{
+						lblFollower_count.Text = _list.follower_count.ToString();
+						lblFollowing_count.Text = _list.following_count.ToString();
+						lblUploadedAudio_count.Text = _list.myaudio_count.ToString();
+					});
+					if (HomePage.layoutHeigh > 0)
+						_rlHeader.HeightRequest = HomePage.layoutHeigh;
+				}
+				else
+				{
+					StaticMethods.ShowToast("No post found!");
+				}
+				StaticMethods.DismissLoader();
+				//GetFollowUnfollow().Wait();
+			});
+		}
+		private async Task unFollowUser(int follow_userid)
+		{
+
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
+					{
+						if (isFollowing)
+							ret = WebService.unFollowUser(follow_userid);
+						else
+							ret = WebService.followUser(follow_userid);
+					}).ContinueWith(
+					t =>
+					{
+						Device.BeginInvokeOnMainThread(() =>
+						{
+
+							if (ret == "success")
+							{
+								if (isFollowing)
+								{
+									imgMic.Source = "unfollow.png";
+									isFollowing = false;
+
+								}
+								else
+								{
+									imgMic.Source = "follow.png";
+									isFollowing = true;
+								}
+
+
+
+							}
+							else
+							{
+								StaticMethods.ShowToast("Something went wrong, Please try again later!");
+							}
+							if (HomePage.layoutHeigh > 0)
+								_rlHeader.HeightRequest = HomePage.layoutHeigh;
+
+							Debug.WriteLine("********Inside" + layoutHeigh.ToString());
+						});
+						
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
+		}
 	}
 }

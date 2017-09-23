@@ -48,6 +48,7 @@ async void Back_Tapped(object sender, System.EventArgs e)
 					txtFirstName.HeightRequest = 60;
 					txtLastName.HeightRequest = 60;
 					txtDob.HeightRequest = 60;
+                    rlDob.HeightRequest = 60;
 					txtEmail.HeightRequest = 60;
 					txtPassword.HeightRequest = 60;
 					txtCountry.HeightRequest = 60;

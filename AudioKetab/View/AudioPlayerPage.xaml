@@ -4,7 +4,7 @@
 	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 	x:Class="AudioKetab.AudioPlayerPage">
 	<RelativeLayout 
-            Padding="0"
+            Padding="0" 
             Margin="0"
             x:Name="_MainLayout"
             RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
@@ -261,26 +261,84 @@
 
 
 						
-			<StackLayout Margin="0,10,0,0" BackgroundColor="#708F908E"> 
-			 
-			 <StackLayout>
-			<ffimageloading:CachedImage  
-										Margin="0,5,0,0"
-								x:Name="imgAlbum"
-                           Aspect="AspectFit"
+			<StackLayout Margin="0,10,0,0" BackgroundColor="#708F908E"
+                            VerticalOptions="FillAndExpand"> 
+			  <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Album_Tapped"/> 
+    </StackLayout.GestureRecognizers>  
+			 <StackLayout HorizontalOptions="FillAndExpand">
+
+
+
+              <RelativeLayout VerticalOptions="Start"   HeightRequest="230"
+                                    x:Name="rlMain"
+                                    HorizontalOptions="FillAndExpand">
+                                    <ffimageloading:CachedImage  
+                                        HeightRequest="200"
+                                    BackgroundColor="Red"
+                                    Margin="0,5,0,0"
+                                x:Name="imgAlbum"
+                           Aspect="AspectFill"
                             DownsampleUseDipUnits="true" 
                             LoadingPlaceholder="default.png"
                             ErrorPlaceholder="default.png"
-                           Source="default.png">
-                           HorizontalOptions="Start">
-										 <Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="Album_Tapped"/> 
-    </Image.GestureRecognizers> 
-								</ffimageloading:CachedImage>
+                           Source="default.png"
+                           HorizontalOptions="CenterAndExpand"
+                                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.13}" 
+                                        RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}" RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}" 
+                                        > 
+                                </ffimageloading:CachedImage>
+        <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+        <StackLayout >
+                       
+                                          
+
+                            <StackLayout 
+                                   
+             
+                                    Orientation="Horizontal" 
+                                    VerticalOptions="EndAndExpand">
+                            <Image Margin="15,0,0,0"
+                                        x:Name="imgVideourl"
+                                Source="ic_yellow" 
+                                VerticalOptions="EndAndExpand"
+                                Aspect="AspectFit"
+                            HeightRequest="50">
+                            <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="videourl_tapped"/>
+    </Image.GestureRecognizers>
+                                    </Image> 
+             <Image 
+                                        x:Name="imgArticleurl"
+                                Source="ic)green" 
+                                VerticalOptions="EndAndExpand"
+                                Aspect="AspectFit"
+                            HeightRequest="50">
+                            <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="Articleurl_tapped"/> 
+    </Image.GestureRecognizers>
+                                    </Image> 
+                            </StackLayout>
+                              
+                                        </StackLayout>
+                                    
+        
+        </Grid>
+        </RelativeLayout> 
+
+
+
+                                
+
+
+             
+		
+										
 
 							
-			<StackLayout Orientation="Horizontal">
-			<Grid HorizontalOptions="FillAndExpand" Padding="10"> 
+			<StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+			<Grid HorizontalOptions="FillAndExpand" Padding="10"
+                                        Margin="0,20,0,0"> 
 							<StackLayout Grid.Column="0" VerticalOptions="Start">
 							<Image 
 							x:Name="imgLike"
@@ -306,7 +364,11 @@
     </StackLayout.GestureRecognizers>	
 							</StackLayout>
 						 	<StackLayout Grid.Column="2"  VerticalOptions="Start">
-							<Image 	x:Name="imgVolume"
+
+                                           <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="mute_Tapped"/>
+    </StackLayout.GestureRecognizers>   
+                                            <Image 	x:Name="imgVolume"
 											Source="ic_volume"
 									Aspect="AspectFit"/>
 
@@ -314,9 +376,9 @@
 											Text="0" 
 								HorizontalTextAlignment="Center"
 												IsVisible="false"/>
-								<StackLayout.GestureRecognizers>
+								<!--<StackLayout.GestureRecognizers>
         <TapGestureRecognizer Tapped="mute_Tapped"/>
-    </StackLayout.GestureRecognizers>
+    </StackLayout.GestureRecognizers>-->
 							</StackLayout>
 							<StackLayout Grid.Column="3"  VerticalOptions="Start">
 					 		<Image Source="ic_share"
@@ -330,36 +392,7 @@
     </StackLayout.GestureRecognizers>
 							</StackLayout>
 
-							<RelativeLayout >  
 
-							<StackLayout 
-									RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.15}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=-1}"
-             
-									Orientation="Horizontal" 
-									VerticalOptions="EndAndExpand">
-							<Image 
-										x:Name="imgVideourl"
-								Source="ic_yellow" 
-								VerticalOptions="EndAndExpand"
-								Aspect="AspectFit"
-							HeightRequest="50">
-							<Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="videourl_tapped"/>
-    </Image.GestureRecognizers>
-									</Image> 
-			 <Image 
-										x:Name="imgArticleurl"
-								Source="ic)green" 
-								VerticalOptions="EndAndExpand"
-								Aspect="AspectFit"
-							HeightRequest="50">
-							<Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="Articleurl_tapped"/> 
-    </Image.GestureRecognizers>
-									</Image> 
-							</StackLayout>
-			 </RelativeLayout>
 
 											<StackLayout Grid.Column="4"  VerticalOptions="Start">
 					 		<Image Source="iclist.png"

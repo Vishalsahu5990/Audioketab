@@ -18,17 +18,78 @@ namespace AudioKetab
 			NavigationPage.SetHasNavigationBar(this, false);
 			cellSize = App.ScreenWidth / 4.5;
 			//StaticMethods.ShowLoader();
-			var ret = WebService.GetMoreLectureandTraining();
-			if (ret == "success")
-			{
-				ProcessResult();
-
-			}
+			
 
 			btnMoreRecentAdded.Clicked += BtnMoreRecentAdded_Clicked;
 			btnMoreMostPlayed.Clicked += BtnMoreMostPlayed_Clicked;
 			btnMoreRecentFollowers.Clicked += BtnMoreRecentFollowers_Clicked;
 		}
+        async void one_clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var item = (Xamarin.Forms.Button)sender;
+                for (int i = 0; i < list_recentadded.Count; i++)
+                {
+                    if (item.CommandParameter.ToString() == list_recentadded[i].s_id)
+                    {
+                        if (item != null)
+                        {
+                            await Navigation.PushModalAsync(new AudioPlayerPage(StaticDataModel.CurrentContext, list_recentadded[i]));
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        async void two_clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var item = (Xamarin.Forms.Button)sender;
+                for (int i = 0; i < list_mostplayed.Count; i++)
+                {
+                    if (item.CommandParameter.ToString() == list_mostplayed[i].s_id)
+                    {
+                        if (item != null)
+                        {
+                            await Navigation.PushModalAsync(new AudioPlayerPage(StaticDataModel.CurrentContext, list_mostplayed[i]));
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        async void three_clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var item = (Xamarin.Forms.Button)sender;
+                for (int i = 0; i < list_recentfollower.Count; i++)
+                {
+                    if (item.CommandParameter.ToString() == list_recentfollower[i].s_id)
+                    {
+                        if (item != null)
+                        {
+                            await Navigation.PushModalAsync(new AudioPlayerPage(StaticDataModel.CurrentContext, list_recentfollower[i]));
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
@@ -39,7 +100,7 @@ namespace AudioKetab
 			{
 				categoryypicker.Items.Add(arrayCategory[i]);
 			}
-
+            GetAllData().Wait();
 		}
 		protected override void OnDisappearing()
 		{
@@ -267,5 +328,41 @@ namespace AudioKetab
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
 		}
+        private async Task GetAllData()
+        {
+            string category = string.Empty;
+
+            string ret = string.Empty;
+            StaticMethods.ShowLoader();
+            Task.Factory.StartNew(
+                    // tasks allow you to use the lambda syntax to pass wor
+                    () =>
+                    {
+                    ret = WebService.GetMoreLectureandTraining();
+
+                    }).ContinueWith(
+                    t =>
+                    {
+                        if (ret == "success")
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                ProcessResult();
+                            });
+
+
+
+
+                        }
+                        else
+                        {
+                            StaticMethods.ShowToast("No result found!");
+
+                        }
+
+
+                    }, TaskScheduler.FromCurrentSynchronizationContext()
+                );
+        }
 	}
 }

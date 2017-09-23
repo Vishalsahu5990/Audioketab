@@ -82,7 +82,7 @@
 
 					
 		   <RelativeLayout
-           >
+           x:Name="_rlHeader"> 
 						
          <Image
                 Aspect="Fill"
@@ -121,9 +121,9 @@
 										Margin="0,5,0,0"
                     TextColor="White" 
                     HorizontalOptions="Start" 
-                        LineBreakMode="TailTruncation" 
+                        
                     FontAttributes="Bold"  
-                   FontSize="14" />
+                   FontSize="13" />
                     <Label 
                     x:Name="lblDesc" 
 					Text="No description"	
@@ -261,12 +261,12 @@
                     VerticalOptions="Start"
                    Spacing="5" 
 									x:Name="_slBadge"
-									IsVisible="true">
-            <Image 
+									IsVisible="true"> 
+            <Image  
                         Source="badge" 
                         Margin="5,0,0,0"
                        
-                />
+                /> 
                 <Label Text="الأوسمة"
                 HorizontalOptions="EndAndExpand" 
                 VerticalOptions="Center" 

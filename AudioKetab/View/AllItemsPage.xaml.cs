@@ -9,6 +9,7 @@ namespace AudioKetab
 	public partial class AllItemsPage : ContentPage
 	{
 		int _identifier = 0;
+        double cellSize = 0;
 		public AllItemsPage()
 		{
 
@@ -17,8 +18,11 @@ namespace AudioKetab
 		}
 		public AllItemsPage(int identifier)
 		{
-			_identifier = identifier;
 			InitializeComponent();
+			_identifier = identifier;
+            flowlistview.FlowColumnMinWidth= App.ScreenWidth / 3;
+            cellSize = App.ScreenWidth / 3;
+		
 			NavigationPage.SetHasNavigationBar(this, false);
 			flowlistview.FlowItemsSource = Enumerable.Range(0, 18).ToList();
 			TaskSelector(_identifier);
@@ -35,6 +39,26 @@ namespace AudioKetab
 
 			}
 		}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            flowlistview.FlowItemTapped+= Flowlistview_FlowItemTapped;
+        }
+
+        void Flowlistview_FlowItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var item = e.Item as Book_summariesModel;
+            if (!ReferenceEquals(item,null))
+            {
+                Navigation.PushModalAsync(new AudioPlayerPage(StaticDataModel.CurrentContext,item));
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            flowlistview.FlowItemTapped -= Flowlistview_FlowItemTapped;
+        }
 		private void TaskSelector(int identifier)
 		{
 			try
@@ -93,6 +117,7 @@ namespace AudioKetab
 							for (int i = 0; i < list.Count; i++)
 							{
 								list[i].image_path = Constants.SERVER_IMG_URL + list[i].image_path;
+                                list[i].cell_size = cellSize;
 							}
 							flowlistview.FlowItemsSource = list;
 						}

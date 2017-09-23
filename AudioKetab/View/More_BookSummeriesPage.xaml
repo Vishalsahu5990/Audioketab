@@ -5,6 +5,10 @@
 	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 	x:Class="AudioKetab.More_BookSummeriesPage"
 	xmlns:Controls="clr-namespace:HorizontalList;assembly=HorizontalList">
+    <RelativeLayout VerticalOptions="Start">
+        <Image Aspect="Fill"  RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}" RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}" RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}" />
+        <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+    
 	<StackLayout x:Name="ParentLayout" Orientation="Vertical" Spacing="0">
 
 
@@ -136,8 +140,8 @@
                             Margin="20,0,0,0"
                             />
 			<Label 
-			Text="Recent Added" 
-			TextColor="White"
+			Text="اضيفت مؤخرا" 
+			TextColor="Silver"
 			VerticalOptions="Center"
 			HorizontalOptions="EndAndExpand"
 			Margin="0,0,20,0"/>
@@ -156,13 +160,23 @@
 										<Controls:HorizontalListView 
 												x:Name="listview_recentadded"
 												ListOrientation="Horizontal" 
-												ItemsSource="{Binding List_LectureTraining}"
-												Command="{Binding SelectedItemCommandLectureTraining}" >
+                                                Command="{Binding SelectedItemCommandLectureTraining}">
 											<Controls:HorizontalListView.ItemTemplate>
 												<DataTemplate>
 													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
-														<RelativeLayout>
-															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
+														<RelativeLayout HeightRequest="{Binding cell_size}">
+															<ffimageloading:CachedImage
+                                                                    DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                        HeightRequest="{Binding cell_size}" 
+                                        WidthRequest="{Binding cell_size}"
+                                        Aspect="AspectFill" 
+                                        DownsampleUseDipUnits="false" 
+                                        LoadingPlaceholder="default.png"
+                                        ErrorPlaceholder="default.png" 
+                                        Source="{Binding image_path}"
+                                        />
 															<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
 					Type=RelativeToParent, Property=Width}" 
@@ -172,50 +186,18 @@
 				Clicked="one_clicked"
 				CommandParameter="{Binding s_id}"/>
 															</RelativeLayout>
-														<Label FontSize="13" Text="{Binding author_name}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="{Binding cell_size}" HeightRequest="10" />
+														<Label FontSize="13"
+                                            Text="{Binding author_name}" 
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center" 
+                                            />
 													</StackLayout>
 												</DataTemplate>
 											</Controls:HorizontalListView.ItemTemplate>
 										</Controls:HorizontalListView>
 									</ScrollView>
 
-				<!--<local:TLScrollView 
-					ItemsSource="{Binding items}"
-				Orientation="Horizontal" 
-				SelectedCommand="{Binding [ItemSelected]}"
-				HeightRequest="{Binding cell_size}"
-				x:Name="listview_recentadded">
-			<local:TLScrollView.ItemTemplate>
-				<DataTemplate>
-					<ViewCell>
-						<StackLayout Padding="5"
-							WidthRequest="{Binding cell_size}"								>
-							<RelativeLayout
-									>
-                          <ffimageloading:CachedImage 
-							HeightRequest="{Binding cell_size}"
-							WidthRequest="{Binding cell_size}"
-							Aspect="AspectFill"
-							DownsampleUseDipUnits="false" 
-							LoadingPlaceholder="default.png"
-							ErrorPlaceholder="default.png"
-							Source="{Binding image_path}"
-							/>
-								 
-					        </RelativeLayout>
-											<Label
-											FontSize="13"
-												Text="{Binding author_name}"
-								HorizontalOptions="Center"
-									HorizontalTextAlignment="Center"
-								WidthRequest="{Binding cell_size}"
-									HeightRequest="10"		/> 
-						</StackLayout>
-					</ViewCell>
-				</DataTemplate>
-			</local:TLScrollView.ItemTemplate>
-		</local:TLScrollView>
--->
+	
 
 				
 					</StackLayout>
@@ -243,8 +225,8 @@
                             Margin="20,0,0,0"
                             />
 			<Label 
-			Text="Most played" 
-			TextColor="White"
+			Text="الاكثر استماعا" 
+			TextColor="Silver"
 			VerticalOptions="Center"
 			HorizontalOptions="EndAndExpand"
 			Margin="0,0,20,0"/>
@@ -256,7 +238,7 @@
 				<Image Source="previous_ic" HeightRequest="25" Margin="5"/>
 					</StackLayout>
 					<StackLayout HorizontalOptions="CenterAndExpand">
-					<local:TLScrollView 
+					<!--<local:TLScrollView 
 					ItemsSource="{Binding items1}"
 				Orientation="Horizontal" 
 				SelectedCommand="{Binding [ItemSelected]}"
@@ -286,12 +268,55 @@
 								HorizontalOptions="Center"
 									HorizontalTextAlignment="Center"
 								WidthRequest="{Binding cell_size}"
-									HeightRequest="10"		/> 
+									HeightRequest="10"/> 
 						</StackLayout>
 					</ViewCell>
 				</DataTemplate>
 			</local:TLScrollView.ItemTemplate>
-		</local:TLScrollView>
+		</local:TLScrollView>-->
+                    <ScrollView Orientation="Horizontal" 
+                    HeightRequest="{Binding cell_size}">
+                                        <Controls:HorizontalListView 
+                                                x:Name="listview_mostplayed"
+                                                ListOrientation="Horizontal" 
+                                                ItemsSource="{Binding items1}"
+                                                Command="{Binding SelectedItemCommandLectureTraining}" >
+                                            <Controls:HorizontalListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout Padding="5" WidthRequest="{Binding cell_size}">
+                                                        <RelativeLayout HeightRequest="{Binding cell_size}">
+                                                            <ffimageloading:CachedImage
+                                                     DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                        HeightRequest="{Binding cell_size}" 
+                                        WidthRequest="{Binding cell_size}"
+                                        Aspect="AspectFill" 
+                                        DownsampleUseDipUnits="false" 
+                                        LoadingPlaceholder="default.png"
+                                        ErrorPlaceholder="default.png" 
+                                        Source="{Binding image_path}"
+                                        />
+                                                            <Button BackgroundColor="Transparent"
+                RelativeLayout.WidthConstraint="{ConstraintExpression 
+                    Type=RelativeToParent, Property=Width}" 
+                    RelativeLayout.HeightConstraint="{ConstraintExpression 
+                    Type=RelativeToParent,
+                Property=Height}"
+                Clicked="two_clicked"
+                CommandParameter="{Binding s_id}"/>
+                                                            </RelativeLayout>
+                                                        <Label FontSize="13" 
+                                            Text="{Binding author_name}"
+                                            HorizontalOptions="Center" 
+                                            HorizontalTextAlignment="Center" 
+                                            />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </Controls:HorizontalListView.ItemTemplate>
+                                        </Controls:HorizontalListView>
+                                    </ScrollView>
+
 					</StackLayout>
 					<StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
 					<Image  VerticalOptions="Center" Source="next_ic" HeightRequest="25" Margin="5"/>
@@ -315,9 +340,9 @@
                                     WidthRequest="50"
                             Margin="20,0,0,0"
                             />
-			<Label 
-			Text="Recent followers" 
-			TextColor="White"
+			<Label  
+			Text="اخر المتحدثين" 
+			TextColor="Silver"
 			VerticalOptions="Center"
 			HorizontalOptions="EndAndExpand"
 			Margin="0,0,20,0"/>
@@ -329,7 +354,7 @@
 				<Image Source="previous_ic" HeightRequest="25" Margin="5"/>
 					</StackLayout>
 					<StackLayout HorizontalOptions="CenterAndExpand">
-					<local:TLScrollView 
+					<!--<local:TLScrollView 
 					ItemsSource="{Binding items2}"
 				Orientation="Horizontal" 
 				SelectedCommand="{Binding [ItemSelected]}"
@@ -364,7 +389,49 @@
 					</ViewCell>
 				</DataTemplate>
 			</local:TLScrollView.ItemTemplate> 
-		</local:TLScrollView>
+		</local:TLScrollView>-->
+                 <ScrollView Orientation="Horizontal" 
+                    HeightRequest="{Binding cell_size}">
+                                        <Controls:HorizontalListView 
+                                                x:Name="listview_recentfollowers"
+                                                ListOrientation="Horizontal" 
+                                                ItemsSource="{Binding items2}"
+                                                Command="{Binding SelectedItemCommandLectureTraining}" >
+                                            <Controls:HorizontalListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout Padding="5" WidthRequest="{Binding cell_size}">
+                                                        <RelativeLayout HeightRequest="{Binding cell_size}">
+                                                            <ffimageloading:CachedImage
+                                                     DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                        HeightRequest="{Binding cell_size}" 
+                                        WidthRequest="{Binding cell_size}" 
+                                        Aspect="AspectFill" 
+                                        DownsampleUseDipUnits="false" 
+                                        LoadingPlaceholder="default.png"
+                                        ErrorPlaceholder="default.png" 
+                                        Source="{Binding image_path}"
+                                        />
+                                                            <Button BackgroundColor="Transparent"
+                RelativeLayout.WidthConstraint="{ConstraintExpression 
+                    Type=RelativeToParent, Property=Width}" 
+                    RelativeLayout.HeightConstraint="{ConstraintExpression 
+                    Type=RelativeToParent,
+                Property=Height}"
+                Clicked="three_clicked"
+                CommandParameter="{Binding s_id}"/>
+                                                            </RelativeLayout>
+                                                        <Label FontSize="13"
+                                            Text="{Binding first_name}" 
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                           />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </Controls:HorizontalListView.ItemTemplate>
+                                        </Controls:HorizontalListView>
+                                    </ScrollView>
 					</StackLayout>
 					<StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
 
@@ -375,4 +442,7 @@
 
 				</StackLayout> 
 		</StackLayout>  
+           
+        </Grid>
+    </RelativeLayout>
 </ContentPage>  

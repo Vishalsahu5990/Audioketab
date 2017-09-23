@@ -17,6 +17,24 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="203" image="splash_logo.png">
+                                <rect key="frame" x="40" y="375" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinX="YES" flexibleMaxY="YES" flexibleMinY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="جميع الحقوق محفوظة" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="400">
+                                <rect key="frame" x="80" y="520" width="79" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinX="YES" flexibleMaxY="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@AudioKetab 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="401">
+                                <rect key="frame" x="156" y="520" width="103" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinX="YES" flexibleMaxY="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -31,12 +49,12 @@
     <resources>
         <image name="download-(2).png" width="125" height="68"/>
         <image name="download.png" width="540" height="960"/>
-        <image name="bg.png" width="550" height="960"/>
+        <image name="bg.png" width="540" height="960"/>
         <image name="logo.png" width="134" height="73"/>
         <image name="menu_ic.png" width="41" height="45"/>
         <image name="mic_ic.png" width="80" height="81"/>
-        <image name="radio_check.png" width="37" height="37"/>
-        <image name="radio_uncheck.png" width="37" height="37"/>
+        <image name="radio_check.png" width="22" height="22"/>
+        <image name="radio_uncheck.png" width="22" height="22"/>
         <image name="bg-layer2.png" width="540" height="626"/>
         <image name="default.png" width="130" height="130"/>
         <image name="ic_comment.png" width="30" height="30"/>
@@ -118,6 +136,10 @@
         <image name="ic_volume2x.png" width="100" height="113"/>
         <image name="ic_volume3x.png" width="100" height="113"/>
         <image name="crosssign.png" width="16" height="16"/>
+        <image name="questions.png" width="10" height="10"/>
+        <image name="cloudcomputing.png" width="22" height="22"/>
+        <image name="unitedstates.png" width="25" height="25"/>
+        <image name="germany.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

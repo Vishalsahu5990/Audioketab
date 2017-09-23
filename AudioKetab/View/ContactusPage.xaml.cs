@@ -12,10 +12,10 @@ namespace AudioKetab
 	public partial class ContactusPage : ContentPage
 	{
 		CircleImage profileImage = null;
-		int height = 55;
-		int width = 55;
-		int x = 70;
-		int y = 50;
+		int height = 65;
+		int width = 65;
+		int x = 75;
+		int y = 45;
 		MainPage _context;
 		public ICommand ChangeMenuCommand { get; private set; }
 		public ContactusPage()

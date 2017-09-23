@@ -24,7 +24,7 @@ namespace AudioKetab
 
 			var exists = CrossSecureStorage.Current.HasKey("userId");
 			if (!exists)
-				await Navigation.PushModalAsync(new LoginPage());
+                await Navigation.PushAsync(new LoginPage());
 			else
                 App.Current.MainPage=new MainPage();
 

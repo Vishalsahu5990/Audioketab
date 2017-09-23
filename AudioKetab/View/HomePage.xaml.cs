@@ -16,12 +16,13 @@ namespace AudioKetab
 	public partial class HomePage : ContentPage
 	{
 		public static double layoutHeigh=0;
+        bool isFirstLoad = false;
 		CategoryViewModel viewModel;
 		CircleImage profileImage = null;	
-		int height = 55;
-		int width = 55;
-		int x = 70;
-		int y = 50;
+		int height = 65;
+		int width = 65;
+		int x = 75;
+		int y = 45;
 		Book_summariesModel _model;
 		ControlTemplate headerTemplate;
 		MainPage _context;
@@ -32,7 +33,7 @@ namespace AudioKetab
 		List<LectureandTraingingModel> list_LectureTraining = null;
 		List<NewsLetterModel> list_NewsLetter = null;
 		private double cellSize = 0;
-		bool isFirstLoad = false;
+		
 		async void mentor_clicked(object sender, System.EventArgs e)
 		{
 			try
@@ -239,23 +240,23 @@ namespace AudioKetab
 
 			}
 		}
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-			StaticDataModel.IsFromHomePage = true;
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            StaticDataModel.IsFromHomePage = true;
 
-			if(isFirstLoad)
-            GetAudio().Wait();
+            if (isFirstLoad)
+                GetAudio().Wait();
 
-			_rlHeader.SizeChanged += (sender, e) =>
-			 {
-
-
-
-			};
+            _rlHeader.SizeChanged += (sender, e) =>
+             {
 
 
-		}
+
+             };
+
+
+        }
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			base.OnSizeAllocated(width, height);
@@ -404,7 +405,7 @@ namespace AudioKetab
 
 		async void Audio_Tapped(object sender, System.EventArgs e)
 		{
-			await Navigation.PushModalAsync(new AudioRecordingPage(_context));
+            await Navigation.PushAsync(new AudioRecordingPage(_context));
 		}
 
 
@@ -502,7 +503,7 @@ namespace AudioKetab
 							article_url = item["article_url"].ToString(),
 							video_url = item["video_url"].ToString(),
 							description = item["description"].ToString(),
-							cell_size = cellSize
+							cell_size = cellSize 
 						});
 					}
 
@@ -550,7 +551,7 @@ namespace AudioKetab
 							category = item["category"].ToString(),
 							comment = item["comment"].ToString(),
 							song_path = item["song_path"].ToString(),
-							image_path = Constants.SERVER_IMG_URL + item["image_path"].ToString(),
+                            image_path = Constants.SERVER_IMG_URL + item["image_path"].ToString(),
 							count_like = item["count_like"].ToString(),
 							u_id = item["u_id"].ToString(),
 							profile_pic = item["profile_pic"].ToString(),

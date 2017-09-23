@@ -11,25 +11,27 @@ using Firebase;
 using Firebase.Invites;
 using Firebase.Analytics;
 using Google.SignIn;
+using Newtonsoft.Json.Linq;
+using Xamarin.Forms;
 
 namespace AudioKetab.iOS
 {
-	[Register("AppDelegate")]
-	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
-	{
-		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-		{
-			global::Xamarin.Forms.Forms.Init();
-			PrepareRemoteNotification();
-			SlideOverKit.iOS.SlideOverKit.Init ();
-			CarouselViewRenderer.Init ();
-			ImageCircleRenderer.Init();
-			FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
-			WebsocketConnection.Link();
-			//Getting device screen size
-			App.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
-			App.ScreenWidth = (double)UIScreen.MainScreen.Bounds.Width;
-			SetupTitleBar();
+    [Register("AppDelegate")]
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    {
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        {
+            global::Xamarin.Forms.Forms.Init();
+            PrepareRemoteNotification();
+            SlideOverKit.iOS.SlideOverKit.Init ();
+            CarouselViewRenderer.Init ();
+            ImageCircleRenderer.Init();
+            FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
+            WebsocketConnection.Link();
+            //Getting device screen size
+            App.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
+            App.ScreenWidth = (double)UIScreen.MainScreen.Bounds.Width;
+            SetupTitleBar();
 
 
 
@@ -38,106 +40,126 @@ namespace AudioKetab.iOS
 var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
 SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString ();
 
-			Firebase.Analytics.App.Configure();
-			LoadApplication(new App());
+            Firebase.Analytics.App.Configure();
+            LoadApplication(new App());
 
-			return base.FinishedLaunching(app, options);
-		}
-		public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
-		{
+            return base.FinishedLaunching(app, options);
+        }
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
 var openUrlOptions = new UIApplicationOpenUrlOptions(options);
-	return OpenUrl(app, url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
+    return OpenUrl(app, url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
 
-		}
-		public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
-		{
+        }
+        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+        {
 // Handle App Invite requests
 var invite = Invites.HandleUrl(url, sourceApplication, annotation);
 
-	if (invite != null) {
-		var matchType = invite.MatchType == ReceivedInviteMatchType.Weak ? "Weak" : "Strong";
+    if (invite != null) {
+        var matchType = invite.MatchType == ReceivedInviteMatchType.Weak ? "Weak" : "Strong";
 var message = $"Deep link from {sourceApplication}\nInvite ID: {invite.InviteId}\nApp Url: {invite.DeepLink}\nMatch Type: {matchType}";
 System.Console.WriteLine ($"Depp-Link Data: {message}");
 
-		return true;
-	}
+        return true;
+    }
 
-	// Handle Sign In
-	return SignIn.SharedInstance.HandleUrl (url, sourceApplication, annotation);
-		}
-		private void SetupTitleBar()
-		{
+    // Handle Sign In
+    return SignIn.SharedInstance.HandleUrl (url, sourceApplication, annotation);
+        }
+        private void SetupTitleBar()
+        {
 
 
-			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(0.301f, 0.301f, 0.301f); //bar background
-			UINavigationBar.Appearance.TintColor = UIColor.FromRGB(1f, 0.377f, 0.376f);//Tint color of button items
-			UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes()
-			{
-				TextColor = UIColor.FromRGB(0.76f, 0.76f, 0.76f)
+            UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(0.301f, 0.301f, 0.301f); //bar background
+            UINavigationBar.Appearance.TintColor = UIColor.FromRGB(1f, 0.377f, 0.376f);//Tint color of button items
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes()
+            {
+                TextColor = UIColor.FromRGB(0.76f, 0.76f, 0.76f)
 
-			});
-		}
-		private void PrepareRemoteNotification()
-		{
-			try
-			{
-				if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-				{
-					var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
-						UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-						new NSSet());
+            });
+        }
+        private void PrepareRemoteNotification()
+        {
+            try
+            {
+                if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+                {
+                    var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                        UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+                        new NSSet());
 
-					UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
-					UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
-					UIApplication.SharedApplication.RegisterForRemoteNotifications();
-				}
-				else
-				{
-					UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
-					UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
+                    UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
+                    UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+                    UIApplication.SharedApplication.RegisterForRemoteNotifications();
+                }
+                else
+                {
+                    UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
+                    UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
 
-				}
-			}
-			catch (Exception ex)
-			{
+                }
+            }
+            catch (Exception ex)
+            {
 
-			}
-		}
-		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-		{
-			// Get current device token
-			var DeviceToken = deviceToken.Description;
-			if (!string.IsNullOrWhiteSpace(DeviceToken))
-			{
-				DeviceToken = DeviceToken.Trim('<').Trim('>');
-				DeviceToken = DeviceToken.Replace(" ", "");
-				StaticDataModel.DeviceToken = DeviceToken.ToString();
-				Console.WriteLine(DeviceToken);
-			}
+            }
+        }
+        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        {
+            // Get current device token
+            var DeviceToken = deviceToken.Description;
+            if (!string.IsNullOrWhiteSpace(DeviceToken))
+            {
+                DeviceToken = DeviceToken.Trim('<').Trim('>');
+                DeviceToken = DeviceToken.Replace(" ", "");
+                StaticDataModel.DeviceToken = DeviceToken.ToString();
+                Console.WriteLine(DeviceToken);
+            }
 
-			// Get previous device token
-			var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey("PushDeviceToken");
+            // Get previous device token
+            var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey("PushDeviceToken");
 
-			// Has the token changed?
-			if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
-			{
-				//TODO: Put your own logic here to notify your server that the device token has changed/been created!
-			}
+            // Has the token changed?
+            if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
+            {
+                //TODO: Put your own logic here to notify your server that the device token has changed/been created!
+            }
 
-			// Save new device token 
-			NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, "PushDeviceToken");
-		}
+            // Save new device token 
+            NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, "PushDeviceToken");
+        }
 
-		public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
-		{
-			//new UIAlertView("Error registering push notifications", error.LocalizedDescription, null, "OK", null).Show();
-		}
+        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        {
+            //new UIAlertView("Error registering push notifications", error.LocalizedDescription, null, "OK", null).Show();
+        }
 
-		public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary options, Action<UIBackgroundFetchResult> completionHandler)
-		{
-			
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary options, Action<UIBackgroundFetchResult> completionHandler)
+        {
 
-		}
+            if (null != options && options.ContainsKey(new NSString("aps")))
+            {
+                string alert = string.Empty;
+                string sound = string.Empty;
+                int badge = -1;
 
-	}
+                NSDictionary aps = options.ObjectForKey(new NSString("aps")) as NSDictionary;
+                NSDictionary json = (aps["moredata"] as NSDictionary);
+               
+                NotificatonModel.RemoteNoti objNotification = new NotificatonModel.RemoteNoti();
+                objNotification.message_id=json["message_id"].ToString();
+                objNotification.msg = json["msg"].ToString();
+                objNotification.notification_type = json["notification_type"].ToString();
+                objNotification.registration_ids = json["registration_ids"].ToString();
+                objNotification.to_id = json["to_id"].ToString();
+                objNotification.user_id = json["user_id"].ToString();
+
+                if(objNotification.notification_type.Equals("message"))
+                MessagingCenter.Send<object, NotificatonModel.RemoteNoti>(this, "NotificationRecieved", objNotification);
+
+            }
+        }
+       
+    }
 }

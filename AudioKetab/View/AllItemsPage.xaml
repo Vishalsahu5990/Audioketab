@@ -76,25 +76,29 @@
 			 			</Grid.ColumnDefinitions>
 						<StackLayout >
 							<RelativeLayout
-									HeightRequest="80"
-									WidthRequest="80" 
+									HeightRequest="130"
+									WidthRequest="{Binding cell_size}" 
 								HorizontalOptions="Center">
                           <ffimageloading:CachedImage 
 							Aspect="AspectFill"
-							DownsampleUseDipUnits="false" 
+							DownsampleUseDipUnits="true" 
 							LoadingPlaceholder="default.png"
 							ErrorPlaceholder="default.png"
 							Source="{Binding image_path}"
-							/>
+							DownsampleToViewSize="false"
+                                DownsampleWidth="100"
+                                DownsampleHeight="100"/>
 							 
 					        </RelativeLayout>
 							<Label Text="{Binding book_name}"
 							TextColor="Gray"
-							HorizontalTextAlignment="Center"/>
+							HorizontalTextAlignment="Center"
+                            LineBreakMode="TailTruncation"/>
 							<Label  Text="{Binding author_name}"
 							FontSize="13" 
 							TextColor="Gray"
-							HorizontalTextAlignment="Center"/>
+							HorizontalTextAlignment="Center"
+                            IsVisible="false"/>
 						</StackLayout>
 					</Grid>
 				</DataTemplate>

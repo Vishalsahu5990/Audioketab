@@ -52,7 +52,7 @@ namespace AudioKetab
 		{
 			try
 			{
-                await Navigation.PopModalAsync();
+                await Navigation.PopAsync();
 				//_context.MenuTapped.Execute(_context.MenuTapped);
 			}
 			catch (Exception ex)
@@ -118,7 +118,9 @@ namespace AudioKetab
 		}
 		async void chooseaudio_Tapped(object sender, System.EventArgs e)
 		{
-			DependencyService.Get<IiOSMethods>().ShowLoader();
+           
+                DependencyService.Get<IiOSMethods>().ShowLoader();
+           
 		}
 		void Categoryypicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -269,15 +271,16 @@ namespace AudioKetab
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			//if (_uploadAudioModel.byte_recorded_audio != null)
-			//{
-			//	string fileName = string.Format("recording{0}.aac", DateTime.Now.ToString("yyyyMMddHHmmss"));
-			//	lblRecording.Text = fileName;
-			//}
-			//else
-			//{ 
-			//	lblRecording.Text = string.Empty;
-			//}
+            MessagingCenter.Subscribe<string, byte[]>(this, "NotificationRecieved",(arg1, arg2)  =>
+			{
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    _uploadAudioModel.byte_recorded_audio = arg2;
+                    lblUPloadAudioFile.Text = arg1;
+                });
+
+
+			});
 		}
 	}
 }

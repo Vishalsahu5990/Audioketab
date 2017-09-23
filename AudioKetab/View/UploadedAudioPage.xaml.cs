@@ -11,11 +11,13 @@ namespace AudioKetab
 		public UploadedAudioPage()
 		{
 			InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 			GetMyAudios(StaticDataModel.UserId).Wait();
 		}
 		public UploadedAudioPage(int userid)
 		{ 
 			InitializeComponent();
+			NavigationPage.SetHasNavigationBar(this, false);
 			GetMyAudios(userid).Wait(); 
 		}
 async void Back_Tapped(object sender, System.EventArgs e)

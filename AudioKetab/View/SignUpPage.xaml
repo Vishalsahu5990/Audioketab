@@ -114,7 +114,9 @@
 					HeightRequest="30"
 					FontSize="14"
 				    BackgroundColor="White"/>
-						<RelativeLayout HeightRequest="30"> 
+						<RelativeLayout
+                        x:Name="rlDob"
+                                    HeightRequest="30"> 
 						<local:MyEntry
 					HorizontalTextAlignment="End"
 					x:Name="txtDob"

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(iOSMethods))]
 namespace AudioKetab.iOS
 {
-	public class iOSMethods : UIViewController, IiOSMethods, IInviteDelegate,ISignInUIDelegate
+	public class iOSMethods : UIViewController, IiOSMethods, IInviteDelegate, ISignInUIDelegate
 	{
 		private string Key = "AudioKetab_LocalData";
 		// declarations
@@ -29,42 +30,154 @@ namespace AudioKetab.iOS
 		NSUrl audioFilePath = null;
 		NSObject observer;
 
-[Export("signInWillDispatch:error:")]
-public void WillDispatch(SignIn signIn, NSError error)
-{
-//myActivityIndicator.StopAnimating();
-}
 
-[Export("signIn:presentViewController:")]
-public void PresentViewController(SignIn signIn, UIViewController viewController)
-{
-PresentViewController(viewController, true, null);
-}
+		private TaskCompletionSource<List<AttachmentMediaFile>> _audioPickedTask;
 
-[Export("signIn:dismissViewController:")]
-public void DismissViewController(SignIn signIn, UIViewController viewController)
-{
-	DismissViewController(true, null);
-}
-public void DidSignIn(SignIn signIn, GoogleUser user, NSError error)
-{
-			if (user != null && error == null)
-			{ 
-			
+		public async Task<List<AttachmentMediaFile>> PickAudioAsync()
+		{
+			_audioPickedTask = new TaskCompletionSource<List<AttachmentMediaFile>>();
+
+			var picker = new MPMediaPickerController();
+
+			ShowViewController(picker);
+
+			picker.ItemsPicked += OnAudioPicked;
+			picker.DidCancel += OnCancel;
+
+			var media = await _audioPickedTask.Task;
+
+			return media;
+		}
+		private void OnCancel(object sender, EventArgs e)
+		{
+			var picker = sender as MPMediaPickerController;
+			picker.DidCancel -= OnCancel;
+			picker.DismissViewController(true, null);
+
+			_audioPickedTask.TrySetResult(new List<AttachmentMediaFile>());
+		}
+
+		private void OnAudioPicked(object sender, ItemsPickedEventArgs e)
+		{
+			var media = new List<AttachmentMediaFile>();
+
+			var picker = sender as MPMediaPickerController;
+			picker.ItemsPicked -= OnAudioPicked;
+			picker.DismissViewController(true, null);
+
+			if (e.MediaItemCollection.Items != null)
+			{
+				foreach (var item in e.MediaItemCollection.Items)
+				{
+					
+
+					if (!item.IsCloudItem)
+					{
+						try
+						{
+
+
+
+							MPMediaItem song;
+                            song = item;
+                            NSUrl assetURL = song.AssetURL;
+                            var songAsset = new AVUrlAsset(assetURL);
+
+                            AVAssetExportSession exporter = new AVAssetExportSession(songAsset,AVAssetExportSessionPreset.AppleM4A);
+
+                            exporter.OutputFileType=@"com.apple.m4a-audio";
+
+							var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+							var exportFile = documents+"/exported.m4a";
+
+                            if (File.Exists(exportFile))
+                                File.Delete(exportFile);
+
+
+                            var exportURL = NSUrl.CreateFileUrl(new string[] { exportFile });
+                            exporter.OutputUrl = exportURL;
+
+
+
+							exporter.ExportAsynchronously(() => {
+							  Console.WriteLine("#####################"+exporter.Status);//prints status "Failed"....
+							                         var status = exporter.Status;
+                                switch (status)
+                                {
+                                    case AVAssetExportSessionStatus.Failed:
+                                        var err = exporter.Error;
+                                        Console.WriteLine(err);
+                                        break;
+                                    case AVAssetExportSessionStatus.Completed:
+                                        Debug.WriteLine("##########***************");
+                                        var data = NSData.FromUrl(exportURL);
+                                        var array = ToByte(data);
+                                       
+                                        MessagingCenter.Send<string, byte[]>(item.Title, "NotificationRecieved", array);
+                                        break;
+                                }
+							  exporter.Dispose();
+							});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							media.Add(new AttachmentMediaFile(item.AssetURL.AbsoluteString, AttachmentMediaFileType.Audio, null , item.Title));
+							
+                           
+
+						}
+						catch (Exception ex)
+						{
+							// throw ;
+						}
+
+					}
+				}
 			}
-		// Disable the SignInButton
-}
+
+			_audioPickedTask.TrySetResult(media);
+		}
+		private void ShowViewController(UIViewController controller)
+		{
+			var topController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+			while (topController.PresentedViewController != null)
+			{
+				topController = topController.PresentedViewController;
+			}
+
+			topController.PresentViewController(controller, true, null);
+		}
 		public void ShowToast(string msg)
 		{
 			//BTProgressHUD.ShowToast(msg, false, 1000);
 		}
 		public void ShowLoader()
 		{
-			
-			MPMediaPickerController mediaController = new MPMediaPickerController(MPMediaType.AnyAudio);
-			mediaController.AllowsPickingMultipleItems = false;
-			mediaController.Delegate = new MediaPickerDelegate(UIApplication.SharedApplication.KeyWindow.RootViewController);
-			UIApplication.SharedApplication.KeyWindow.RootViewController.PresentModalViewController(mediaController, true);
+            PickAudioAsync();
+			//MPMediaPickerController mediaController = new MPMediaPickerController(MPMediaType.Music);
+			//mediaController.AllowsPickingMultipleItems = false;
+			//mediaController.Delegate = new MediaPickerDelegate(UIApplication.SharedApplication.KeyWindow.RootViewController);
+			//UIApplication.SharedApplication.KeyWindow.RootViewController.PresentModalViewController(mediaController, true);
 
 
 		}
@@ -72,30 +185,30 @@ public void DidSignIn(SignIn signIn, GoogleUser user, NSError error)
 		{
 			try
 			{
-				
+
 				//// When you create the invitation dialog, you must specify the title
 				//// of the invitation dialog and the invitation message to send. 
 				//// You can also customize the image and deep link URL that 
 				//// get sent in the invitation
 				//var inviteDialog = Invites.GetInviteDialog();
 				//inviteDialog.SetInviteDelegate (this);
-				//inviteDialog.SetTitle("Audioketab");
+				//inviteDialog.SetTitle("Audioketab";
 				//var anUrl = "";
 				//// A message hint for the dialog. Note this manifests differently depending on the
 				//// received invitation type. For example, in an email invite this appears as the subject.
-				//inviteDialog.SetMessage($"Try this out! {anUrl}");
+				//inviteDialog.SetMessage($"Try this out! {anUrl}";
 
 				//// These following values are optionals and are only sent via email
-				////inviteDialog.SetDeepLink("http://appstore.com/audioketab");
-				//inviteDialog.SetDescription("A description of the app");
-				////inviteDialog.SetCustomImage("The url of the image");
-				//inviteDialog.SetCallToActionText("Invite friend");
+				////inviteDialog.SetDeepLink("http://appstore.com/audioketab";
+				//inviteDialog.SetDescription("A description of the app";
+				////inviteDialog.SetCustomImage("The url of the image";
+				//inviteDialog.SetCallToActionText("Invite friend";
 
 				//// If you have an Android version of your app and you want to send
 				//// an invitation that can be opened on Android in addition to iOS
 				////var targetApp = new InvitesTargetApplication
 				////{
-				////	AndroidClientId = "Android ID"
+				////    AndroidClientId = "Android ID"
 				////};
 				////inviteDialog.SetOtherPlatformsTargetApplication(targetApp);
 
@@ -103,15 +216,15 @@ public void DidSignIn(SignIn signIn, GoogleUser user, NSError error)
 				SignIn.SharedInstance.UIDelegate = this;
 				//SignIn.SharedInstance.Delegate =this ;
 
-// Sign the user in automatically
-SignIn.SharedInstance.SignInUserSilently ();
+				// Sign the user in automatically
+				SignIn.SharedInstance.SignInUserSilently();
 			}
 			catch (Exception ex)
 			{
 
 			}
 		}
-		[Export("inviteFinishedWithInvitations:error:")]
+        [Export("inviteFinishedWithInvitations:error:")]
 		public void InviteFinished(string[] invitationIds, NSError error)
 		{
 			if (error == null)
@@ -131,7 +244,7 @@ SignIn.SharedInstance.SignInUserSilently ();
 			try
 			{
 				AudioSession.Initialize();
-				Console.WriteLine("Begin Recording");
+                Console.WriteLine("Begin Recording");
 
 				AudioSession.Category = AudioSessionCategory.RecordAudio;
 				AudioSession.SetActive(true);
@@ -161,7 +274,7 @@ SignIn.SharedInstance.SignInUserSilently ();
 		public byte[] StopRecording()
 		{
 			this.recorder.Stop();
-			//this.LengthOfRecordingLabel.Text = string.Format("{0:hh\\:mm\\:ss}", this.stopwatch.Elapsed);
+			//this.LengthOfRecordingLabel.Text = string.Format("{0:hh\\:mm\\s}", this.stopwatch.Elapsed);
 			this.stopwatch.Stop();
 			if (!string.IsNullOrEmpty(audioFilePath.ToString()))
 			{
@@ -212,18 +325,18 @@ SignIn.SharedInstance.SignInUserSilently ();
 			try
 			{
 				var storage = SimpleStorage.EditGroup(Key);
-				string id = storage.Get("driver_id");
+                string id = storage.Get("driver_id");
 				//um.driver_id = Convert.ToInt32(id);
-				//um.firstname = storage.Get("firstname");
-				//um.lastname = storage.Get("lastname");
-				//um.email = storage.Get("email");
-				//um.DOB = storage.Get("DOB");
-				//um.city = storage.Get("city");
-				//um.phonenumber = Convert.ToInt32(storage.Get("phonenumber"));
-				//um.address = storage.Get("address");
-				//um.device = storage.Get("device");
-				//um.vehicle = storage.Get("vehicle");
-				//um.image = storage.Get("image");
+				//um.firstname = storage.Get("firstname";
+				//um.lastname = storage.Get("lastname";
+				//um.email = storage.Get("email";
+				//um.DOB = storage.Get("DOB";
+				//um.city = storage.Get("city";
+				//um.phonenumber = Convert.ToInt32(storage.Get("phonenumber");
+				//um.address = storage.Get("address";
+				//um.device = storage.Get("device";
+				//um.vehicle = storage.Get("vehicle";
+				//um.image = storage.Get("image";
 				return um;
 			}
 			catch (Exception ex)
@@ -266,17 +379,15 @@ SignIn.SharedInstance.SignInUserSilently ();
 
 			public override void MediaItemsPicked(MPMediaPickerController sender, MPMediaItemCollection mediaItemCollection)
 			{
-
-               
 				var items = mediaItemCollection.Items;
 
 				var assetUrl = items[0].AssetURL;
-                NSData data = NSData.FromFile(assetUrl.Path);
+				//NSData data = NSData.FromUrl(assetUrl);
 
 
-				NSUrl soundFileURL = NSUrl.CreateFileUrl(@"%@/memo.mp3", assetUrl);
-				//[NSURL fileURLWithPath:[NSString stringWithFormat: @"%@/memo.m4a", documentsDirectory]]; ;
-				NSData myData = NSData.FromUrl(soundFileURL);
+				//NSUrl soundFileURL = NSUrl.CreateFileUrl(@"%@/memo.mp3", assetUrl);
+				////[NSURL fileURLWithPathNSString stringWithFormat: @"%@/memo.m4a", documentsDirectory]]; ;
+				//NSData myData = NSData.FromUrl(soundFileURL);
 				GetAssetFromUrl(assetUrl);
 				_viewController.DismissModalViewController(true);
 			}
@@ -290,40 +401,40 @@ SignIn.SharedInstance.SignInUserSilently ();
 
 				try
 				{
-					//var inputPath = url;
-					//var outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/output.mp3";
-					//var outputURL = new NSUrl(outputPath);
-					//NSData data = NSData.FromUrl(outputURL);
+					var inputPath = url;
+					var outputPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/output.mp3";
+					var outputURL = new NSUrl(outputPath);
+					NSData data = NSData.FromUrl(outputURL);
 
-					////compress the video file
-					//var asset = new AVUrlAsset(inputPath, (AVUrlAssetOptions)null);
-					//var exportSession = AVAssetExportSession.FromAsset(asset, "AVAssetExportPresetLowQuality");
+					//compress the video file
+					var asset = new AVUrlAsset(inputPath, (AVUrlAssetOptions)null);
+                    var exportSession = AVAssetExportSession.FromAsset(asset, "AVAssetExportPresetLowQuality");
 
-					//exportSession.OutputUrl = outputURL;
-					//exportSession.OutputFileType = AVFileType.CoreAudioFormat;
+					exportSession.OutputUrl = outputURL;
+					exportSession.OutputFileType = AVFileType.CoreAudioFormat;
 
-					//exportSession.ExportAsynchronously(() =>
-					//{
-					//	Console.WriteLine(exportSession.Status);//prints status "Failed"....
+					exportSession.ExportAsynchronously(() =>
+					{
+						Console.WriteLine(exportSession.Status);//prints status "Failed"....
 
-					//	exportSession.Dispose();
-					//});
-					var asset = new ALAssetsLibrary();
-					
-					asset.AssetForUrl(
-									url,
-									(ALAsset obj) =>
-									{
-										var assetRep = obj.DefaultRepresentation;
-										var filename = assetRep.Filename;
-                        Console.WriteLine("True@@@@@@@@@@@@@@@@@");
+						exportSession.Dispose();
+					});
+					//var asset = new ALAssetsLibrary();
+					//UIImage image;
+					//asset.AssetForUrl(
+					//   url,
+					//   (ALAsset obj) =>
+					//   {
+					//   var assetRep = obj.DefaultRepresentation;
+					//   var filename = assetRep.Filename;
 
-									},
-									(NSError err) =>
-									{
-										Console.WriteLine(err);
-									}
-								);
+
+					//   },
+					//   (NSError err) =>
+					//   {
+					//   Console.WriteLine(err);
+					//   }
+					//   );
 				}
 				catch (Exception ex)
 				{
@@ -352,7 +463,7 @@ SignIn.SharedInstance.SignInUserSilently ();
 			}
 
 			// Declare string for application temp path and tack on the file extension
-			string fileName = string.Format("recording{0}.aac", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string fileName = string.Format("recording{0}.aac", DateTime.Now.ToString("yyyyMMddHHmmss"));
 			string tempRecording = Path.Combine(Path.GetTempPath(), fileName);
 
 			Console.WriteLine(tempRecording);
@@ -361,18 +472,18 @@ SignIn.SharedInstance.SignInUserSilently ();
 			//set up the NSObject Array of values that will be combined with the keys to make the NSDictionary
 			NSObject[] values = new NSObject[]
 			{
-				NSNumber.FromFloat(44100.0f),
-				NSNumber.FromInt32((int)AudioToolbox.AudioFormatType.MPEG4AAC),
-				NSNumber.FromInt32(1),
-				NSNumber.FromInt32((int)AVAudioQuality.High)
+NSNumber.FromFloat(44100.0f),
+NSNumber.FromInt32((int)AudioToolbox.AudioFormatType.MPEG4AAC),
+NSNumber.FromInt32(1),
+NSNumber.FromInt32((int)AVAudioQuality.High)
 			};
 			//Set up the NSObject Array of keys that will be combined with the values to make the NSDictionary
 			NSObject[] keys = new NSObject[]
 			{
-				AVAudioSettings.AVSampleRateKey,
-				AVAudioSettings.AVFormatIDKey,
-				AVAudioSettings.AVNumberOfChannelsKey,
-				AVAudioSettings.AVEncoderAudioQualityKey
+AVAudioSettings.AVSampleRateKey,
+AVAudioSettings.AVFormatIDKey,
+AVAudioSettings.AVNumberOfChannelsKey,
+AVAudioSettings.AVEncoderAudioQualityKey
 			};
 			//Set Settings with the Values and Keys to create the NSDictionary
 			settings = NSDictionary.FromObjectsAndKeys(values, keys);

@@ -80,6 +80,8 @@ namespace AudioKetab
 					if (id != null)
 						StaticDataModel.UserId = Convert.ToInt32(id);
 
+               
+
 				}
 			}
 			catch (Exception ex)
@@ -98,8 +100,8 @@ namespace AudioKetab
 					{
 						IsPresented = false;
 						//menuPage.ListView.SelectedItem = null;
-						//DependencyService.Get<IiOSMethods>().SendAppInvitation();
-						DisplayAlert("Message", "Out of memory exception!", "Ok");
+						DependencyService.Get<IiOSMethods>().SendAppInvitation();
+						//DisplayAlert("Message", "Out of memory exception!", "Ok");
 					}
 					else
 					{

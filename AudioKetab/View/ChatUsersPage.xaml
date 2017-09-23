@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 	 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-     xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
-	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
-	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+         xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab"
+    	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+    	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 	
 	x:Class="AudioKetab.ChatUsersPage">
 	<StackLayout> 
@@ -58,7 +58,7 @@
 
 <!--listview-->
 			 <flv:FlowListView
-			RowHeight="120"
+			RowHeight="95"
 			BackgroundColor="Transparent"
 			Margin="0,30,0,0"
 			SeparatorVisibility="None"
@@ -81,13 +81,12 @@
 						<StackLayout >
 							  
     <RelativeLayout
-		HeightRequest="120"
-							>
+		HeightRequest="95">
             <StackLayout 
 				Orientation="Horizontal"
 				BackgroundColor="Gray"
 				HorizontalOptions="FillAndExpand"
-				HeightRequest="70" 
+				HeightRequest="50" 
 				Opacity="0.8"
 				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=0.2}"					
 				RelativeLayout.WidthConstraint=
@@ -110,7 +109,9 @@
 				TextColor="White"
 				FontAttributes="Bold"
 										VerticalTextAlignment="Center"
-										HorizontalTextAlignment="Start"/>
+										HorizontalTextAlignment="Start"
+                                            LineBreakMode="TailTruncation"
+                                             WidthRequest="150"/>
 				</StackLayout>
               
 
@@ -120,11 +121,11 @@
 									BorderThickness="3"
 							Aspect="AspectFill"
 							Source="{Binding users.profile_pic}"
-							HeightRequest="95"
-                WidthRequest="95"
+							HeightRequest="75"
+                WidthRequest="75"
                 HorizontalOptions="EndAndExpand"
                     Margin="0,0,5,10"
-                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.55}"
+                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.7}"
                  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=0.090}"/>
 			
 			</RelativeLayout>
@@ -143,6 +144,65 @@
 			x:Name="btnMsg" HorizontalOptions="CenterAndExpand"
 			/>
 			</StackLayout>
-			</StackLayout>   
+			</StackLayout> 
+
+<!---->
+
+<!--<StackLayout >
+                              
+    <RelativeLayout
+        HeightRequest="95"
+                            >
+            <StackLayout 
+                Orientation="Horizontal"
+                BackgroundColor="Gray"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="50" 
+                Opacity="0.8"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=0.2}"                   
+                RelativeLayout.WidthConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                >
+                                     <Image
+                                     IsVisible="false"
+                                        Source="sel_list" 
+                HorizontalOptions="Start"
+                Margin="0,0,0,0"/>
+                <StackLayout Margin="10,0,0,0"
+                                        VerticalOptions="Center">
+                <Label Text="{Binding users.first_name}"
+                FontAttributes="Bold" TextColor="Black"
+                                        FontSize="15"
+                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.1}"/>
+                <Label
+                                            FontSize="15"
+                                    Text="{Binding msg_desc}"
+                TextColor="White"
+                FontAttributes="Bold"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Start"/>
+                </StackLayout>
+              
+
+            </StackLayout>
+                                 <controls:CircleImage 
+                                    BorderColor="Black"
+                                    BorderThickness="3"
+                            Aspect="AspectFill"
+                            Source="{Binding users.profile_pic}"
+                            HeightRequest="75"
+                WidthRequest="75"
+                HorizontalOptions="EndAndExpand"
+                    Margin="0,0,5,10"
+                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.7}"
+                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=0.090}"/>
+            
+            </RelativeLayout>
+                            
+                        </StackLayout>-->
+<!---->
+
+
+        
 	</StackLayout>
 </ContentPage>

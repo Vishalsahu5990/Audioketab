@@ -32,7 +32,7 @@ namespace AudioKetab
 			_name = name;
 			_profile = profile;
 			InitializeComponent();
-			getConversation(_userid).Wait();
+			
 			Connect();
 			NavigationPage.SetHasNavigationBar(this, false);
 
@@ -73,6 +73,30 @@ namespace AudioKetab
 			ChatEntry.keepOpen = true;
 			lblUsername.Text = _name;
 			imgProfile.Source = _profile;
+
+            getConversation(_userid).Wait();
+
+            MessagingCenter.Subscribe<object, NotificatonModel.RemoteNoti>(this, "NotificationRecieved", (object arg1, NotificatonModel.RemoteNoti arg2) =>
+               {
+                   var cm = new ChatModel
+                   {
+                       Incoming = true,
+                       Outgoing = false,
+                    msg_desc = arg2.msg,
+                    msg_datetime=DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")
+                   };
+                   if (_list == null)
+                       _list = new List<ChatModel>();
+
+
+                   _list.Add(cm);
+                   items = new ChatItemList(_list);
+                   flowlistview.FlowItemsSource = items.Items;
+                   var lastItem = flowlistview.FlowItemsSource.OfType<object>().Last();
+                   Device.BeginInvokeOnMainThread(() => flowlistview.ScrollTo(lastItem, ScrollToPosition.End, false));
+                  
+            
+            });
 		}
 
 		void TxtComment_Completed(object sender, EventArgs e)
@@ -128,6 +152,8 @@ connection.Send(json);
 				Incoming = false,
 				Outgoing = true,
 								msg_desc = txtComment.Text
+											 ,
+				msg_datetime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")        
 							};
 				if (_list == null)
 					_list = new List<ChatModel>();
@@ -206,6 +232,7 @@ Device.BeginInvokeOnMainThread(() =>flowlistview.ScrollTo(lastItem, ScrollToPosi
 			if (!string.IsNullOrEmpty(txtComment.Text))
 			{
 				Send();
+                txtComment.Text = string.Empty;
 			}
 		}
 		private async Task getConversation(int u_id)

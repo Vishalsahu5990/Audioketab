@@ -6,8 +6,7 @@
 	>
 	<RelativeLayout 
             Padding="0" 
-            Margin="0"
-           
+            Margin="0"           
             RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
             RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}">
 
@@ -18,7 +17,7 @@
               RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
             RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
 
-		 <Grid RelativeLayout.WidthConstraint=
+		 <Grid RelativeLayout.WidthConstraint= 
               "{ConstraintExpression Type=RelativeToParent, Property=Width}"
             RelativeLayout.HeightConstraint=
               "{ConstraintExpression Type=RelativeToParent, Property=Height}">

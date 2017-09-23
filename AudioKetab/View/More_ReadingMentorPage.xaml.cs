@@ -42,12 +42,17 @@ async void follow_unfollowTapped(object sender, System.EventArgs e)
 {
 	try
 	{
-		var item = (Xamarin.Forms.Button)sender;
-		var model = (from itm in mentorslist where itm.u_id == item.CommandParameter select itm).FirstOrDefault<Reading_mentorModel>();
-		//var action = await DisplayAlert("aleart", "You are about to follow?", "Yes", "No");
-		//if (action)
-		//{
-					FollowUser(Convert.ToInt32(model.u_id));
+				var result = await DisplayAlert("Alert!", "Do you want to follow?", "YES", "CANCEL");
+
+                if (result)
+                {
+                    var item = (Xamarin.Forms.Button)sender;
+                    var model = (from itm in mentorslist where itm.u_id == item.CommandParameter select itm).FirstOrDefault<Reading_mentorModel>();
+                    //var action = await DisplayAlert("aleart", "You are about to follow?", "Yes", "No");
+                    //if (action)
+                    //{
+                    FollowUser(Convert.ToInt32(model.u_id));
+                }
 		//}
 	}
 	catch (Exception ex)

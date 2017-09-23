@@ -22,8 +22,8 @@ namespace AudioKetab
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepareUI();
 
-			txtEmail.Text = "mishraprabhakar10@gmail.com";
-			txtPassword.Text = "123@123";
+			//txtEmail.Text = "mishraprabhakar10@gmail.com";
+			//txtPassword.Text = "123@123";
 		}
 		void TxtEmail_Focused(object sender, FocusEventArgs e)
 		{
@@ -63,7 +63,7 @@ namespace AudioKetab
 
 		async void SignUp_Tapped(object sender, System.EventArgs e)
 		{
-			await Navigation.PushModalAsync(new ForgotPasswordPage());
+            await Navigation.PushAsync(new ForgotPasswordPage());
 		}
 
 

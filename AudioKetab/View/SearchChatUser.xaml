@@ -94,7 +94,7 @@
 
 <!--listview-->
 			 <flv:FlowListView
-			RowHeight="120"
+			RowHeight="95"
 			BackgroundColor="Transparent"
 			Margin="0,30,0,0"
 			SeparatorVisibility="None"
@@ -117,13 +117,13 @@
 						<StackLayout >
 							  
     <RelativeLayout
-		HeightRequest="120"
+		HeightRequest="95"
 							>
             <StackLayout 
 				Orientation="Horizontal"
 				BackgroundColor="Gray"
 				HorizontalOptions="FillAndExpand"
-				HeightRequest="70" 
+				HeightRequest="50" 
 				Opacity="0.8"
 				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=0.2}"					
 				RelativeLayout.WidthConstraint=
@@ -146,7 +146,9 @@
 				TextColor="White"
 				FontAttributes="Bold"
 										VerticalTextAlignment="Center"
-										HorizontalTextAlignment="Start"/>
+										HorizontalTextAlignment="Start"
+                                             LineBreakMode="TailTruncation"
+                                            WidthRequest="150"/>
 				</StackLayout>
               
 
@@ -156,11 +158,11 @@
 									BorderThickness="3"
 							Aspect="AspectFill"
 							Source="{Binding profile_pic}"
-							HeightRequest="95"
-                WidthRequest="95"
+							HeightRequest="75"
+                WidthRequest="75"
                 HorizontalOptions="EndAndExpand"
                     Margin="0,0,5,10"
-                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.55}"
+                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.7}"
                  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height,Factor=0.090}"/>
 			
 			</RelativeLayout>

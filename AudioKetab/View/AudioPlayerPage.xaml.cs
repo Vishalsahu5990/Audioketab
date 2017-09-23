@@ -21,10 +21,10 @@ namespace AudioKetab
 	{
 		static double layoutHeigh = 0;
 		CircleImage profileImage = null;
-		int height = 55;
-		int width = 55;
-		int x = 70;
-		int y = 50;
+		int height = 65;
+		int width = 65;
+		int x = 75;
+		int y = 45;
 		private IPlaybackController PlaybackController => CrossMediaManager.Current.PlaybackController;
 		MainPage _context;
 		Book_summariesModel _model;
@@ -202,8 +202,8 @@ await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path
 		{
 			try
 			{
-				imgAlbum.HeightRequest = App.ScreenWidth / 2;
-				imgAlbum.WidthRequest = App.ScreenWidth / 2;
+				imgAlbum.HeightRequest = App.ScreenWidth / 1.7;
+				//imgAlbum.WidthRequest = App.ScreenWidth;
 				imgAlbum.Source = _model.image_path;
 				if (_model != null)
 				{
@@ -262,7 +262,14 @@ await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path
 			}
 
 		}
-
+        async void mute_Tapped(object sender, EventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(() => 
+            {
+                CrossMediaManager.Current.VolumeManager.Mute = true;
+                CrossMediaManager.Current.VolumeManager.CurrentVolume = 0;
+            });
+        }
 		async void BtnPause_Clicked(object sender, EventArgs e)
 		{
 			Debug.WriteLine(CrossMediaManager.Current.AudioPlayer.Status);
@@ -373,7 +380,8 @@ await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path
 		{
 			try
 			{
-				await Navigation.PushModalAsync(new ChatUsersPage());
+                await Navigation.PushModalAsync(new ChatPage(Convert.ToInt32(_model.user_id), lblUsername.Text, _profilePic));
+				//await Navigation.PushModalAsync(new ChatUsersPage());
 			}
 			catch (Exception ex)
 			{
@@ -410,7 +418,7 @@ await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path
 		{
 			try
 			{
-				if (string.IsNullOrEmpty(_model.video_url))
+				if (!string.IsNullOrEmpty(_model.video_url))
 					Device.OpenUri(new System.Uri(_model.video_url));
 
 			}
@@ -425,7 +433,7 @@ await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path
 		{
 			try
 			{
-				if (string.IsNullOrEmpty(_model.article_url))
+				if (!string.IsNullOrEmpty(_model.article_url))
 					Device.OpenUri(new System.Uri(_model.article_url));
 			}
 			catch (Exception ex)
@@ -467,18 +475,18 @@ await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path
 
 			}
 		}
-		async void mute_Tapped(object sender, System.EventArgs e)
-		{
-			try
-			{
-				DisplayAlert("Not supported!", "Unable to mute device", "Ok");
-			}
-			catch (Exception ex)
-			{
+		//async void mute_Tapped(object sender, System.EventArgs e)
+		//{
+		//	try
+		//	{
+		//		DisplayAlert("Not supported!", "Unable to mute device", "Ok");
+		//	}
+		//	catch (Exception ex)
+		//	{
 
 
-			}
-		}
+		//	}
+		//}
 		async void share_Tapped(object sender, System.EventArgs e)
 		{
 			try
@@ -646,19 +654,23 @@ await CrossMediaManager.Current.Play(Constants.SERVER_IMG_URL + _model.song_path
 							{
 								if (isFollowing)
 								{
-									imgMic.Source = "unfollow";
+									imgMic.Source = "unfollow.png";
 									isFollowing = false;
 
 								}
 								else
 								{
-									imgMic.Source = "follow";
+									imgMic.Source = "follow.png";
 									isFollowing = true;
 								}
 
 
 
 							}
+                    else
+                    {
+                        StaticMethods.ShowToast("Something went wrong, Please try again later!");
+                    }
 					if (HomePage.layoutHeigh > 0)
 								_rlHeader.HeightRequest = HomePage.layoutHeigh;
 

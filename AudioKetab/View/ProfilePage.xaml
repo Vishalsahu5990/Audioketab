@@ -77,7 +77,7 @@
 
 					
 		   <RelativeLayout
-           >
+          x:Name="_rlHeader" >
 						
          <Image
                 Aspect="Fill"

@@ -56,28 +56,31 @@
 		<Grid HorizontalOptions="FillAndExpand" Padding="10" Margin="30,0,30,0">
 					
 				<StackLayout Orientation="Horizontal" Grid.Column="0" Spacing="3">
+                 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="rbtnBoolsummeries_Tapped"/> 
+    </StackLayout.GestureRecognizers>
 					<Label FontSize="10" Text="مقالات من الصحف و سواليف" VerticalOptions="CenterAndExpand"/>
 			<Image x:Name="r1" Source="radio_check">
-				 <Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="rbtnBoolsummeries_Tapped"/> 
-    </Image.GestureRecognizers></Image>
+				</Image>
 					</StackLayout>
 					
 					<StackLayout Orientation="Horizontal" Grid.Column="1" Spacing="3">
+                 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="rbtnLectures_Tapped"/>  
+    </StackLayout.GestureRecognizers>
 						<Label FontSize="10" Text="محاضرات ودورات" VerticalOptions="CenterAndExpand"/>
 			<Image x:Name="r2" Source="radio_uncheck">
-				 <Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="rbtnLectures_Tapped"/>  
-    </Image.GestureRecognizers></Image> 
+				</Image> 
 					</StackLayout> 
 
 					
 					<StackLayout Orientation="Horizontal" Grid.Column="2" Spacing="3">
+                 <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="rbtnNewsletter_Tapped"/>
+    </StackLayout.GestureRecognizers>
 						<Label FontSize="10" Text="قراءة في  كتاب" VerticalOptions="CenterAndExpand"/>
 			<Image x:Name="r3" Source="radio_uncheck">
-				 <Image.GestureRecognizers>
-        <TapGestureRecognizer Tapped="rbtnNewsletter_Tapped"/>
-    </Image.GestureRecognizers></Image> 
+				</Image> 
 					</StackLayout> 
 				</Grid>
 		<ScrollView IsClippedToBounds="true">  

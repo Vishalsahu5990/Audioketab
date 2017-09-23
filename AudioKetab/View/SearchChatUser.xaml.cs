@@ -84,6 +84,7 @@ private async Task SearchUser()
 			{
 				for (int i = 0; i < _list.Count; i++)
 				{
+                    _list[i].first_name = _list[i].first_name + " " + _list[i].last_name;        
 					if (!string.IsNullOrEmpty(_list[i].profile_pic))
 						_list[i].profile_pic = Constants.PRO_PIC_IMG_URL + _list[i].profile_pic;
 					else

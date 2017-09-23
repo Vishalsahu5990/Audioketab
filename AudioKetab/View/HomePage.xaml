@@ -3,12 +3,14 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage" 
 	xmlns:local="clr-namespace:AudioKetab;assembly=AudioKetab" 
-	xmlns:Controls="clr-namespace:HorizontalList;assembly=HorizontalList" xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" Icon="logo">
+	xmlns:Controls="clr-namespace:HorizontalList;assembly=HorizontalList" 
+    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions" 
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" Icon="logo">
 	<RelativeLayout VerticalOptions="Start">
 		<Image Aspect="Fill" Source="bg1" RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}" RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}" RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}" />
 		<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
 			<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" x:Name="_slParantLayout">
-				<StackLayout Spacing="0" VerticalOptions="Start">
+				<StackLayout Spacing="0" VerticalOptions="Start" >
 					<!--	Start Header view		-->
 					<RelativeLayout x:Name="_MainRelativeLayout" VerticalOptions="Start">
 						<StackLayout Spacing="0">
@@ -33,16 +35,18 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 								<Image Aspect="Fill" Source="heder_feam" x:Name="imgBG" RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}" RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}" RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}" />
 								<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
 									<StackLayout Orientation="Horizontal" Margin="2">
-										<Grid>
-											<StackLayout Grid.Column="0">
-												<Image x:Name="imgMic" Source="mic_ic" Margin="3,0,0,0" VerticalOptions="EndAndExpand" HorizontalOptions="Start">
+										<Grid Padding="0" Margin="0">
+											<StackLayout Grid.Column="0" Padding="0" 
+                                                HorizontalOptions="Start">
+												<Image x:Name="imgMic" Source="mic_ic" 
+                                                    Margin="0,0,0,0" VerticalOptions="EndAndExpand" HorizontalOptions="Start">
 													<Image.GestureRecognizers>
 														<TapGestureRecognizer Tapped="Audio_Tapped" />
 													</Image.GestureRecognizers>
 												</Image>
 											</StackLayout>
 											<StackLayout Spacing="0" x:Name="_slHeaderIcons" Grid.Column="1">
-												<Label x:Name="lblUsername" Text="(User Name)" Margin="0,5,0,0" TextColor="White" HorizontalOptions="Start" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="14" />
+												<Label x:Name="lblUsername" Text="(User Name)" Margin="0,5,0,0" TextColor="White" HorizontalOptions="Start" FontAttributes="Bold" FontSize="13" />
 												<Label x:Name="lblDesc" Text="No description" LineBreakMode="TailTruncation" TextColor="White" HorizontalOptions="Start" FontSize="12" Margin="0,3,20,5" />
 												<!--		start view icons							-->
 												<Grid ColumnSpacing="10" HorizontalOptions="FillAndExpand" Padding="0" Margin="0">
@@ -104,8 +108,9 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 						<StackLayout>
 							<StackLayout x:Name="layout" BackgroundColor="Transparent" Padding="12,5,12,0">
 								<StackLayout Orientation="Horizontal" VerticalOptions="Start" Spacing="5" x:Name="_slBadge" IsVisible="false">
-									<Image Source="badge" Margin="5,0,0,0" HeightRequest="50" WidthRequest="50" />
-									<Label Text="test" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,0,20,0" />
+									<Image Source="badge" Margin="5,0,0,0"
+                                   />
+									<Label Text="الأوسمة" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,0,20,0" />
 								</StackLayout>
 								<StackLayout Padding="5" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 									<Grid HorizontalOptions="FillAndExpand">
@@ -114,11 +119,20 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 											<Label Text="Reading Mentors" TextColor="#70706F" FontSize="Small" VerticalOptions="CenterAndExpand" />
 											<BoxView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
 										</StackLayout>
-										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" HeightRequest="30">
-											<RelativeLayout HorizontalOptions="FillAndExpand">
+										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" >
+											<RelativeLayout HorizontalOptions="FillAndExpand" >
 												<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
-													<StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-														<Label Text="مستشارون للقراءة" VerticalOptions="CenterAndExpand" TextColor="White" HorizontalTextAlignment="End" FontSize="Small" LineBreakMode="TailTruncation" />
+													<StackLayout HorizontalOptions="Center" Orientation="Horizontal"
+                                                        VerticalOptions="FillAndExpand"
+                                                        >
+														<Label Text="مستشارون للقراءة" 
+                                                        VerticalOptions="CenterAndExpand"
+                                                        TextColor="White"
+                                                        HorizontalTextAlignment="End" 
+                                                        FontSize="Small"
+                                                        LineBreakMode="TailTruncation" 
+                                                        VerticalTextAlignment="Center"
+                                                        />
 														<RelativeLayout>
 														</RelativeLayout>
 													</StackLayout>
@@ -148,7 +162,15 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 														<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
 
 														<RelativeLayout HeightRequest="{Binding cell_size}">
-																<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding profile_pic}" />
+																<ffimageloading:CachedImage
+                                                                 DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                                                                                                                 HeightRequest="{Binding cell_size}" 
+                                                                WidthRequest="{Binding cell_size}"
+                                                                Aspect="AspectFill" 
+                                                                DownsampleUseDipUnits="false"
+                                                                LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding profile_pic}" />
 																<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
 					Type=RelativeToParent, Property=Width}" 
@@ -177,7 +199,7 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 											<Label Text="Book Summaries" TextColor="#70706F" FontSize="Small" VerticalOptions="CenterAndExpand" />
 											<BoxView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
 										</StackLayout>
-										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" HeightRequest="30">
+										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" >
 											<RelativeLayout HorizontalOptions="FillAndExpand">
 												<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
 													<StackLayout HorizontalOptions="Center" Orientation="Horizontal">
@@ -207,7 +229,11 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 												<DataTemplate>
 													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
 														<RelativeLayout HeightRequest="{Binding cell_size}">
-															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
+															<ffimageloading:CachedImage
+                                                             DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                                            HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
 
 															<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
@@ -218,7 +244,11 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 				Clicked="booksummeries_clicked"
 				CommandParameter="{Binding s_id}"/>
 														</RelativeLayout>
-														<Label FontSize="13" Text="{Binding book_name}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="{Binding cell_size}" HeightRequest="10" />
+														<Label FontSize="13" Text="{Binding book_name}"
+                                                        HorizontalOptions="Center" 
+                                                        HorizontalTextAlignment="Center"
+
+                                                         />
 													</StackLayout>
 												</DataTemplate>
 											</Controls:HorizontalListView.ItemTemplate>
@@ -236,10 +266,10 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 											<Label Text="Lectures and Training" TextColor="#70706F" FontSize="Small" VerticalOptions="CenterAndExpand" />
 											<BoxView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
 										</StackLayout>
-										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" HeightRequest="30">
+										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" >
 											<RelativeLayout HorizontalOptions="FillAndExpand">
 												<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
-													<StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+													<StackLayout HorizontalOptions="Center" Orientation="Horizontal" VerticalOptions="FillAndExpand">
 														<Label Text="محاضرات ودورات" FontSize="Small" VerticalOptions="CenterAndExpand" TextColor="White" HorizontalTextAlignment="End" LineBreakMode="TailTruncation" />
 														<RelativeLayout>
 														</RelativeLayout>
@@ -270,7 +300,17 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 												<DataTemplate>
 													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
 														<RelativeLayout HeightRequest="{Binding cell_size}">
-															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
+															<ffimageloading:CachedImage 
+                                                             DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                                                HeightRequest="{Binding cell_size}" 
+                                                                WidthRequest="{Binding cell_size}"
+                                                                Aspect="AspectFill"
+                                                                DownsampleUseDipUnits="false"
+                                                                LoadingPlaceholder="default.png" 
+                                                                ErrorPlaceholder="default.png"
+                                                                Source="{Binding image_path}" />
 															<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
 					Type=RelativeToParent, Property=Width}" 
@@ -321,10 +361,11 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 											<Label Text="Newsletter and Talks" TextColor="#70706F" FontSize="Small" VerticalOptions="CenterAndExpand" />
 											<BoxView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
 										</StackLayout>
-										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" HeightRequest="30">
+										<StackLayout BackgroundColor="#60838282" HorizontalOptions="FillAndExpand" Grid.Column="1" >
 											<RelativeLayout HorizontalOptions="FillAndExpand">
 												<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
-													<StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+													<StackLayout HorizontalOptions="Center" Orientation="Horizontal"
+                                                        VerticalOptions="FillAndExpand">
 														<Label Text="مقالات وسواليف" FontSize="Small" VerticalOptions="CenterAndExpand" TextColor="White" HorizontalTextAlignment="End" LineBreakMode="TailTruncation" />
 														<RelativeLayout>
 														</RelativeLayout>
@@ -341,9 +382,44 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 								<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 									<Image VerticalOptions="Center" Source="previous_ic" />
 
-
+                                    <ScrollView Orientation="Horizontal" >
+                                        <Controls:HorizontalListView 
+                                                x:Name="news_letters"
+                                                ListOrientation="Horizontal" 
+                                                ItemsSource="{Binding List_LectureTraining}"
+                                                Command="{Binding SelectedItemCommandLectureTraining}" >
+                                            <Controls:HorizontalListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout Padding="5" WidthRequest="{Binding cell_size}">
+                                                        <RelativeLayout HeightRequest="{Binding cell_size}">
+                                                            <ffimageloading:CachedImage 
+                                                             DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                                                HeightRequest="{Binding cell_size}" 
+                                                                WidthRequest="{Binding cell_size}"
+                                                                Aspect="AspectFill"
+                                                                DownsampleUseDipUnits="false"
+                                                                LoadingPlaceholder="default.png" 
+                                                                ErrorPlaceholder="default.png"
+                                                                Source="{Binding image_path}" />
+                                                            <Button BackgroundColor="Transparent"
+                RelativeLayout.WidthConstraint="{ConstraintExpression 
+                    Type=RelativeToParent, Property=Width}" 
+                    RelativeLayout.HeightConstraint="{ConstraintExpression 
+                    Type=RelativeToParent,
+                Property=Height}"
+                Clicked="lecture_clicked"
+                CommandParameter="{Binding s_id}"/>
+                                                            </RelativeLayout>
+                                                        <Label FontSize="13" Text="{Binding book_name}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="{Binding cell_size}" HeightRequest="10" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </Controls:HorizontalListView.ItemTemplate>
+                                        </Controls:HorizontalListView>
+                                    </ScrollView>
 									<!--fourth list-->
-									<ScrollView Orientation="Horizontal" >
+									<!--<ScrollView Orientation="Horizontal" >
 										<Controls:HorizontalListView x:Name="news_letters" ListOrientation="Horizontal" 
 											ItemsSource="{Binding List_NewsLetter}"
 											Command="{Binding SelectedItemCommandNewsLetter}" >
@@ -351,7 +427,11 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 												<DataTemplate>
 													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
 														<RelativeLayout HeightRequest="{Binding cell_size}">
-															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
+															<ffimageloading:CachedImage
+                                                             DownsampleToViewSize="true"
+                                                                    DownsampleHeight="80"
+                                                                    DownsampleWidth="80"
+                                                            HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
 															<Button BackgroundColor="Transparent"
 				RelativeLayout.WidthConstraint="{ConstraintExpression 
 					Type=RelativeToParent, Property=Width}" 
@@ -366,29 +446,13 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 												</DataTemplate>
 											</Controls:HorizontalListView.ItemTemplate>
 										</Controls:HorizontalListView>
-									</ScrollView>
+									</ScrollView>-->
 
 
 
 
 									
-									<!--<local:TLScrollView Orientation="Horizontal"
-									ItemsSource="{Binding List_NewsLetter}" 
-									SelectedCommand="{Binding [ItemSelected]}" 
-									HeightRequest="{Binding cell_size}" x:Name="news_letters">
-										<local:TLScrollView.ItemTemplate>
-											<DataTemplate>
-												<ViewCell>
-													<StackLayout Padding="5" WidthRequest="{Binding cell_size}">
-														<RelativeLayout x:Name="layout_cell">
-															<ffimageloading:CachedImage HeightRequest="{Binding cell_size}" WidthRequest="{Binding cell_size}" Aspect="AspectFill" DownsampleUseDipUnits="false" LoadingPlaceholder="default.png" ErrorPlaceholder="default.png" Source="{Binding image_path}" />
-														</RelativeLayout>
-														<Label FontSize="13" Text="{Binding book_name}" HorizontalOptions="Center" HorizontalTextAlignment="Center" WidthRequest="{Binding cell_size}" HeightRequest="10" />
-													</StackLayout>
-												</ViewCell>
-											</DataTemplate>
-										</local:TLScrollView.ItemTemplate>
-									</local:TLScrollView>-->
+
 									<Image HorizontalOptions="EndAndExpand" Source="next_ic" />
 								</StackLayout>
 							</StackLayout>
@@ -399,4 +463,4 @@ xmlns:t="clr-namespace:SlideOverKit" x:Class="AudioKetab.HomePage"
 			</StackLayout>
 		</Grid>
 	</RelativeLayout>
-</ContentPage>  
+</ContentPage> 
